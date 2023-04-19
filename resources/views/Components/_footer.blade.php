@@ -5,9 +5,16 @@
     class="d-md-flex justify-content-around align-items-center"
 >
     <div class="text-center">
-        <span class="creator">&copy; 2023 NMarques</span>
+        <a class="navbar-brand" href="{{route('welcome')}}">
+            <img
+                src="{{asset('imagens/Logo.png')}}"
+                alt="Nuno Marques"
+                width="51"
+                height="50"
+            />
+        </a>
     </div>
-    <div class="text-center m-2 m">
+    <div class="text-center m-2">
         <a href="#products" class="indexfooter p-1">Products</a>
         <a href="#about" class="indexfooter p-1">About us</a>
         <a href="#faq" class="indexfooter p-1">FAQ's</a>
@@ -20,8 +27,32 @@
         <a href="#"><i class="bi bi-youtube navicon m-2"></i></a>
     </div>
 </div>
+<div class="py-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+
+                <!-- Copyright -->
+                <p class="ms-5 small text-muted">
+                    © 2023 All rights reserved. Designed by Nuno Marques.
+                </p>
+
+            </div>
+            <div class="col-auto me-5">
+
+                <!-- Payment methods -->
+                <img class="footer-payment small" src="{{asset('imagens/mastercard.svg')}}" alt="...">
+                <img class="footer-payment" src="{{asset('imagens/visa.svg')}}" alt="...">
+                <img class="footer-payment" src="{{asset('imagens/american-express.svg')}}" alt="...">
+                <img class="footer-payment" src="{{asset('imagens/paypal.svg')}}" alt="...">
+                <img class="footer-payment" src="{{asset('imagens/maestro-card.svg')}}" alt="...">
+            </div>
+        </div>
+    </div>
+</div>
 </section>
 <!--END NEWSLETTER AND DISCOUNT-->
+
 
 <script
     src="https://kit.fontawesome.com/e644b18eb6.js"
