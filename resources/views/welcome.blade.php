@@ -1,4 +1,4 @@
-@include('components._header')
+@include('partials._header')
 
 
 <!--HERO -->
@@ -133,7 +133,7 @@
                 <div>
                     <h4>Industrial Design</h4>
                     <p class="pfont">
-                        Geometric forms rendered in <br />
+                        Geometric forms rendered in <br/>
                         industrial, cast aluminum.
                     </p>
                 </div>
@@ -145,7 +145,7 @@
                 <div class="mt-3">
                     <h4>Sophisticated Built</h4>
                     <p class="pfont">
-                        Pleasant, glare-free illumination <br />
+                        Pleasant, glare-free illumination <br/>
                         delivered via sculptural fixtures.
                     </p>
                 </div>
@@ -155,7 +155,7 @@
                 <div>
                     <h4>Superb Finish</h4>
                     <p class="pfont">
-                        Cast aluminum with a smooth, warm <br />
+                        Cast aluminum with a smooth, warm <br/>
                         and tactile finish.
                     </p>
                 </div>
@@ -173,7 +173,7 @@
             <h2 class="my-5">Redefine how we use space</h2>
             <p class="fw-lighter">
                 Top designers and craftspeople around the world to create
-                contemporary furniture, lighting and <br />
+                contemporary furniture, lighting and <br/>
                 accessories that are clean, clever and natural.
             </p>
         </div>
@@ -181,7 +181,7 @@
 </section>
 <!--END CONTENT VIDEO -->
 
-@include('partials.product-sample')
+@include('components.product-sample')
 
 <!--RETURN POLICY-->
 <section
@@ -194,7 +194,7 @@
             <h2 class="my-4">Redefine how we use space</h2>
             <p class="fw-lighter">
                 Top designers and craftspeople around the world to create
-                contemporary furniture, lighting and <br />
+                contemporary furniture, lighting and <br/>
                 accessories that are clean, clever and natural.
             </p>
             <i class="bi bi-arrow-counterclockwise fs-1"></i>
@@ -228,4 +228,4 @@
         </form>
     </div>
 
-@include('components._footer')
+@include('partials._footer')

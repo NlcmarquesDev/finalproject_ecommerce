@@ -150,9 +150,10 @@
                 @endif
 
             </div>
+
             <!-----end button for Login-->
             <!-----button for Checklist-->
-            <x-offcanvas title="Whishlist" display="d-none d-lg-inline-block" >nuno</x-offcanvas>
+            <x-offcanvas title="Whishlist" display="d-none d-lg-inline-block" >ola</x-offcanvas>
             <!-----End button for checklist-->
             <!-----button for basket-->
             <x-offcanvas title="Your Cart (2)" number="2" icon="fas fa-shopping-bag">

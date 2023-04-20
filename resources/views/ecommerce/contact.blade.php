@@ -1,5 +1,6 @@
-@include('components._header')
+@include('partials._header')
 
 <h1>This is the contact page</h1>
 
-@include('components._footer')
+
+@include('partials._footer')

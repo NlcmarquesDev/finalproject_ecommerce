@@ -1,5 +1,5 @@
-@include('components._header')
+@include('partials._header')
 
 <h1>he explain everything here :)</h1>
 
-@include('components._footer')
+@include('partials._footer')

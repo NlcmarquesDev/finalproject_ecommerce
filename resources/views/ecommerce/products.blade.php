@@ -1,11 +1,11 @@
-@include('components._header')
+@include('partials._header')
 <!--PRODUCT -->
 <div class="container-fluid">
     <div class="row d-flex">
 
 
         <div class="text-center">
-            <h2 class="fw-normal my-4"><small>Designer's Portfolio</small> </h2>
+            <h2 class="fw-normal my-4"><small>Designer's Portfolio</small></h2>
             <p class="pfont">The Cast Lighting Series aesthetic presence rivals its versatility.</p>
         </div>
         <!--Breadcrumb-->
@@ -19,10 +19,12 @@
             </div>
         </div>
         <!-- Filter modal Section -->
-        <a class="btn btn-sm  d-lg-none mx-auto" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        <a class="btn btn-sm  d-lg-none mx-auto" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+           aria-controls="offcanvasExample">
             Filter
         </a>
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+             aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filter</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -208,7 +210,7 @@
                                         </div>
                                         <div>
                                             <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark" >Produto.price</p>
+                                            <p class="text-dark">Produto.price</p>
                                         </div>
                                     </a>
                                 </div>
@@ -236,7 +238,7 @@
                                         </div>
                                         <div>
                                             <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark" >Produto.price</p>
+                                            <p class="text-dark">Produto.price</p>
                                         </div>
                                     </a>
                                 </div>
@@ -264,7 +266,7 @@
                                         </div>
                                         <div>
                                             <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark" >Produto.price</p>
+                                            <p class="text-dark">Produto.price</p>
                                         </div>
                                     </a>
                                 </div>
@@ -292,7 +294,7 @@
                                         </div>
                                         <div>
                                             <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark" >Produto.price</p>
+                                            <p class="text-dark">Produto.price</p>
                                         </div>
                                     </a>
                                 </div>
@@ -320,7 +322,7 @@
                                         </div>
                                         <div>
                                             <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark" >Produto.price</p>
+                                            <p class="text-dark">Produto.price</p>
                                         </div>
                                     </a>
                                 </div>
@@ -348,7 +350,7 @@
                                         </div>
                                         <div>
                                             <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark" >Produto.price</p>
+                                            <p class="text-dark">Produto.price</p>
                                         </div>
                                     </a>
                                 </div>
@@ -376,7 +378,7 @@
                                         </div>
                                         <div>
                                             <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark" >Produto.price</p>
+                                            <p class="text-dark">Produto.price</p>
                                         </div>
                                     </a>
                                 </div>
@@ -404,7 +406,7 @@
                                         </div>
                                         <div>
                                             <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark" >Produto.price</p>
+                                            <p class="text-dark">Produto.price</p>
                                         </div>
                                     </a>
                                 </div>
@@ -432,7 +434,7 @@
                                         </div>
                                         <div>
                                             <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark" >Produto.price</p>
+                                            <p class="text-dark">Produto.price</p>
                                         </div>
                                     </a>
                                 </div>
@@ -445,4 +447,4 @@
         </section>
     </div>
 </div>
-@include('components._footer')
+@include('partials._footer')

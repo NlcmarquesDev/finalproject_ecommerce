@@ -1,4 +1,4 @@
-@include('components._header')
+@include('partials._header')
 <!--HERO -->
 <div class="producDetail container-fluid bg-light">
     <div class="row">
@@ -56,10 +56,10 @@
                             ><i class="bi bi-heart fs-4"></i
                                 ></a>
                         </div>
-                        <hr />
+                        <hr/>
                         <!---detail product-->
                         <p class="my-3 fs-5">Description of the product</p>
-                        <hr />
+                        <hr/>
                         <!---reviews star-->
                         <div class="d-flex align-items-center">
                             <div class="pe-2">
@@ -127,5 +127,5 @@
     </div>
 </div>
 <!--END HERO-->
-@include('partials.product-sample')
-@include('components._footer')
+@include('components.product-sample')
+@include('partials._footer')
