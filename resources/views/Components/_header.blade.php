@@ -152,206 +152,134 @@
             </div>
             <!-----end button for Login-->
             <!-----button for Checklist-->
-            <div>
-                <button
-                    type="button"
-                    data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight"
-                    data-bs-toggle="offcanvas"
-                    class="bg-transparent border-0"
-                >
-                    <div class="boxbol d-none d-lg-inline-block">
-                        <i
-                            class="fa-regular fa-heart navicon d-none d-lg-inline-block m-2"
-                        ></i>
-                        <span class="numberbol">9</span>
-                    </div>
-                </button>
-
-                <div
-                    class="offcanvas offcanvas-end"
-                    tabindex="-1"
-                    id="offcanvasRight"
-                    aria-labelledby="offcanvasRightLabel"
-                >
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasRightLabel">
-                            Whislst Items
-                        </h5>
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="offcanvas"
-                            aria-label="Close"
-                        ></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <div>Nuno</div>
-                    </div>
-                </div>
-            </div>
+            <x-offcanvas title="Whishlist" display="d-none d-lg-inline-block" >nuno</x-offcanvas>
             <!-----End button for checklist-->
             <!-----button for basket-->
-            <div>
-                <button
-                    type="button"
-                    data-bs-target="#offcanvasRightcard"
-                    aria-controls="offcanvasRightcard"
-                    data-bs-toggle="offcanvas"
-                    class="bg-transparent border-0"
-                >
-                    <div class="boxbol">
-                        <i class="fas fa-shopping-bag navicon m-2"></i>
-                        <span class="numberbol">9</span>
-                    </div>
-                </button>
+            <x-offcanvas title="Your Cart (2)" number="2" icon="fas fa-shopping-bag">
+                <!-- Header-->
+                <div class="offcanvas-header lh-fixed fs-lg">
 
-                <div
-                    class="offcanvas offcanvas-end"
-                    tabindex="-1"
-                    id="offcanvasRightcard"
-                    aria-labelledby="offcanvasRightLabelcard"
-                >
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasRightLabelcard">
-                            <strong class="mx-auto">Your Cart (2)</strong>
-                        </h5>
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="offcanvas"
-                            aria-label="Close"
-                        ></button>
-                    </div>
-                    <div class="offcanvas-body">
+                </div>
 
-                            <!-- Header-->
-                            <div class="offcanvas-header lh-fixed fs-lg">
+                <!-- List group -->
+                <ul class="list-group list-group-lg list-group-flush">
+                    <li class="list-group-item mb-2">
+                        <div class="row align-items-center">
+                            <div class="col-4">
+
+                                <!-- Image -->
+                                <a href="./product.html">
+                                    <img class="img-fluid" src="{{asset('imagens/toa-heftiba.jpg')}}" alt="...">
+                                </a>
 
                             </div>
+                            <div class="col-8">
 
-                            <!-- List group -->
-                            <ul class="list-group list-group-lg list-group-flush">
-                                <li class="list-group-item mb-2">
-                                    <div class="row align-items-center">
-                                        <div class="col-4">
+                                <!-- Title -->
+                                <p class="fs-sm fw-bold mb-6">
+                                    <a class="text-body" href="./product.html">Cotton floral print Dress</a> <br>
+                                    <span class="text-muted">&euro;40.00</span>
+                                </p>
 
-                                            <!-- Image -->
-                                            <a href="./product.html">
-                                                <img class="img-fluid" src="{{asset('imagens/toa-heftiba.jpg')}}" alt="...">
-                                            </a>
+                                <!--Footer -->
+                                <div class="d-flex align-items-center">
 
-                                        </div>
-                                        <div class="col-8">
+                                    <!-- Select -->
+                                    <select class="form-select form-select-xxs w-auto">
+                                        <option value="1">1</option>
+                                        <option value="1">2</option>
+                                        <option value="1">3</option>
+                                    </select>
 
-                                            <!-- Title -->
-                                            <p class="fs-sm fw-bold mb-6">
-                                                <a class="text-body" href="./product.html">Cotton floral print Dress</a> <br>
-                                                <span class="text-muted">&euro;40.00</span>
-                                            </p>
-
-                                            <!--Footer -->
-                                            <div class="d-flex align-items-center">
-
-                                                <!-- Select -->
-                                                <select class="form-select form-select-xxs w-auto">
-                                                    <option value="1">1</option>
-                                                    <option value="1">2</option>
-                                                    <option value="1">3</option>
-                                                </select>
-
-                                                <!-- Remove -->
-                                                <a class="fs-xs text-gray-400 ms-auto" href="#!">
-                                                    <i class="fe fe-x"></i> Remove
-                                                </a>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row align-items-center">
-                                        <div class="col-4">
-
-                                            <!-- Image -->
-                                            <a href="./product.html">
-                                                <img class="img-fluid" src="{{asset('imagens/stone-lamp-black-450x450.jpg.webp')}}" alt="...">
-                                            </a>
-
-                                        </div>
-                                        <div class="col-8">
-
-                                            <!-- Title -->
-                                            <p class="fs-sm fw-bold mb-6">
-                                                <a class="text-body" href="./product.html">Suede cross body Bag</a> <br>
-                                                <span class="text-muted">$49.00</span>
-                                            </p>
-
-                                            <!--Footer -->
-                                            <div class="d-flex align-items-center">
-
-                                                <!-- Select -->
-                                                <select class="form-select form-select-xxs w-auto">
-                                                    <option value="1">1</option>
-                                                    <option value="1">2</option>
-                                                    <option value="1">3</option>
-                                                </select>
-
-                                                <!-- Remove -->
-                                                <a class="fs-xs text-gray-400 ms-auto" href="#!">
-                                                    <i class="fe fe-x"></i> Remove
-                                                </a>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-
-                            <!-- Footer -->
-                            <div class="offcanvas-footer justify-between lh-fixed fs-sm bg-light mt-5 py-3">
-                                <strong>Subtotal</strong> <strong class="ms-auto">$89.00</strong>
-                            </div>
-
-                            <!-- Buttons -->
-                            <div class="offcanvas-body">
-                                <a class="btn w-100 btn-dark" href="./checkout.html">Continue to Checkout</a>
-                                <a class="btn w-100 btn-outline-dark mt-2" href="./shopping-cart.html">View Cart</a>
-                            </div>
-
-                            <!-- Empty cart (remove `.d-none` to enable it) -->
-                            <div class="d-none">
-
-                                <!-- Close -->
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
-                                    <i class="fe fe-x" aria-hidden="true"></i>
-                                </button>
-
-                                <!-- Header-->
-                                <div class="offcanvas-header lh-fixed fs-lg">
-                                    <strong class="mx-auto">Your Cart (0)</strong>
-                                </div>
-
-                                <!-- Body -->
-                                <div class="offcanvas-body flex-grow-0 my-auto">
-
-                                    <!-- Heading -->
-                                    <h6 class="mb-7 text-center">Your cart is empty 😞</h6>
-
-                                    <!-- Button -->
-                                    <a class="btn w-100 btn-outline-dark" href="#!">
-                                        Continue Shopping
+                                    <!-- Remove -->
+                                    <a class="fs-xs text-gray-400 ms-auto" href="#!">
+                                        <i class="fe fe-x"></i> Remove
                                     </a>
 
                                 </div>
 
                             </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-4">
+
+                                <!-- Image -->
+                                <a href="./product.html">
+                                    <img class="img-fluid" src="{{asset('imagens/stone-lamp-black-450x450.jpg.webp')}}" alt="...">
+                                </a>
+
+                            </div>
+                            <div class="col-8">
+
+                                <!-- Title -->
+                                <p class="fs-sm fw-bold mb-6">
+                                    <a class="text-body" href="./product.html">Suede cross body Bag</a> <br>
+                                    <span class="text-muted">$49.00</span>
+                                </p>
+
+                                <!--Footer -->
+                                <div class="d-flex align-items-center">
+
+                                    <!-- Select -->
+                                    <select class="form-select form-select-xxs w-auto">
+                                        <option value="1">1</option>
+                                        <option value="1">2</option>
+                                        <option value="1">3</option>
+                                    </select>
+
+                                    <!-- Remove -->
+                                    <a class="fs-xs text-gray-400 ms-auto" href="#!">
+                                        <i class="fe fe-x"></i> Remove
+                                    </a>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Footer -->
+                <div class="offcanvas-footer justify-between lh-fixed fs-sm bg-light mt-5 py-3">
+                    <strong>Subtotal</strong> <strong class="ms-auto">$89.00</strong>
+                </div>
+
+                <!-- Buttons -->
+                <div class="offcanvas-body">
+                    <a class="btn w-100 btn-dark" href="./checkout.html">Continue to Checkout</a>
+                    <a class="btn w-100 btn-outline-dark mt-2" href="./shopping-cart.html">View Cart</a>
+                </div>
+
+                <!-- Empty cart (remove `.d-none` to enable it) -->
+                <div class="d-none">
+
+                    <!-- Close -->
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+                        <i class="fe fe-x" aria-hidden="true"></i>
+                    </button>
+
+                    <!-- Header-->
+                    <div class="offcanvas-header lh-fixed fs-lg">
+                        <strong class="mx-auto">Your Cart (0)</strong>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="offcanvas-body flex-grow-0 my-auto">
+
+                        <!-- Heading -->
+                        <h6 class="mb-7 text-center">Your cart is empty 😞</h6>
+
+                        <!-- Button -->
+                        <a class="btn w-100 btn-outline-dark" href="#!">
+                            Continue Shopping
+                        </a>
 
                     </div>
+
                 </div>
-            </div>
+            </x-offcanvas>
             <!----- end button for basket-->
         </div>
     </div>
