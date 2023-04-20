@@ -112,11 +112,11 @@
                             Elements
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">FAQ's</a></li>
-                            <li><a class="dropdown-item" href="#">About us</a></li>
+                            <li><a class="dropdown-item" href="{{route('faq')}}">FAQ's</a></li>
+                            <li><a class="dropdown-item" href="{{route('about')}}">About us</a></li>
                         </ul>
                     </li>
-                    <a class="nav-link d-none d-lg-inline-block mx-2" href="#"
+                    <a class="nav-link d-none d-lg-inline-block mx-2" href="{{route('contact')}}"
                     >Contact us</a
                     >
                 </div>
@@ -248,8 +248,8 @@
 
                 <!-- Buttons -->
                 <div class="offcanvas-body">
-                    <a class="btn w-100 btn-dark" href="./checkout.html">Continue to Checkout</a>
-                    <a class="btn w-100 btn-outline-dark mt-2" href="./shopping-cart.html">View Cart</a>
+                    <a class="btn w-100 btn-dark" href="{{route('checkout')}}">Continue to Checkout</a>
+                    <a class="btn w-100 btn-outline-dark mt-2" href="{{route('cart')}}">View Cart</a>
                 </div>
 
                 <!-- Empty cart (remove `.d-none` to enable it) -->

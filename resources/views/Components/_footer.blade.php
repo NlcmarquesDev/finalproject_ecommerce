@@ -15,10 +15,10 @@
         </a>
     </div>
     <div class="text-center m-2">
-        <a href="#products" class="indexfooter p-1">Products</a>
-        <a href="#about" class="indexfooter p-1">About us</a>
-        <a href="#faq" class="indexfooter p-1">FAQ's</a>
-        <a href="#contact" class="indexfooter p-1">Contact us</a>
+        <a href="{{route('products')}}" class="indexfooter p-1">Products</a>
+        <a href="{{route('about')}}" class="indexfooter p-1">About us</a>
+        <a href="{{route('faq')}}" class="indexfooter p-1">FAQ's</a>
+        <a href="{{route('contact')}}" class="indexfooter p-1">Contact us</a>
     </div>
     <div class="iconfooter text-center">
         <a href="#"><i class="bi bi-instagram navicon m-2"></i></a>

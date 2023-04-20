@@ -12,7 +12,7 @@ use App\Http\Controllers\HomeController;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
+| routes are loaded by the RouteSecontact.blade.phprviceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
 */
@@ -25,7 +25,16 @@ Route::get('/', [EcommerceController::class, 'index'])->name('welcome');
 Route::get('/products', [EcommerceController::class, 'products'])->name('products');
 //Single Product Page
 Route::get('/singleproduct', [EcommerceController::class, 'singleProduct'])->name('single.product');
-
+//contact page
+Route::get('/contactus', [EcommerceController::class, 'contact'])->name('contact');
+//About page
+Route::get('/aboutus', [EcommerceController::class, 'about'])->name('about');
+//FAQ page
+Route::get('/faq', [EcommerceController::class, 'faq'])->name('faq');
+//Checkoutpage
+Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout');
+//Cart page
+Route::get('/cart', [EcommerceController::class, 'cart'])->name('cart');
 Auth::routes();
 
 

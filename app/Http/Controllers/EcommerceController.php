@@ -19,4 +19,19 @@ class EcommerceController extends Controller
     public function singleProduct(){
         return view('ecommerce.single-product');
     }
+    public function contact(){
+        return view('ecommerce.contact');
+    }
+    public function about(){
+        return view('ecommerce.about');
+    }
+    public function faq(){
+        return view('ecommerce.faq');
+    }
+    public function checkout(){
+        return view('ecommerce.checkout');
+    }
+    public function cart(){
+        return view('ecommerce.cart');
+    }
 }
