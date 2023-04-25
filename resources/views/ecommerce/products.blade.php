@@ -9,15 +9,7 @@
             <p class="pfont">The Cast Lighting Series aesthetic presence rivals its versatility.</p>
         </div>
         <!--Breadcrumb-->
-        <div class="d-flex my-4">
-            <div>
-                <a href="{{route('welcome')}}" class="indexfooter p-1">Home</a>
-            </div>
-            <div class="mx-2">
-                <span>/</span>
-                <a href="{{route('products')}}" class="indexfooter p-1">Products</a>
-            </div>
-        </div>
+        <x-breadcrumb :items="[ ['name' => 'Home', 'route' => route('welcome')], ['name' => 'Products', 'route' => route('products')],]"></x-breadcrumb>
         <!-- Filter modal Section -->
         <a class="btn btn-sm  d-lg-none mx-auto" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
            aria-controls="offcanvasExample">
@@ -445,6 +437,7 @@
             </div>
 
         </section>
+        @include('partials.return-policy')
     </div>
 </div>
 @include('partials._footer')

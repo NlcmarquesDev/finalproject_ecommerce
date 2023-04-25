@@ -1,36 +1,41 @@
 
 <hr />
-<div
-    id="contentfooter"
-    class="d-md-flex justify-content-around align-items-center"
->
-    <div class="text-center">
-        <a class="navbar-brand" href="{{route('welcome')}}">
-            <img
-                src="{{asset('imagens/Logo.png')}}"
-                alt="Nuno Marques"
-                width="51"
-                height="50"
-            />
-        </a>
-    </div>
-    <div class="text-center m-2">
-        <a href="{{route('products')}}" class="indexfooter p-1">Products</a>
-        <a href="{{route('about')}}" class="indexfooter p-1">About us</a>
-        <a href="{{route('faq')}}" class="indexfooter p-1">FAQ's</a>
-        <a href="{{route('contact')}}" class="indexfooter p-1">Contact us</a>
-    </div>
-    <div class="iconfooter text-center">
-        <a href="#"><i class="bi bi-instagram navicon m-2"></i></a>
-        <a href="#"><i class="bi bi-facebook navicon m-2"></i></a>
-        <a href="#"><i class="bi bi-pinterest navicon m-2"></i></a>
-        <a href="#"><i class="bi bi-youtube navicon m-2"></i></a>
-    </div>
-</div>
+
 <div class="py-5">
     <div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-3 d-flex flex-column align-items-center">
+            <h5 class="text-dark">Get started</h5>
+            <a href="{{route('welcome')}}" class="pfont" >Home</a>
+            <a href="{{route('home')}}" class="pfont my-2" >Sign up</a>
+            <a href="#" class="pfont" >Downloads</a>
+        </div>
+        <div class="col-sm-3 d-flex flex-column align-items-center">
+            <h5 class="text-dark">About us</h5>
+            <a href="{{route('about')}}" class="pfont" >Company Information</a>
+            <a href="{{route('contact')}}" class="pfont my-2" >Contact us</a>
+            <a href="#" class="pfont" >Reviews</a>
+        </div>
+        <div class="col-sm-3 d-flex flex-column align-items-center">
+            <h5 class="text-dark" >Support</h5>
+            <a href="{{route('faq')}}" class="pfont" >FAQ</a>
+            <a href="#" class="pfont my-2" >Help desk</a>
+            <a href="#" class="pfont" >Forums</a>
+        </div>
+        <div class="col-sm-3 info">
+            <h5 class="text-dark">Information</h5>
+            <p class="text-muted"> Lorem ipsum dolor amet, consectetur adipiscing elit. Etiam consectetur aliquet aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+<div class="py-5 ">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col">
+            <div class="col-sm-4">
 
                 <!-- Copyright -->
                 <p class="ms-5 small text-muted">
@@ -38,7 +43,14 @@
                 </p>
 
             </div>
-            <div class="col-auto me-5">
+            <div class="col-sm-4 iconfooter text-center">
+                <a href="#"><i class="bi bi-instagram navicon m-2"></i></a>
+                <a href="#"><i class="bi bi-facebook navicon m-2"></i></a>
+                <a href="#"><i class="bi bi-pinterest navicon m-2"></i></a>
+                <a href="#"><i class="bi bi-youtube navicon m-2"></i></a>
+            </div>
+
+            <div class="col-sm-4 text-center">
 
                 <!-- Payment methods -->
                 <img class="footer-payment small" src="{{asset('imagens/mastercard.svg')}}" alt="...">

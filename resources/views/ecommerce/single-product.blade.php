@@ -2,21 +2,8 @@
 <!--HERO -->
 <div class="producDetail container-fluid bg-light">
     <div class="row">
-        <div class="d-flex my-4">
-            <div>
-                <a href="{{route('welcome')}}" class="indexfooter p-1">Home</a>
-            </div>
-            <div class="mx-2">
-                <span>/</span>
-                <a href="{{route('products')}}" class="indexfooter p-1">Products</a>
-            </div>
-            <div>
-                <span>/</span>
-                <a href="{{route('single.product')}}" class="indexfooter p-1"
-                >Product Details</a
-                >
-            </div>
-        </div>
+        <!--Breadcrumb-->
+        <x-breadcrumb :items="[ ['name' => 'Home', 'route' => route('welcome')], ['name' => 'Products', 'route' => route('products')], ['name' => 'Products Details', 'route' => route('single.product')]]"></x-breadcrumb>
         <div class="col-12 col-lg-10 offset-lg-1 my-4">
             <!---Product Image-->
             <div class="container">
@@ -128,4 +115,5 @@
 </div>
 <!--END HERO-->
 @include('components.product-sample')
+@include('partials.newsletter')
 @include('partials._footer')

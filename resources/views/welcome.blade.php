@@ -184,48 +184,10 @@
 @include('components.product-sample')
 
 <!--RETURN POLICY-->
-<section
-    id="returnPolicy"
-    class="d-flex flex-column justify-content-center"
->
-    <div class="row">
-        <div class="text-center">
-            <h4 class="gold">CONNECTED SPACES</h4>
-            <h2 class="my-4">Redefine how we use space</h2>
-            <p class="fw-lighter">
-                Top designers and craftspeople around the world to create
-                contemporary furniture, lighting and <br/>
-                accessories that are clean, clever and natural.
-            </p>
-            <i class="bi bi-arrow-counterclockwise fs-1"></i>
-            <p>30 Days return</p>
-            <p class="fw-lighter">Check for more information in faq's</p>
-        </div>
-    </div>
-</section>
+@include('partials.return-policy')
 <!--END RETURN POLICY -->
 
 <!--NEWSLETTER AND DISCOUNT-->
-<section id="newsletter">
-    <div
-        id="discount"
-        class="d-lg-flex justify-content-center align-items-center text-center pt-5 pt-lg-0"
-    >
-        <header class="me-4">
-            <h2><i>Get Discount 25% off</i></h2>
-        </header>
-        <form id="formemail" action="" class="pt-5 pt-lg-0 text-center">
-            <input
-                type="email"
-                name="email"
-                id="email"
-                class="no-outline"
-                placeholder="Enter your email ..."
-            />
-            <button class="border-0" type="submit">
-                <i id="envelope" class="bi bi-envelope bg-transparent"></i>
-            </button>
-        </form>
-    </div>
+@include('partials.newsletter')
 
 @include('partials._footer')

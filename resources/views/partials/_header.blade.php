@@ -193,7 +193,7 @@
                                     </select>
 
                                     <!-- Remove -->
-                                    <a class="fs-xs text-gray-400 ms-auto" href="#!">
+                                    <a class="fs-xs text-gray ms-auto" href="#!">
                                         <i class="fe fe-x"></i> Remove
                                     </a>
 
