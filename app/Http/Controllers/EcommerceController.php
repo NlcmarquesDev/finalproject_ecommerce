@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class EcommerceController extends Controller
@@ -26,7 +27,8 @@ class EcommerceController extends Controller
         return view('ecommerce.about');
     }
     public function faq(){
-        return view('ecommerce.faq');
+        $faqs = Faq::all();
+        return view('ecommerce.faq', compact('faqs'));
     }
     public function checkout(){
         return view('ecommerce.checkout');

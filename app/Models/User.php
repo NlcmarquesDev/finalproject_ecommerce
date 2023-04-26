@@ -19,11 +19,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'role_id',
         'is_active',
         'email',
         'password',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, "user_role");
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -57,7 +61,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role(){
-        return $this->belongsTo(Role::class);
-    }
+
 }

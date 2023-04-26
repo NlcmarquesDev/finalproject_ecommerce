@@ -1,5 +1,5 @@
 @include('partials._header')
-<x-breadcrumb :items="[ ['name' => 'Home', 'route' => route('welcome')], ['name' => 'Products', 'route' => route('products')],]"></x-breadcrumb>
+<x-breadcrumb :items="[ ['name' => 'Home', 'route' => route('welcome')], ['name' => 'About Us', 'route' => route('about')],]"></x-breadcrumb>
 
 <div class="col-lg-8 mx-auto">
     <div class="row">

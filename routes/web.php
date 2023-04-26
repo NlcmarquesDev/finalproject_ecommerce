@@ -50,6 +50,7 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function (){
     Route::resource('users', UsersController::class);
     //FAQ page
     Route::resource('faq',faqController::class);
+    //
 
 
 });
