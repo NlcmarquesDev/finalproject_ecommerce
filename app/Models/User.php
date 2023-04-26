@@ -36,6 +36,19 @@ class User extends Authenticatable
     ];
 
     /**
+     * Methode test of een user a   dministrator is en actief binnen de database
+     *
+     * @return bool
+     */
+    public function isAdmin(){
+        foreach($this->roles as $role){
+            if($role->name == 'Administrator && $this->is_active == 1'){
+                return true;
+            }
+        }
+    }
+
+    /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
