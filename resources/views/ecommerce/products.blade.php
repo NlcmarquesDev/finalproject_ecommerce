@@ -1,5 +1,7 @@
 @include('partials._header')
 <!--PRODUCT -->
+<!--Breadcrumb-->
+<x-breadcrumb :items="[ ['name' => 'Home', 'route' => route('welcome')], ['name' => 'Products', 'route' => route('products')],]"></x-breadcrumb>
 <div class="container-fluid">
     <div class="row d-flex">
 
@@ -8,8 +10,7 @@
             <h2 class="fw-normal my-4"><small>Designer's Portfolio</small></h2>
             <p class="pfont">The Cast Lighting Series aesthetic presence rivals its versatility.</p>
         </div>
-        <!--Breadcrumb-->
-        <x-breadcrumb :items="[ ['name' => 'Home', 'route' => route('welcome')], ['name' => 'Products', 'route' => route('products')],]"></x-breadcrumb>
+
         <!-- Filter modal Section -->
         <a class="btn btn-sm  d-lg-none mx-auto" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
            aria-controls="offcanvasExample">

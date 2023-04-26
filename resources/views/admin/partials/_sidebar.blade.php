@@ -35,6 +35,11 @@
                     <a class="nav-link" href="#">All Tags</a>
                     <a class="nav-link" href="#">Create Tag</a>
                 </x-sidebar-items>
+                {{--                Tags list--}}
+                <x-sidebar-items item="Faq" icon="fa-solid fa-circle-question">
+                    <a class="nav-link" href="{{route('faq.index')}}">All Faq's</a>
+                    <a class="nav-link" href="{{route('faq.create')}}">Create Faq</a>
+                </x-sidebar-items>
 
 {{--                extra items--}}
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

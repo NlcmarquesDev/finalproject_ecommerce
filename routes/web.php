@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EcommerceController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,8 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function (){
     Route::get('/', [HomeController::class, 'index'])->name('home');
     //USERS PAGE
     Route::resource('users', UsersController::class);
+    //FAQ page
+    Route::resource('faq',faqController::class);
 
 
 });
