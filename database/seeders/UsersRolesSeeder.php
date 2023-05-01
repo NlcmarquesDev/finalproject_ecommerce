@@ -15,17 +15,19 @@ class UsersRolesSeeder extends Seeder
     public function run(): void
     {
         //
-        $roles = Role::all();
-        User::all()->each(function ($user) use ($roles) {
-            if($user['id'] == 1){
+        $roles = Role::all();//ophalen rollen uit DB
+        User::all()->each(function ($user) use ($roles){
+            if($user['id']==1){
                 $user->roles()->sync([1]);
-            }elseif($user['id'] == 2){
+            }elseif($user['id']==2){
                 $user->roles()->sync([2]);
             }else{
                 $user->roles()->attach(
-                    $roles->random(rand(1, 2))->pluck('id')->toArray()
+                    $roles->whereIn('id', [2, 3])->pluck('id')->shuffle()->take(1)->toArray()
                 );
-
+//                $user->roles()->attach(
+//                    $roles->sync([2,3])->random(rand(2,3))->pluck('id')->toArray()
+//                );
             }
         });
     }

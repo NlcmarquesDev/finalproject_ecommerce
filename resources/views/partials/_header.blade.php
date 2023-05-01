@@ -48,24 +48,26 @@
                     <!-- Button to close the overlay navigation -->
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                     <div class="text-center">
-                        @if(Auth::user() != null)
-                            @if(Auth::user()->role_id == 1)
+                        @if (Route::has('login'))
+                            @auth
                                 <a class="dropdown-item" href="{{route('checkout')}}">My Checkout</a>
                                 <a class="dropdown-item" href="{{route('about')}}">Orders</a>
                                 <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{__('Logout')}}</a>
                                             <form id="logout-form" action="{{route('logout')}}" method="POST">
                                                 @csrf
                                             </form>
-                            @endif
-                        @else
+                            @endauth
                         @endif
+
                         <a href="#">Shop</a>
                         <a href="#">FAQ`s</a>
                         <a href="#">Contact</a>
                         @if (Route::has('login'))
                             <div>
                                 @auth
-                                    <a href="{{ url('/admin') }}">Home</a>
+                                    @can('admin')
+                                     <a href="{{ url('/admin') }}">Home</a>
+                                    @endcan
                                 @else
                                     <a href="{{ route('login') }}" >Log in</a>
 
@@ -128,8 +130,9 @@
                         </ul>
                     </li>
                     <a class="nav-link d-none d-lg-inline-block mx-2" href="{{route('contact')}}">Contact us</a>
-                    @if(Auth::user() != null)
-                        @if(Auth::user()->role_id == 1)
+
+                    @if (Route::has('login'))
+                        @auth
                     <li class="nav-item dropdown mx-2">
                         <a
                             class="nav-link dropdown-toggle d-none d-lg-inline-block"
@@ -153,8 +156,7 @@
                             </li>
                         </ul>
                     </li>
-                    @endif
-                    @else
+                        @endauth
                     @endif
                 </div>
             </div>
@@ -173,9 +175,11 @@
                 @if (Route::has('login'))
                     <div>
                         @auth
+                            @can('admin')
                             <a href="{{ url('/admin') }}"><i
                                     class="fa-regular fa-circle-user navicon d-none d-lg-inline-block m-2"
                                 ></i></a>
+                            @endcan
                         @else
                             <a href="{{ route('login') }}" class="fw-semibold d-none d-lg-inline-block"><i class="navicon fa-solid fa-right-to-bracket m-2"></i></a>
 

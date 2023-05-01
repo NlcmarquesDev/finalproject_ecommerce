@@ -36,11 +36,13 @@ Route::get('/faq', [EcommerceController::class, 'faq'])->name('faq');
 Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout');
 //Cart page
 Route::get('/cart', [EcommerceController::class, 'cart'])->name('cart');
+
+
 Auth::routes();
 
+/* C0STUMER ROUTES*/
 
-
-
+@
 
 /*BACKEND ROUTES*/
 Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function (){
@@ -51,6 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function (){
     //FAQ page
     Route::resource('faq',faqController::class);
     //
+
 
 
 });
