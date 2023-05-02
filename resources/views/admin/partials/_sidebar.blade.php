@@ -22,8 +22,8 @@
                 </x-sidebar-items>
                 {{--                Categories list--}}
                 <x-sidebar-items item="Categories" icon="fas fa-tint">
-                    <a class="nav-link" href="#">All Categories</a>
-                    <a class="nav-link" href="#">Create Category</a>
+                    <a class="nav-link" href="{{route('categories.index')}}">All Categories</a>
+                    <a class="nav-link" href="{{route('categories.create')}}">Create Category</a>
                 </x-sidebar-items>
                 {{--                Brands list--}}
                 <x-sidebar-items item="Brands" icon="fas fa-tags">

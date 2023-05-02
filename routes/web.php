@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\UsersController;
@@ -38,6 +39,8 @@ Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkou
 Route::get('/cart', [EcommerceController::class, 'cart'])->name('cart');
 
 
+Route::get('/category/{category:slug}',[CategoriesController::class,'category'])->name('category.category');
+
 Auth::routes();
 
 /* C0STUMER ROUTES*/
@@ -52,7 +55,12 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function (){
     Route::resource('users', UsersController::class);
     //FAQ page
     Route::resource('faq',faqController::class);
-    //
+    //Categories Page
+    Route::resource('categories',CategoriesController::class);
+    Route::post("categories/restore/{category}", [
+        CategoriesController::class,
+        "categoryRestore",
+    ])->name("categories.restore");
 
 
 
