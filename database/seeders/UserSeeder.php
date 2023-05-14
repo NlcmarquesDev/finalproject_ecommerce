@@ -21,15 +21,18 @@ class UserSeeder extends Seeder
             //'role_id'=>1,
             'name'=>'Nuno',
             'email'=>'nunolcm@gmail.com',
+            'role_id'=>1,
+            "photo_id" => 1,
             'password'=>bcrypt(12345678),
             'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'=>Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('users')->insert([
             'is_active'=>1,
-           // 'role_id'=>2,
+            'role_id'=>2,
             'name'=>'ines',
             'email'=>'ines@gmail.com',
+
             'password'=>bcrypt(12345678),
             'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'=>Carbon::now()->format('Y-m-d H:i:s'),

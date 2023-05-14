@@ -167,17 +167,20 @@
 
 <!--CONTENT PUBLICITY -->
 <section id="pubCont" class="d-flex flex-column justify-content-center">
-    <div class="row">
-        <div class="text-center">
-            <h4 class="gold">CONNECTED SPACES</h4>
-            <h2 class="my-5">Redefine how we use space</h2>
-            <p class="fw-lighter">
-                Top designers and craftspeople around the world to create
-                contemporary furniture, lighting and <br/>
-                accessories that are clean, clever and natural.
-            </p>
+    <div class="container">
+        <div class="row">
+            <div class="text-center">
+                <h4 class="gold">CONNECTED SPACES</h4>
+                <h2 class="my-5">Redefine how we use space</h2>
+                <p class="fw-lighter">
+                    Top designers and craftspeople around the world to create
+                    contemporary furniture, lighting and <br/>
+                    accessories that are clean, clever and natural.
+                </p>
+            </div>
         </div>
     </div>
+    
 </section>
 <!--END CONTENT VIDEO -->
 

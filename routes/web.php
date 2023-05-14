@@ -53,6 +53,11 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function (){
     Route::get('/', [HomeController::class, 'index'])->name('home');
     //USERS PAGE
     Route::resource('users', UsersController::class);
+    //users restore
+    Route::post("users/restore/{user}", [
+        UsersController::class,
+        "usersRestore",
+    ])->name("users.restore");
     //FAQ page
     Route::resource('faq',faqController::class);
     //Categories Page

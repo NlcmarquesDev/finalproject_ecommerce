@@ -23,13 +23,22 @@ class User extends Authenticatable
         'name',
         'is_active',
         'email',
+        'role_id',
         'photo_id',
         'password',
     ];
 
-    public function roles()
+    public function role()
     {
-        return $this->belongsToMany(Role::class, "user_role");
+        return $this->hasOne(Role::class, 'id', 'role_id');
+    }
+    public function photo()
+    {
+        return $this->belongsTo(Photo::class);
+    }
+    public function locations()
+    {
+        return $this->hasMany(locations::class);
     }
 
     /**
@@ -48,8 +57,8 @@ class User extends Authenticatable
      * @return bool
      */
     public function isAdmin(){
-        foreach($this->roles as $role){
-            if($role->name == 'administrator' && $this->is_active == 1){
+        foreach($this->role as $role){
+            if($role == 'administrator' && $this->is_active == 1){
                 return true;
             }
         }
