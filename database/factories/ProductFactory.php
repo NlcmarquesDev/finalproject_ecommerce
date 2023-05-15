@@ -25,8 +25,10 @@ class ProductFactory extends Factory
 
             "name" => fake()->randomElement($nameid),
             "photo_id" => Photo::inRandomOrder()->first()->id,
-            "body" =>"<p>". $this->faker->paragraph(100, true). "</p>",
+            "description" =>"<p>". $this->faker->paragraph(100, true). "</p>",
             "price" => fake()->numberBetween(0,500),
+            "rating" =>fake()->numberBetween(0,5),
+
         ];
     }
 

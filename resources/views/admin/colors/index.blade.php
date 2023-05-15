@@ -1,16 +1,16 @@
 @extends('admin.index')
 @section('content')
-    <h1 class="mt-4">Users</h1>
+    <h1 class="mt-4">Colors</h1>
         <div class="d-flex justify-content-between mb-4">
 
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="d-flex justify-content-between ">
-                    <a class="navbar-brand" href="#"><h2>Users</h2></a>
+                    <a class="navbar-brand" href="#"><h2>Colors</h2></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <button class="btn btn-secondary">Create User</button>
+                        <button class="btn btn-secondary">Create Color</button>
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
@@ -24,52 +24,27 @@
             <thead class="bg-light">
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
+                <th>Color Name</th>
+                <th>Code</th>
                 <th>Created_at</th>
                 <th>Updated_at</th>
                 <th>Deleted_at</th>
-                <th>Status</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($users as $user)
+            @foreach($colors as $color)
 {{--     @dd($users)--}}
-            <tr class="{{$user->deleted_at ? 'bg-warning' :  ''}}">
-
-                    <td>{{$user->id}}</td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img
-                            src="{{$user->photo ? asset($user->photo->file) : "https://i.pravatar.cc/250"}}"
-
-                            alt=""
-                            style="width: 45px; height: 45px"
-                            class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">{{$user->name}}</p>
-
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <p class="text-muted mb-0">{{$user->email}}</p>
-                </td>
-                <td>
-
-                    <span class="badge text-bg-info text-white">{{$user->role->name }}</span>
-
-                </td>
-                <td>{{$user->created_at}}</td>
-                <td>{{$user->updated_at}}</td>
-                <td>{{$user  ->deleted_at ? $user->deleted_at->diffForHumans() : ''}}</td>
-                <td> <span class="badge rounded-pill {{$user->is_active ==1 ? 'bg-success' : 'bg-danger'}}">{{$user->is_active ==1 ? 'Active' : 'Not Active'}}</span></td>
+            <tr >
+                <td>{{$color->id}}</td>
+                <td>{{$color->name}}</td>
+                <td>{{$color->code}}</td>
+                <td>{{$color->created_at}}</td>
+                <td>{{$color->updated_at}}</td>
+                <td>{{$color  ->deleted_at ? $color->deleted_at->diffForHumans() : ''}}</td>
                 <td class="d-flex gap-2">
-                    @if($user->deleted_at != null)
-                        <form action="{{ route('users.restore', $user->id) }}" method="POST">
+                    @if($color->deleted_at != null)
+                        <form action="{{ route('colors.restore', $color->id) }}" method="POST">
                             @csrf
                             @method('POST')
                             <button type="submit" class="btn btn-info">
@@ -81,13 +56,13 @@
                             </button>
                         </form>
                     @else
-                        <a class="btn btn-primary"  href="{{ route('users.edit', $user->id) }}">
+                        <a class="btn btn-primary"  href="{{ route('colors.edit', $color->id) }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                                 <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                             </svg>
                             Edit
                         </a>
-                        <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                        <form action="{{ route('colors.destroy', $color->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">
@@ -105,7 +80,7 @@
             </tbody>
         </table>
 
-{{$users->links()}}
+{{$colors->links()}}
 
 
 @endsection

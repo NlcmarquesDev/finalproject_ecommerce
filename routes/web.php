@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ColorsController;
 use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\UsersController;
@@ -66,6 +67,12 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function (){
         CategoriesController::class,
         "categoryRestore",
     ])->name("categories.restore");
+    //Colors Page
+    Route::resource('colors',ColorsController::class);
+    Route::post("colors/restore/{color}", [
+        ColorsController::class,
+        "colorRestore",
+    ])->name("colors.restore");
 
 
 

@@ -25,6 +25,11 @@
                     <a class="nav-link" href="{{route('categories.index')}}">All Categories</a>
                     <a class="nav-link" href="{{route('categories.create')}}">Create Category</a>
                 </x-sidebar-items>
+                {{--                Colors list--}}
+                <x-sidebar-items item="Colors" icon="fa-solid fa-droplet">
+                    <a class="nav-link" href="{{route('colors.index')}}">All Colors</a>
+                    <a class="nav-link" href="{{route('colors.create')}}">Create Color</a>
+                </x-sidebar-items>
                 {{--                Brands list--}}
                 <x-sidebar-items item="Brands" icon="fas fa-tags">
                     <a class="nav-link" href="#">All Brands</a>
