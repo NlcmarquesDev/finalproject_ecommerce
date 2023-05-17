@@ -175,10 +175,12 @@
         <!-- Products Section -->
         <section class="col-lg-10 col-md-12">
             <div class="row">
+
                 <section id="sampleProduct" class="container my-5">
                     <div class="row d-flex justify-content-center">
                         <div class="container">
                             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 px-2">
+                                @foreach($products as $product)
                                 <div class="col">
                                     <a href="{{route('single.product')}}" class="text-decoration-none">
                                         <div class="boximg">
@@ -186,7 +188,7 @@
                                                 <div class="flip-box-inner">
                                                     <div class="flip-box-front">
                                                         <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"
+                                                            src="{{$product->photos->first() ? asset($product->photos->first()->file) : 'http://via.placeholder.com/62x62'}}"
                                                             alt="stone lamp"
                                                             style="width: 300px; height: 300px"
                                                         />
@@ -202,235 +204,236 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark">Produto.price</p>
+                                            <p class="pfont my-3 ">{{$product->name}}</p>
+                                            <p class="text-dark">{{$product->price}}</p>
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col">
-                                    <a href="{{route('single.product')}}" class="text-decoration-none">
-                                        <div class="boximg">
-                                            <div class="flip-box">
-                                                <div class="flip-box-inner">
-                                                    <div class="flip-box-front">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"
-                                                            alt="stone lamp"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                    <div class="flip-box-back">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"
-                                                            alt="Paris"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark">Produto.price</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="{{route('single.product')}}" class="text-decoration-none">
-                                        <div class="boximg">
-                                            <div class="flip-box">
-                                                <div class="flip-box-inner">
-                                                    <div class="flip-box-front">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"
-                                                            alt="stone lamp"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                    <div class="flip-box-back">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"
-                                                            alt="Paris"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark">Produto.price</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="{{route('single.product')}}" class="text-decoration-none">
-                                        <div class="boximg">
-                                            <div class="flip-box">
-                                                <div class="flip-box-inner">
-                                                    <div class="flip-box-front">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"
-                                                            alt="stone lamp"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                    <div class="flip-box-back">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"
-                                                            alt="Paris"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark">Produto.price</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="{{route('single.product')}}" class="text-decoration-none">
-                                        <div class="boximg">
-                                            <div class="flip-box">
-                                                <div class="flip-box-inner">
-                                                    <div class="flip-box-front">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"
-                                                            alt="stone lamp"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                    <div class="flip-box-back">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"
-                                                            alt="Paris"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark">Produto.price</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="{{route('single.product')}}" class="text-decoration-none">
-                                        <div class="boximg">
-                                            <div class="flip-box">
-                                                <div class="flip-box-inner">
-                                                    <div class="flip-box-front">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"
-                                                            alt="stone lamp"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                    <div class="flip-box-back">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"
-                                                            alt="Paris"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark">Produto.price</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="{{route('single.product')}}" class="text-decoration-none">
-                                        <div class="boximg">
-                                            <div class="flip-box">
-                                                <div class="flip-box-inner">
-                                                    <div class="flip-box-front">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"
-                                                            alt="stone lamp"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                    <div class="flip-box-back">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"
-                                                            alt="Paris"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark">Produto.price</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="{{route('single.product')}}" class="text-decoration-none">
-                                        <div class="boximg">
-                                            <div class="flip-box">
-                                                <div class="flip-box-inner">
-                                                    <div class="flip-box-front">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"
-                                                            alt="stone lamp"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                    <div class="flip-box-back">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"
-                                                            alt="Paris"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark">Produto.price</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="{{route('single.product')}}" class="text-decoration-none">
-                                        <div class="boximg">
-                                            <div class="flip-box">
-                                                <div class="flip-box-inner">
-                                                    <div class="flip-box-front">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"
-                                                            alt="stone lamp"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                    <div class="flip-box-back">
-                                                        <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"
-                                                            alt="Paris"
-                                                            style="width: 300px; height: 300px"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <p class="pfont my-3 ">Produto.component</p>
-                                            <p class="text-dark">Produto.price</p>
-                                        </div>
-                                    </a>
-                                </div>
+                                @endforeach
+{{--                                <div class="col">--}}
+{{--                                    <a href="{{route('single.product')}}" class="text-decoration-none">--}}
+{{--                                        <div class="boximg">--}}
+{{--                                            <div class="flip-box">--}}
+{{--                                                <div class="flip-box-inner">--}}
+{{--                                                    <div class="flip-box-front">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"--}}
+{{--                                                            alt="stone lamp"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flip-box-back">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"--}}
+{{--                                                            alt="Paris"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div>--}}
+{{--                                            <p class="pfont my-3 ">Produto.component</p>--}}
+{{--                                            <p class="text-dark">Produto.price</p>--}}
+{{--                                        </div>--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                                <div class="col">--}}
+{{--                                    <a href="{{route('single.product')}}" class="text-decoration-none">--}}
+{{--                                        <div class="boximg">--}}
+{{--                                            <div class="flip-box">--}}
+{{--                                                <div class="flip-box-inner">--}}
+{{--                                                    <div class="flip-box-front">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"--}}
+{{--                                                            alt="stone lamp"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flip-box-back">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"--}}
+{{--                                                            alt="Paris"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div>--}}
+{{--                                            <p class="pfont my-3 ">Produto.component</p>--}}
+{{--                                            <p class="text-dark">Produto.price</p>--}}
+{{--                                        </div>--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                                <div class="col">--}}
+{{--                                    <a href="{{route('single.product')}}" class="text-decoration-none">--}}
+{{--                                        <div class="boximg">--}}
+{{--                                            <div class="flip-box">--}}
+{{--                                                <div class="flip-box-inner">--}}
+{{--                                                    <div class="flip-box-front">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"--}}
+{{--                                                            alt="stone lamp"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flip-box-back">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"--}}
+{{--                                                            alt="Paris"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div>--}}
+{{--                                            <p class="pfont my-3 ">Produto.component</p>--}}
+{{--                                            <p class="text-dark">Produto.price</p>--}}
+{{--                                        </div>--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                                <div class="col">--}}
+{{--                                    <a href="{{route('single.product')}}" class="text-decoration-none">--}}
+{{--                                        <div class="boximg">--}}
+{{--                                            <div class="flip-box">--}}
+{{--                                                <div class="flip-box-inner">--}}
+{{--                                                    <div class="flip-box-front">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"--}}
+{{--                                                            alt="stone lamp"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flip-box-back">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"--}}
+{{--                                                            alt="Paris"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div>--}}
+{{--                                            <p class="pfont my-3 ">Produto.component</p>--}}
+{{--                                            <p class="text-dark">Produto.price</p>--}}
+{{--                                        </div>--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                                <div class="col">--}}
+{{--                                    <a href="{{route('single.product')}}" class="text-decoration-none">--}}
+{{--                                        <div class="boximg">--}}
+{{--                                            <div class="flip-box">--}}
+{{--                                                <div class="flip-box-inner">--}}
+{{--                                                    <div class="flip-box-front">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"--}}
+{{--                                                            alt="stone lamp"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flip-box-back">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"--}}
+{{--                                                            alt="Paris"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div>--}}
+{{--                                            <p class="pfont my-3 ">Produto.component</p>--}}
+{{--                                            <p class="text-dark">Produto.price</p>--}}
+{{--                                        </div>--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                                <div class="col">--}}
+{{--                                    <a href="{{route('single.product')}}" class="text-decoration-none">--}}
+{{--                                        <div class="boximg">--}}
+{{--                                            <div class="flip-box">--}}
+{{--                                                <div class="flip-box-inner">--}}
+{{--                                                    <div class="flip-box-front">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"--}}
+{{--                                                            alt="stone lamp"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flip-box-back">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"--}}
+{{--                                                            alt="Paris"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div>--}}
+{{--                                            <p class="pfont my-3 ">Produto.component</p>--}}
+{{--                                            <p class="text-dark">Produto.price</p>--}}
+{{--                                        </div>--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                                <div class="col">--}}
+{{--                                    <a href="{{route('single.product')}}" class="text-decoration-none">--}}
+{{--                                        <div class="boximg">--}}
+{{--                                            <div class="flip-box">--}}
+{{--                                                <div class="flip-box-inner">--}}
+{{--                                                    <div class="flip-box-front">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"--}}
+{{--                                                            alt="stone lamp"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flip-box-back">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"--}}
+{{--                                                            alt="Paris"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div>--}}
+{{--                                            <p class="pfont my-3 ">Produto.component</p>--}}
+{{--                                            <p class="text-dark">Produto.price</p>--}}
+{{--                                        </div>--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                                <div class="col">--}}
+{{--                                    <a href="{{route('single.product')}}" class="text-decoration-none">--}}
+{{--                                        <div class="boximg">--}}
+{{--                                            <div class="flip-box">--}}
+{{--                                                <div class="flip-box-inner">--}}
+{{--                                                    <div class="flip-box-front">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp')}}"--}}
+{{--                                                            alt="stone lamp"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flip-box-back">--}}
+{{--                                                        <img--}}
+{{--                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"--}}
+{{--                                                            alt="Paris"--}}
+{{--                                                            style="width: 300px; height: 300px"--}}
+{{--                                                        />--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div>--}}
+{{--                                            <p class="pfont my-3 ">Produto.component</p>--}}
+{{--                                            <p class="text-dark">Produto.price</p>--}}
+{{--                                        </div>--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                         <button class="btn">Paginacao</button>

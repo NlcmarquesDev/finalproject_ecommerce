@@ -10,11 +10,13 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable=['photo_id', 'name', 'body'];
-    public function photo(){
-        return $this->belongsTo(Photo::class);
+    protected $fillable=[ 'name', 'description', 'price', 'stock', 'rating'];
+    public function photos(){
+        return $this->hasMany(Photo::class);
     }
     public function colors(){
         return $this->belongsToMany(Color::class,'product_color','product_id', 'color_id');
     }
+
+
 }

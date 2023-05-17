@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Photo extends Model
 {
     use HasFactory;
-    protected $fillable = ["file"];
+    protected $fillable = ["file", "product_id"];
 
     protected $uploads = "/assets/";
     //accessor
@@ -25,8 +25,9 @@ class Photo extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function product(){
-        return $this->hasOne(Product::class);
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
 }

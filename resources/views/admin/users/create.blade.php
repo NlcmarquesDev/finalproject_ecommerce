@@ -2,7 +2,7 @@
 @section('content')
     <x-admin.heading_table title="Edit User" button="All User"  rota="{{route('users.index')}}"></x-admin.heading_table>
     <div class="row">
-        <form action="{{action("\App\Http\Controllers\UsersController@store")}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
             <div class="d-xl-flex col-xl-12">

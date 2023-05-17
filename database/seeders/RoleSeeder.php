@@ -21,12 +21,12 @@ class RoleSeeder extends Seeder
             "updated_at" => now(),
         ]);
         DB::table("roles")->insert([
-            "name" => "custumer",
+            "name" => "customer",
             "created_at" => now(),
             "updated_at" => now(),
         ]);
         DB::table("roles")->insert([
-            "name" => "guess",
+            "name" => "editor",
             "created_at" => now(),
             "updated_at" => now(),
         ]);

@@ -17,7 +17,7 @@ class PhotoFactory extends Factory
      */
     public function definition(): array
     {
-        $path = storage_path("app/public/posts");
+        $path = storage_path("app/public/products");
         /* schrijfbare posts directory */
         if (!file_exists($path)) {
             mkdir($path, 0755, true);
@@ -25,16 +25,16 @@ class PhotoFactory extends Factory
             /* standaard maximum 10 posts in de directory  */
             $files = glob($path . "/*");
             if (count($files) > 9) {
-                Storage::disk("public")->deleteDirectory("posts");
+                Storage::disk("public")->deleteDirectory("products");
             }
         }
         return [
             "file" => function () {
                 $imageUrl =
-                    "https://source.unsplash.com/category/nature/640x480";
+                    "https://via.placeholder.com/360x360.png/00bbcc?text=animals+cats+vero";
                 $imageData = file_get_contents($imageUrl);
                 /* /posts/uniekenaam.png */
-                $filename = "posts/" . uniqid() . ".jpg";
+                $filename = "products/" . uniqid() . ".jpg";
                 Storage::disk("public")->put($filename, $imageData);
                 return $filename;
             },

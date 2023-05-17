@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Faq;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class EcommerceController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
 
@@ -15,7 +22,8 @@ class EcommerceController extends Controller
     }
 
     public function products(){
-        return view('ecommerce.products');
+        $products = Product::all();
+        return view('ecommerce.products', compact('products'));
     }
     public function singleProduct(){
         return view('ecommerce.single-product');

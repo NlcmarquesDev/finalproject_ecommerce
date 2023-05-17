@@ -1,13 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ColorsController;
 use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +35,13 @@ Route::get('/contactus', [EcommerceController::class, 'contact'])->name('contact
 Route::get('/aboutus', [EcommerceController::class, 'about'])->name('about');
 //FAQ page
 Route::get('/faq', [EcommerceController::class, 'faq'])->name('faq');
-//Checkoutpage
-Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout');
+////Checkoutpage
+//
+//Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout')->middleware('customer');
+
+
+
+
 //Cart page
 Route::get('/cart', [EcommerceController::class, 'cart'])->name('cart');
 
@@ -46,10 +52,11 @@ Auth::routes();
 
 /* C0STUMER ROUTES*/
 
-@
 
 /*BACKEND ROUTES*/
-Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function (){
+    Route::prefix('admin')->middleware(['admin'])->group(function(){
+//Route::group(['prefix' => 'admin', 'middleware'=>'auth','admin' ], function (){
+        Route::get('/checkout', [EcommerceController::class, 'checkout']);
     //BACKEND HOMEPAGE
     Route::get('/', [HomeController::class, 'index'])->name('home');
     //USERS PAGE
@@ -61,6 +68,8 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function (){
     ])->name("users.restore");
     //FAQ page
     Route::resource('faq',faqController::class);
+    //
+    Route::resource('products', ProductController::class);
     //Categories Page
     Route::resource('categories',CategoriesController::class);
     Route::post("categories/restore/{category}", [
@@ -73,6 +82,10 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function (){
         ColorsController::class,
         "colorRestore",
     ])->name("colors.restore");
+
+//        //Checkoutpage
+//
+//        Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout')->middleware('customer');
 
 
 

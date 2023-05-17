@@ -58,11 +58,25 @@ class User extends Authenticatable
      */
     public function isAdmin(){
         foreach($this->role as $role){
+//            dd($role);
             if($role == 'administrator' && $this->is_active == 1){
                 return true;
             }
         }
     }
+//    public function isCustomer(){
+//        foreach($this->role as $role){
+//            dd($role);
+//            if($role == 'customer' && $this->is_active == 1){
+//                return true;
+//            }
+//        }
+//    }
+//
+//    public function hasRole($role){
+////        dd($this->role->name);
+//        return $role == $this->role->name && $this->is_active ;
+//    }
 
     /**
      * The attributes that should be cast.

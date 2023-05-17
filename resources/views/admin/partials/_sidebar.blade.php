@@ -17,8 +17,8 @@
                 </x-sidebar-items>
                 {{--                Products list--}}
                 <x-sidebar-items item="Products" icon="fas fa-shopping-cart">
-                    <a class="nav-link" href="#">All Products</a>
-                    <a class="nav-link" href="#">Create Product</a>
+                    <a class="nav-link" href="{{route('products.index')}}">All Products</a>
+                    <a class="nav-link" href="{{route('products.create')}}">Create Product</a>
                 </x-sidebar-items>
                 {{--                Categories list--}}
                 <x-sidebar-items item="Categories" icon="fas fa-tint">
