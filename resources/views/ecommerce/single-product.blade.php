@@ -9,64 +9,83 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-8 my-auto">
-                        <div class="boximg">
-                            <div class="flip-box mx-auto">
-                                <div class="flip-box-inner">
-                                    <div class="flip-box-front">
-                                        <img
-                                            src="../Imagens/Lighting/Stone-lamp/stone-lamp-white2-768x768.jpg.webp"
-                                            alt="stone lamp"
-                                            class="img-fluid"
-                                        />
-                                    </div>
-                                    <div class="flip-box-back">
-                                        <img
-                                            src="../Imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp"
-                                            alt="Paris"
-                                            class="img-fluid"
-                                        />
+                        <div class="d-flex flex-column">
+                            <div class="boximg mb-5">
+                                <div class="flip-box mx-auto">
+                                    <div class="flip-box-inner">
+                                        <div class="flip-box-front">
+                                            <img
+                                                src="{{$product->photos->first() ? asset($product->photos->first()->file) : 'http://via.placeholder.com/62x62'}}"
+                                                alt="stone lamp"
+                                                style="width: 300px; height: 300px"
+                                            />
+                                        </div>
+                                        <div class="flip-box-back">
+                                            <img
+                                                src="{{$product->photos->first() ? asset( $product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62'}}"
+                                                alt="stone lamp"
+                                                style="width: 300px; height: 300px"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="d-flex justify-content-center gap-3">
+                                <img
+                                    src="{{$product->photos->first() ? asset( $product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62'}}"
+                                    alt="stone lamp"
+                                    style="width: 200px; height: 200px"
+                                />  <img
+                                    src="{{$product->photos->first() ? asset( $product->photos->first()->file) : 'http://via.placeholder.com/62x62'}}"
+                                    alt="stone lamp"
+                                    style="width: 200px; height: 200px"
+                                />
+                            </div>
                         </div>
+
                     </div>
                     <div class="col-12 col-lg-4">
                         <header>
-                            <h2>Name from Product</h2>
+                            <h2>{{$product->name}}</h2>
                         </header>
                         <!---price and whishlist-->
                         <div
                             class="d-flex justify-content-between align-items-center my-3"
                         >
-                            <p class="fs-5 my-auto">&euro; 20.00 - &euro; 30.00</p>
+                            <p class="fs-5 my-auto">&euro; {{$product->price}}- &euro; {{$product->price +10}}</p>
                             <a href="" class="outline-none"
                             ><i class="bi bi-heart fs-4"></i
                                 ></a>
                         </div>
                         <hr/>
                         <!---detail product-->
-                        <p class="my-3 fs-5">Description of the product</p>
+                        <p class="my-3 fs-5">{{$product->description}}</p>
                         <hr/>
                         <!---reviews star-->
                         <div class="d-flex align-items-center">
                             <div class="pe-2">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star"></i>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $product->rating)
+                                        <i class="fa-solid fa-star"></i> <!-- Ícone de estrela preenchida -->
+                                    @else
+                                        <i class="fa-regular fa-star"></i> <!-- Ícone de estrela vazia -->
+                                    @endif
+                                @endfor
                             </div>
                             <p class="fs-5 ps-2 my-auto">Reviews</p>
                         </div>
-                        <!---Color-->
+                        <!---Size-->
+                        @if($product->colors)
                         <div class="d-flex justify-content-between my-3">
                             <p class="fs-5 my-auto">Color</p>
                             <select class="rounded" name="" id="">
-                                <option value="">color</option>
-                                <option value="">black</option>
-                                <option value="">white</option>
+                                @foreach($product->colors as $color)
+                                <option value="">{{$color->name}}</option>
+                                @endforeach
                             </select>
                         </div>
+                        @endif
+
                         <!---Size-->
                         <div class="d-flex justify-content-between my-3">
                             <p class="fs-5 my-auto">Size</p>

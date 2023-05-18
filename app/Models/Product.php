@@ -5,12 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable=[ 'name', 'description', 'price', 'stock', 'rating'];
+
+    public static function Slugify($value)
+    {
+        return Str::slug($value);
+    }
+
     public function photos(){
         return $this->hasMany(Photo::class);
     }

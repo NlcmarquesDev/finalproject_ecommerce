@@ -22,11 +22,13 @@ class EcommerceController extends Controller
     }
 
     public function products(){
-        $products = Product::all();
+        $products = Product::with('photos', 'colors')->paginate(12);
         return view('ecommerce.products', compact('products'));
     }
-    public function singleProduct(){
-        return view('ecommerce.single-product');
+    public function singleProduct(Product $product, $id){
+
+        $SingleProduct = Product::findOrFail($id);
+        return view('ecommerce.single-product', compact('SingleProduct'));
     }
     public function contact(){
         return view('ecommerce.contact');

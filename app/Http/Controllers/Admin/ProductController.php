@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Color;
 use App\Models\Photo;
 use App\Models\Product;
+use App\Traits\Slugify;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -96,7 +97,15 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+
+        $slug = Product::Slugify($product->name);
+        $product = Product::findOrFail($product->id);
+
+        $color = Color::pluck("name", "id")->all();
+//        $colors = Color::all();
+
+//        dd($slug);
+        return view("ecommerce.single-product", compact("product", "slug", 'color'));
     }
 
     /**

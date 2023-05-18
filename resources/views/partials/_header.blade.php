@@ -27,16 +27,24 @@
         id="nav"
         class="d-flex justify-content-around align-items-center bg-light "
     >
-        <h1 class="logo mr-auto">
-            <a class="navbar-brand" href="{{route('welcome')}}">
-                <img
-                    src="{{asset('imagens/Logo.png')}}"
-                    alt="Nuno Marques"
-                    width="51"
-                    height="50"
-                />
-            </a>
-        </h1>
+        <div class="d-flex flex-column">
+            <h1 class="logo mx-auto">
+                <a class="navbar-brand" href="{{route('welcome')}}">
+                    <img
+                        src="{{asset('imagens/Logo.png')}}"
+                        alt="Nuno Marques"
+                        width="51"
+                        height="50"
+                    />
+                </a>
+            </h1>
+            @if (Route::has('login'))
+                @auth
+                    <p>Welcome <span> {{ Auth::user()->name }}</span> </p>
+                @endauth
+                @endif
+        </div>
+
         <!-- Collapse button -->
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
@@ -159,6 +167,7 @@
                         @endauth
                     @endif
                 </div>
+
             </div>
         </nav>
         <div class="d-flex justify-content-center align-items-center">
@@ -173,7 +182,7 @@
             <!-----button for Login-->
             <div  class="d-flex align-items-center">
                 @if (Route::has('login'))
-                    <div>
+                    <div class="d-flex">
                         @auth
                             @if(Auth::user()->role_id == '1')
                             <a href="{{ url('/admin') }}"><i

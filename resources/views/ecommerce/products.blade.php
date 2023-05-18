@@ -182,11 +182,13 @@
                             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 px-2">
                                 @foreach($products as $product)
                                 <div class="col">
-                                    <a href="{{route('single.product')}}" class="text-decoration-none">
+{{--                                    @dd($product->photos->first()->file)--}}
+                                    <a href="{{ route('products.show', $product->id) }}" class="text-decoration-none">
                                         <div class="boximg">
                                             <div class="flip-box">
                                                 <div class="flip-box-inner">
                                                     <div class="flip-box-front">
+
                                                         <img
                                                             src="{{$product->photos->first() ? asset($product->photos->first()->file) : 'http://via.placeholder.com/62x62'}}"
                                                             alt="stone lamp"
@@ -195,8 +197,8 @@
                                                     </div>
                                                     <div class="flip-box-back">
                                                         <img
-                                                            src="{{asset('imagens/Lighting/Stone-lamp/stone-lamp-black-450x450.jpg.webp')}}"
-                                                            alt="Paris"
+                                                            src="{{$product->photos->first() ? asset( $product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62'}}"
+                                                            alt="stone lamp"
                                                             style="width: 300px; height: 300px"
                                                         />
                                                     </div>
@@ -436,6 +438,7 @@
 {{--                                </div>--}}
                             </div>
                         </div>
+                        {{$products->links()}}
                         <button class="btn">Paginacao</button>
                 </section>
             </div>

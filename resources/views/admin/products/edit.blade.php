@@ -69,7 +69,11 @@
                         <input class="d-none" id="upload-avatar" type="file">
                         <div class=" rounded-circle cursor-pointer d-flex flex-center mb-5" style="max-width: 300px; max-height: 300px">
                             <div class="form-group">
-                                <img class="rounded-circle mb-2" src="{{$product->photo ? asset($product->photo->file) : "https://i.pravatar.cc/250"}}" alt="">
+                                <img
+                                    src="{{$product->photos->first() ? asset( $product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62'}}"
+                                    alt="stone lamp"
+                                    style="width: 300px; height: 300px"
+                                />
                                 <input type="file" name="photo_id[]" id="ChooseFile" multiple>
                                 <label for="photo_id"></label>
                             </div>

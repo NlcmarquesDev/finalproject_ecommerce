@@ -7,6 +7,7 @@ use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,7 @@ Route::get('/', [EcommerceController::class, 'index'])->name('welcome');
 //Page All products
 Route::get('/products', [EcommerceController::class, 'products'])->name('products');
 //Single Product Page
+Route::get('product/{slug}', [Product::class, 'show'])->name('product.show');
 Route::get('/singleproduct', [EcommerceController::class, 'singleProduct'])->name('single.product');
 //contact page
 Route::get('/contactus', [EcommerceController::class, 'contact'])->name('contact');

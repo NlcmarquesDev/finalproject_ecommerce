@@ -25,6 +25,11 @@
             <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
         </div>
     </form>
+    <div>
+       <span class=text-white > {{ Auth::user()->name }}</span>
+        <img class="img-fluid rounded" style="height: 30px; width: 30px"
+             src="{{asset(Auth::user()->photo ? Auth::user()->photo->file: 'http://via.placeholder.com/62x62')}}">
+    </div>
     <!-- Navbar-->
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
