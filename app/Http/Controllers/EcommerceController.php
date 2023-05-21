@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Faq;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EcommerceController extends Controller
 {
     //
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
 
     public function index()
@@ -46,4 +47,6 @@ class EcommerceController extends Controller
     public function cart(){
         return view('ecommerce.cart');
     }
+
+
 }

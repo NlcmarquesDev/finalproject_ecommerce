@@ -30,7 +30,7 @@ class Customer
                 return redirect('/login');
             }
         }
-        return redirect('/login');
+        return redirect('/');
     }
 
 }

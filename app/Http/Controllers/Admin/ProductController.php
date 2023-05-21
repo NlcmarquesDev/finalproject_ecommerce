@@ -8,6 +8,7 @@ use App\Models\Photo;
 use App\Models\Product;
 use App\Traits\Slugify;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -199,5 +200,11 @@ class ProductController extends Controller
 //        $brands = Brand::all();
 //        $products = Product::where('brand_id', $id)->with(['keywords','photo','brand','productcategories'])->paginate(10);
 //        return view('admin.products.index', compact('products', 'brands'));
+    }
+
+
+    public function removacart(Request $request ){
+
+
     }
 }

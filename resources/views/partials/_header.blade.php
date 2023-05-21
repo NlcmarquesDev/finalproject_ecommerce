@@ -206,7 +206,13 @@
             <x-offcanvas title="Whishlist" display="d-none d-lg-inline-block" >ola</x-offcanvas>
             <!-----End button for checklist-->
             <!-----button for basket-->
-            <x-offcanvas title="Your Cart (2)" number="2" icon="fas fa-shopping-bag">
+
+            @if(session('cart'))
+
+            <x-offcanvas title="Your Cart {{ count(session('cart')) }}" number="2" icon="fas fa-shopping-bag" numbercart="{{ count(session('cart')) }}">
+
+                @endif
+
                 <!-- Header-->
                 <div class="offcanvas-header lh-fixed fs-lg">
 
@@ -215,91 +221,65 @@
                 <!-- List group -->
                 <ul class="list-group list-group-lg list-group-flush">
                     <li class="list-group-item mb-2">
+
+                            <?php $total = 0 ?>
+                            @foreach(session('cart') as $id => $details)
+                                <?php $total += $details['price'] * $details['stock'] ?>
                         <div class="row align-items-center">
                             <div class="col-4">
-
                                 <!-- Image -->
-                                <a href="./product.html">
-                                    <img class="img-fluid" src="{{asset('imagens/toa-heftiba.jpg')}}" alt="...">
+                                <a href="{{ route('products.show', $id) }}">
+                                    <img class="img-fluid" src="{{ $details['photo'] }}" alt="...">
                                 </a>
-
                             </div>
-                            <div class="col-8">
-
-                                <!-- Title -->
-                                <p class="fs-sm fw-bold mb-6">
-                                    <a class="text-body" href="./product.html">Cotton floral print Dress</a> <br>
-                                    <span class="text-muted">&euro;40.00</span>
-                                </p>
-
-                                <!--Footer -->
-                                <div class="d-flex align-items-center">
-
-                                    <!-- Select -->
-                                    <select class="form-select form-select-xxs w-auto">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="1">3</option>
-                                    </select>
-
-                                    <!-- Remove -->
-                                    <a class="fs-xs text-gray ms-auto" href="#!">
-                                        <i class="fe fe-x"></i> Remove
-                                    </a>
-
+                            <div class="col-8 d-flex flex-column ">
+                                <div>
+                                    <!-- Title -->
+                                    <p class="fs-sm fw-bold mb-6">
+                                        <a class="text-body" href="{{ route('products.show', $id) }}">{{ $details['name'] }}</a> <br>
+                                        <span class="text-muted">&euro;{{ $details['price'] }}</span>
+                                    </p>
                                 </div>
-
+                                <div class="d-flex justify-content-between">
+                                    <form action="{{route('addcart.update', $id)}}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="d-flex flex-column justify-content-between align-items-center">
+                                            <!-- Select -->
+                                            <input type="number" value="{{ $details['stock'] }}" name="stock" class="form-control" />
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-3 ">
+                                            <!-- update -->
+                                            <button class="bg-transparent border-0 text-decoration-underline" type="submit">
+                                                Update
+                                            </button>
+                                    </form>
+                                            <!-- Remove -->
+                                            <form action="{{route('addcart.destroy', $id)}}" method="Post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="bg-transparent border-0 text-decoration-underline">
+                                                    Remove
+                                                </button>
+                                            </form>
+                                        </div>
+                                </div>
                             </div>
                         </div>
+                    @endforeach
                     </li>
-                    <li class="list-group-item">
-                        <div class="row align-items-center">
-                            <div class="col-4">
 
-                                <!-- Image -->
-                                <a href="./product.html">
-                                    <img class="img-fluid" src="{{asset('imagens/stone-lamp-black-450x450.jpg.webp')}}" alt="...">
-                                </a>
-
-                            </div>
-                            <div class="col-8">
-
-                                <!-- Title -->
-                                <p class="fs-sm fw-bold mb-6">
-                                    <a class="text-body" href="./product.html">Suede cross body Bag</a> <br>
-                                    <span class="text-muted">$49.00</span>
-                                </p>
-
-                                <!--Footer -->
-                                <div class="d-flex align-items-center">
-
-                                    <!-- Select -->
-                                    <select class="form-select form-select-xxs w-auto">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="1">3</option>
-                                    </select>
-
-                                    <!-- Remove -->
-                                    <a class="fs-xs text-gray-400 ms-auto" href="#!">
-                                        <i class="fe fe-x"></i> Remove
-                                    </a>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </li>
                 </ul>
+{{--                @dd($details['price'])--}}
 
                 <!-- Footer -->
                 <div class="offcanvas-footer justify-between lh-fixed fs-sm bg-light mt-5 py-3">
-                    <strong>Subtotal</strong> <strong class="ms-auto">$89.00</strong>
+                    <strong>Subtotal</strong> <strong class="ms-auto">&euro;{{ $total }}</strong>
                 </div>
 
                 <!-- Buttons -->
                 <div class="offcanvas-body">
-                    <a class="btn w-100 btn-dark" href="#">Continue to Checkout</a>
+                    <a class="btn w-100 btn-dark" href="{{route('checkout')}}">Continue to Checkout</a>
                     <a class="btn w-100 btn-outline-dark mt-2" href="{{route('cart')}}">View Cart</a>
                 </div>
 
@@ -330,6 +310,7 @@
                     </div>
 
                 </div>
+
             </x-offcanvas>
             <!----- end button for basket-->
         </div>

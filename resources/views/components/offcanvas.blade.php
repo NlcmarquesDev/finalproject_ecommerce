@@ -3,6 +3,7 @@
     'icon' =>'fa-regular fa-heart',
     'number' =>'1',
     'display' =>'',
+    'numbercart'=> '0'
 ])
 
 <div>
@@ -17,7 +18,7 @@
             <i
                 class="{{$icon}} navicon {{$display}} m-2"
             ></i>
-            <span class="numberbol">9</span>
+            <span class="numberbol">{{$numbercart}}</span>
         </div>
     </button>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ColorsController;
 use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\Frontend\AddCartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use App\Models\Product;
@@ -37,10 +38,12 @@ Route::get('/contactus', [EcommerceController::class, 'contact'])->name('contact
 Route::get('/aboutus', [EcommerceController::class, 'about'])->name('about');
 //FAQ page
 Route::get('/faq', [EcommerceController::class, 'faq'])->name('faq');
-////Checkoutpage
-//
-//Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout')->middleware('customer');
-
+//Add To Cart
+Route::resource('addcart',AddCartController::class );
+Route::match(['get', 'post'], '/addtocart/{id}', [ProductController::class, 'addtocart'])->name('addtocart');
+Route::get('/addtocart/{id}', [AddCartController::class, 'addtocart'])->name('addtocart');
+//CHECKOUT
+Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout');
 
 
 
@@ -58,7 +61,7 @@ Auth::routes();
 /*BACKEND ROUTES*/
     Route::prefix('admin')->middleware(['admin'])->group(function(){
 //Route::group(['prefix' => 'admin', 'middleware'=>'auth','admin' ], function (){
-        Route::get('/checkout', [EcommerceController::class, 'checkout']);
+
     //BACKEND HOMEPAGE
     Route::get('/', [HomeController::class, 'index'])->name('home');
     //USERS PAGE
@@ -84,12 +87,6 @@ Auth::routes();
         ColorsController::class,
         "colorRestore",
     ])->name("colors.restore");
-
-//        //Checkoutpage
-//
-//        Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout')->middleware('customer');
-
-
 
 });
 

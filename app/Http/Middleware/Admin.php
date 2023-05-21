@@ -27,6 +27,6 @@ class Admin
             }
 
         }
-        return redirect ('/login');
+        return redirect ('/');
     }
 }
