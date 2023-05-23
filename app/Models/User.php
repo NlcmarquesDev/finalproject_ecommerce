@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -32,6 +34,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Role::class, 'id', 'role_id');
     }
+
+    public function roleName()
+    {
+        return $this->hasOne(Role::class, 'id', 'role_id')->first()->name;
+    }
+
     public function photo()
     {
         return $this->belongsTo(Photo::class);
@@ -39,6 +47,10 @@ class User extends Authenticatable
     public function locations()
     {
         return $this->hasMany(locations::class);
+    }
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
     }
 
     /**
@@ -57,21 +69,18 @@ class User extends Authenticatable
      * @return bool
      */
     public function isAdmin(){
-        foreach($this->role as $role){
-//            dd($role);
-            if($role == 'administrator' && $this->is_active == 1){
-                return true;
-            }
+        if($this->roleName() == 'administrator' && $this->is_active == 1) {
+            return true;
         }
+        return false;
     }
-//    public function isCustomer(){
-//        foreach($this->role as $role){
-//            dd($role);
-//            if($role == 'customer' && $this->is_active == 1){
-//                return true;
-//            }
-//        }
-//    }
+
+    public function isCustomer(){
+        if($this->roleName() == 'customer' && $this->is_active == 1) {
+            return true;
+        }
+        return false;
+    }
 //
 //    public function hasRole($role){
 ////        dd($this->role->name);

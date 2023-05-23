@@ -210,10 +210,17 @@
                                                 <p class="text-dark">{{$product->price}}</p>
                                             </div>
                                             <div class="">
-                                                <a href="{{route('addtocart', $product->id)}}"><i class="fa-solid fa-cart-plus"></i></a>
+{{--                                                <a href="{{route('addtocart', $product->id)}}"><i class="fa-solid fa-cart-plus"></i></a>--}}
                                                 <a href=""><i class="fa-regular fa-heart"></i></a>
                                             </div>
-
+                                            <form action="{{ route('addproduct') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                                <input type="hidden" name="name" value="{{ $product->name }}">
+                                                <input type="hidden" name="image" value="{{ $product->photos->first()->file ?? 'http://via.placeholder.com/62x62' }}">
+                                                <input type="hidden" name="price" value="{{ $product->price }}">
+                                                <button type="submit" class="bg-transparent border-0"><i class="fa-solid fa-cart-plus"></i></button>
+                                            </form>
                                         </div>
                                     </a>
                                 </div>

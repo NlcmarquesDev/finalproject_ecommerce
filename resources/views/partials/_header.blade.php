@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+{{--<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">--}}
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -58,7 +58,7 @@
                     <div class="text-center">
 
 
-                                <a class="dropdown-item" href="#">My Checkout</a>
+                                <a class="dropdown-item" href="{{route('checkout')}}">My Checkout</a>
                                 <a class="dropdown-item" href="{{route('about')}}">Orders</a>
                                 <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{__('Logout')}}</a>
                                             <form id="logout-form" action="{{route('logout')}}" method="POST">
@@ -154,7 +154,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{route('faq')}}">Dashboard</a></li>
                             <li><a class="dropdown-item" href="#">My Whishlist</a></li>
-                            <li><a class="dropdown-item" href="#">My Checkout</a></li>
+                            <li><a class="dropdown-item" href="{{route('checkout')}}">My Checkout</a></li>
                             <li><a class="dropdown-item" href="{{route('about')}}">Orders</a></li>
                             <li><a class="dropdown-item" href="{{route('about')}}">My Settings</a></li>
                             <li><a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{__('Logout')}}</a>
@@ -184,10 +184,10 @@
                 @if (Route::has('login'))
                     <div class="d-flex">
                         @auth
-                            @if(Auth::user()->role_id == '1')
-                            <a href="{{ url('/admin') }}"><i
-                                    class="fa-regular fa-circle-user navicon d-none d-lg-inline-block m-2"
-                                ></i></a>
+                            @if(Auth::user()->isAdmin() == '1')
+                                <a href="{{ url('/admin') }}"><i
+                                        class="fa-regular fa-circle-user navicon d-none d-lg-inline-block m-2"
+                                    ></i></a>
                             @endif
                         @else
                             <a href="{{ route('login') }}" class="fw-semibold d-none d-lg-inline-block"><i class="navicon fa-solid fa-right-to-bracket m-2"></i></a>
@@ -207,111 +207,11 @@
             <!-----End button for checklist-->
             <!-----button for basket-->
 
-            @if(session('cart'))
-
-            <x-offcanvas title="Your Cart {{ count(session('cart')) }}" number="2" icon="fas fa-shopping-bag" numbercart="{{ count(session('cart')) }}">
-
-                @endif
-
-                <!-- Header-->
-                <div class="offcanvas-header lh-fixed fs-lg">
-
-                </div>
-
-                <!-- List group -->
-                <ul class="list-group list-group-lg list-group-flush">
-                    <li class="list-group-item mb-2">
-
-                            <?php $total = 0 ?>
-                            @foreach(session('cart') as $id => $details)
-                                <?php $total += $details['price'] * $details['stock'] ?>
-                        <div class="row align-items-center">
-                            <div class="col-4">
-                                <!-- Image -->
-                                <a href="{{ route('products.show', $id) }}">
-                                    <img class="img-fluid" src="{{ $details['photo'] }}" alt="...">
-                                </a>
-                            </div>
-                            <div class="col-8 d-flex flex-column ">
-                                <div>
-                                    <!-- Title -->
-                                    <p class="fs-sm fw-bold mb-6">
-                                        <a class="text-body" href="{{ route('products.show', $id) }}">{{ $details['name'] }}</a> <br>
-                                        <span class="text-muted">&euro;{{ $details['price'] }}</span>
-                                    </p>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <form action="{{route('addcart.update', $id)}}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="d-flex flex-column justify-content-between align-items-center">
-                                            <!-- Select -->
-                                            <input type="number" value="{{ $details['stock'] }}" name="stock" class="form-control" />
-                                        </div>
-                                        <div class="d-flex justify-content-between mt-3 ">
-                                            <!-- update -->
-                                            <button class="bg-transparent border-0 text-decoration-underline" type="submit">
-                                                Update
-                                            </button>
-                                    </form>
-                                            <!-- Remove -->
-                                            <form action="{{route('addcart.destroy', $id)}}" method="Post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="bg-transparent border-0 text-decoration-underline">
-                                                    Remove
-                                                </button>
-                                            </form>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    </li>
-
-                </ul>
-{{--                @dd($details['price'])--}}
-
-                <!-- Footer -->
-                <div class="offcanvas-footer justify-between lh-fixed fs-sm bg-light mt-5 py-3">
-                    <strong>Subtotal</strong> <strong class="ms-auto">&euro;{{ $total }}</strong>
-                </div>
-
-                <!-- Buttons -->
-                <div class="offcanvas-body">
-                    <a class="btn w-100 btn-dark" href="{{route('checkout')}}">Continue to Checkout</a>
-                    <a class="btn w-100 btn-outline-dark mt-2" href="{{route('cart')}}">View Cart</a>
-                </div>
-
-                <!-- Empty cart (remove `.d-none` to enable it) -->
-                <div class="d-none">
-
-                    <!-- Close -->
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
-                        <i class="fe fe-x" aria-hidden="true"></i>
-                    </button>
-
-                    <!-- Header-->
-                    <div class="offcanvas-header lh-fixed fs-lg">
-                        <strong class="mx-auto">Your Cart (0)</strong>
-                    </div>
-
-                    <!-- Body -->
-                    <div class="offcanvas-body flex-grow-0 my-auto">
-
-                        <!-- Heading -->
-                        <h6 class="mb-7 text-center">Your cart is empty 😞</h6>
-
-                        <!-- Button -->
-                        <a class="btn w-100 btn-outline-dark" href="#!">
-                            Continue Shopping
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </x-offcanvas>
+            @if ($showCart())
+                <x-offcanvas title="Your Cart {{$numberOfProducts}}" number="2" icon="fas fa-shopping-bag" numbercart="{{$numberOfProducts}}">
+                    @include('ecommerce.offcanvas-cart')
+                </x-offcanvas>
+            @endif
             <!----- end button for basket-->
         </div>
     </div>

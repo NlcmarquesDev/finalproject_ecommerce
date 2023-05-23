@@ -3,38 +3,120 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Color;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AddCartController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+    public function addProduct(Request $request)
     {
-        //
+        $userId = Auth::id();
+        $cart = Cart::firstOrNew(['user_id' => $userId]);
+
+        $productId = $request->input('id');
+        $productName = $request->input('name');
+        $productImage = $request->input('image');
+        $productPrice = $request->input('price');
+        $productQuantity = 1;
+
+        $cart->expires_at = now()->addDay();
+
+        $products = $cart->products ?? [];
+
+        // Verificar se o produto já existe no carrinho
+        $existingProduct = null;
+
+        foreach ($products as $key => $product) {
+            if ($product['id'] == $productId) {
+                $existingProduct = $key;
+                break;
+            }
+        }
+
+        if ($existingProduct !== null) {
+            // O produto já existe no carrinho, então incrementar a quantidade
+            $products[$existingProduct]['quantity'] += 1;
+        } else {
+            // Adicionar um novo produto ao carrinho
+            $newProduct = [
+                'id' => $productId,
+                'name' => $productName,
+                'image' => $productImage,
+                'price' => $productPrice,
+                'quantity' => $productQuantity
+            ];
+
+            $products[] = $newProduct;
+        }
+
+        $cart->products = $products;
+        $cart->save();
+
+
+        return redirect()->back()->with('success', 'Produto adicionado ao carrinho com sucesso!');
     }
 
-    public function addtocart($id){
+    public function removeProduct(Request $request,$productId)
 
-        $product = Product::findOrFail($id);
-        $cart = session()->get('cart');
+    {
+        // Recupere o objeto Cart correspondente ao usuário atual
+        $userId = Auth::id();
+        $cart = Cart::where('user_id', $userId)->first();
 
-        $photoUrl = $product->photos->first()->file;
+// Verifique se o objeto Cart existe e se a coluna 'products' contém JSON válido
+        if ($cart && $cart->products) {
+            // Crie um novo array para armazenar os produtos atualizados
+            $updatedProducts = [];
 
-// Atribua $photoUrl ao campo 'photo' no carrinho
+            // Percorra os produtos do carrinho e adicione apenas os produtos que não correspondem ao ID fornecido
+            foreach ($cart->products as $product) {
+                if ($product['id'] != $productId) {
+                    $updatedProducts[] = $product;
+                }
+            }
 
-        $cart[$id] = [
-            'name' => $product->name,
-            'price' => $product->price,
-            'stock' => 1,
-            'photo' => $photoUrl
-        ];
+            // Atribua o novo array de produtos atualizados à propriedade "products" do objeto "Cart"
+            $cart->products = $updatedProducts;
+            $cart->save();
+        }
+        return redirect()->back()->with('success', 'Produto removido ao carrinho com sucesso!');
+    }
 
-        session()->put('cart', $cart);
-        return redirect()->back()->with('status', 'Product added');
+    public function updateCart(Request $request)
+    {
+        $userId = Auth::id();
+        $cart = Cart::where('user_id', $userId)->first();
+
+        if ($cart && $cart->products) {
+            $products = $cart->products; // Obtém os produtos como uma string JSON diretamente do modelo Cart
+
+            $productsArray = []; // Inicializa um array vazio para os produtos
+
+            // Decodifica cada produto individualmente e atualiza as quantidades
+            foreach ($products as $product) {
+                $productId = $product['id'];
+                $quantity = $request->input('quantity_'.$productId );
+
+                if ($quantity) {
+                    $product['quantity'] = $quantity;
+                }
+
+                $productsArray[] = $product; // Adiciona o produto atualizado ao array
+            }
+
+            $cart->products = $productsArray; // Salva o array de produtos de volta no modelo Cart
+            $cart->save();
+        }
+        return redirect()->back()->with('success', 'Produto updated ao carrinho com sucesso!');
     }
 
     /**

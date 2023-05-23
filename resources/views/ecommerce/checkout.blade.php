@@ -166,32 +166,35 @@
                 <div class="bg-white p-2 p-lg-3">
                     <h2 class="mb-3 text-uppercase fs-20">Order total</h2>
                         <?php $total = 0 ?>
-                        @foreach(session('cart') as $id => $details)
-                                <?php $total += $details['price'] * $details['stock'] ?>
+
+                    @if ($showCart())
+
+                        @foreach ($showCart()->products as $product)
+                                <?php $total += $product['price'] * $product['quantity'] ?>
                             <div class="row align-items-center">
                                 <div class="col-2">
                                     <!-- Image -->
 
-                                    <a href="{{ route('products.show', $id) }}">
-                                        <img class="img-fluid" src="{{ $details['photo'] }}" alt="...">
+                                    <a href="{{ route('products.show', $product['id']) }}">
+                                        <img class="img-fluid" src="{{ $product['image']}}" alt="...">
                                     </a>
 
                                 </div>
                                 <div class="col-5">
                                     <!-- Title -->
                                     <p class="fs-sm fw-bold mb-6">
-                                        <a class="text-body" href="{{ route('products.show', $id) }}">{{ $details['name'] }}</a> <br>
-                                        <span class="text-muted">&euro;{{ $details['price'] }}</span>
+                                        <a class="text-body" href="{{ route('products.show', $product['id']) }}">{{ $product['name'] }}</a> <br>
+                                        <span class="text-muted">&euro;{{ $product['price'] }}</span>
                                     </p>
                                 </div>
                                 <div class="col-2 d-flex flex-column">
                                     <!--Footer -->
-                                    <form action="{{route('addcart.update', $id)}}" method="POST">
+                                    <form action="{{ route('cart.update',['productId' => $product['id']]) }}" method="POST">
                                         @csrf
-                                        @method('PUT')
+                                        @method('PATCH')
                                         <div class="d-flex flex-column justify-content-between align-items-center">
                                             <!-- Select -->
-                                            <input type="number" value="{{ $details['stock'] }}" name="stock" class="form-control" />
+                                            <input type="number" value="{{ $product['quantity'] }}" name="quantity_{{$product['id']}}" class="form-control" />
                                         </div>
                                         <div class="d-flex justify-content-between mt-3 ">
                                             <!-- update -->
@@ -207,7 +210,7 @@
                                 </div>
                                 <div class="col-1">
                                     <!-- Remove -->
-                                    <form action="{{route('addcart.destroy', $id)}}" method="Post">
+                                    <form action="{{ route('cart.remove', ['productId' => $product['id']]) }}" method="Post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="bg-transparent border-0 text-decoration-underline">
@@ -217,6 +220,7 @@
                                 </div>
                             </div>
                        @endforeach
+                    @endif
                 </div>
                 <hr class="my-3">
                 <ul class="list-group list-group-minimal">

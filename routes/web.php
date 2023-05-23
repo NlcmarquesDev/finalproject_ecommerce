@@ -40,15 +40,31 @@ Route::get('/aboutus', [EcommerceController::class, 'about'])->name('about');
 Route::get('/faq', [EcommerceController::class, 'faq'])->name('faq');
 //Add To Cart
 Route::resource('addcart',AddCartController::class );
-Route::match(['get', 'post'], '/addtocart/{id}', [ProductController::class, 'addtocart'])->name('addtocart');
-Route::get('/addtocart/{id}', [AddCartController::class, 'addtocart'])->name('addtocart');
-//CHECKOUT
-Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout');
+Route::delete('/cart/{productId}', [AddCartController::class,'removeProduct'])->name('cart.remove');
+Route::patch('/cart/update', [AddCartController::class,'updateCart'])->name('cart.update');
+//Route::match(['get', 'post'], '/addtocart/{id}', [ProductController::class, 'addtocart'])->name('addtocart');
+//Route::get('/addtocart/{id}', [AddCartController::class, 'addtocart'])->name('addtocart');
+
+
+Route::match(['get', 'post'], '/addcart', [AddCartController::class, 'addProduct'])->name('addproduct');
+//Route::post('/addcheckout', [AddCartController::class, 'addcheckout'])->name('addcheckout');
+//Route::post('/success', [AddCartController::class, 'success'])->name('addcheckout.success');
+//Route::post('/cancel', [AddCartController::class, 'cancel'])->name('addcheckout.cancel');
 
 
 
-//Cart page
-Route::get('/cart', [EcommerceController::class, 'cart'])->name('cart');
+
+
+
+
+
+Route::middleware(['role:administrator,customer'])->group(function() {
+    //CHECKOUT
+    Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout');
+
+    //Cart page
+    Route::get('/cart', [EcommerceController::class, 'cart'])->name('cart');
+});
 
 
 Route::get('/category/{category:slug}',[CategoriesController::class,'category'])->name('category.category');
@@ -58,8 +74,11 @@ Auth::routes();
 /* C0STUMER ROUTES*/
 
 
+
+
+
 /*BACKEND ROUTES*/
-    Route::prefix('admin')->middleware(['admin'])->group(function(){
+Route::prefix('admin')->middleware(['role:administrator'])->group(function(){
 //Route::group(['prefix' => 'admin', 'middleware'=>'auth','admin' ], function (){
 
     //BACKEND HOMEPAGE
