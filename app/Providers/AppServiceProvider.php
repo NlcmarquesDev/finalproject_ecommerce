@@ -2,13 +2,16 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use App\Models\Cart;
+use App\Helpers\Price;
+use App\Models\Wishlist;
+use Illuminate\View\View;
 use Illuminate\Pagination\Paginator;
+//use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
-//use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\View\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,45 +28,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
         Paginator::useBootstrapFive();
-        $this->registerShowCart();
-
-        $userId = Auth::id();
-        $cart = Cart::where('user_id', $userId)->first();
-
-        $numberOfProducts = 0;
-
-        if ($cart && $cart->products) {
-            $products = json_decode($cart->products, true);
-
-            if (is_array($products)) {
-                $numberOfProducts = count($products);
-            }
-        }
-
-        view()->share('numberOfProducts', $numberOfProducts);
-
-
-
-//        $cartProductCount = $cart ? count($cart->products) : 0;
-//        view()->share('cartProductCount', $cartProductCount);
-
-
-    }
-    private function registerShowCart()
-    {
-        view()->share('showCart', function () {
+        view()->composer('*', function ($view) {
             $userId = Auth::id();
             $cart = Cart::where('user_id', $userId)->first();
+            $view->with('cart', $cart);
+        });
 
-            if ($cart && is_string($cart->products)) {
-                $products = json_decode($cart->products, true);
-                $cart->products = $products;
-            }
-
-            return $cart;
+        app()->bind('price', function () {
+            return new Price();
+        });
+        view()->composer('*', function ($view) {
+            $userId = Auth::id();
+            $wish = Wishlist::where('user_id', $userId)->first();
+            $view->with('wish', $wish);
         });
     }
-
 }

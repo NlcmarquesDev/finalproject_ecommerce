@@ -184,7 +184,7 @@
 </section>
 <!--END CONTENT VIDEO -->
 
-@include('components.product-sample')
+@include('components.productsfooter')
 
 <!--RETURN POLICY-->
 @include('partials.return-policy')

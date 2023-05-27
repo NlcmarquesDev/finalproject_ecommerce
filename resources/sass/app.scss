@@ -1,11 +1,727 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+@import url("https://fonts.bunny.net/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
+
+@import "frontend/global";
 
 // Bootstrap
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
 
 //frontend
-@import './frontend/single-product';
+@import "./frontend/single-product";
+
+@import url("https://fonts.cdnfonts.com/css/maison-neue");
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Maison Neue", sans-serif;
+}
+.gold {
+    color: goldenrod;
+}
+#nav {
+    width: 100%;
+    height: 117px;
+}
+
+#navigation {
+    padding-top: 45px;
+    padding-bottom: 37px;
+}
+.navicon {
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-decoration: none;
+    color: black;
+}
+.navicon:hover {
+    color: #daa520;
+}
+a:hover {
+    text-decoration: none;
+}
+
+/**********/
+/* The Overlay (background) */
+/* The sidepanel menu */
+.sidepanel {
+    height: 250px; /* Specify a height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+}
+
+/* The sidepanel links */
+.sidepanel a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidepanel a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidepanel .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style the button that is used to open the sidepanel */
+.openbtn {
+    font-size: 25px;
+    cursor: pointer;
+    background-color: transparent;
+    color: #111;
+    padding: 10px 15px;
+    border: none;
+}
+
+.openbtn:hover {
+    background-color: #111;
+    color: white;
+    border-radius: 10px;
+}
+/*****social icon*****/
+.socialicon {
+    font-size: 1.5rem;
+    padding: 15px;
+    color: goldenrod;
+}
+.boxbol {
+    position: relative;
+}
+.numberbol {
+    font-size: 14px;
+    font-weight: 300;
+    left: 28px;
+    top: 0px;
+    position: absolute;
+
+    border-radius: 60%;
+    height: 20px;
+    width: 19px;
+    background: rgb(242, 19, 19);
+    color: white;
+}
+/****Search Icon*****/
+
+.searchBox input {
+    border: none;
+    width: 0;
+    padding: 0;
+    opacity: 0;
+    background: transparent;
+    font-size: 1rem;
+    transition: all 1s;
+}
+
+.searchBox input::placeholder {
+    border-bottom: 2px solid black;
+    font-weight: 300;
+}
+
+.searchBox i {
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.searchBox:hover input {
+    width: 150px;
+    opacity: 1;
+}
+
+.searchBox:hover i {
+    color: goldenrod;
+}
+
+/***************NEWSLETTER AND FOOTER****************/
+#newsletter {
+    width: 100%;
+    background: #f5f5f5;
+}
+#discount {
+    height: 225px;
+}
+#contentfooter {
+    height: 100px;
+}
+#formemail {
+    border-bottom: 2px solid black;
+}
+#email {
+    border: none;
+
+    background: transparent;
+    padding-right: 30px;
+    margin: 0px;
+}
+#envelope {
+    font-size: 1.5rem;
+    background: transparent;
+}
+#envelope:hover {
+    color: #daa520;
+    font-size: 1.6rem;
+}
+.no-outline:focus {
+    outline: none;
+}
+.indexfooter {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+}
+.indexfooter:hover {
+    color: #daa520;
+}
+.iconfooter {
+    color: black;
+}
+
+/*********HERO*******/
+
+.cont {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    padding: 80px 70px;
+}
+#diningColor {
+    color: rgb(229, 228, 228);
+}
+.cont__inner {
+    position: relative;
+    height: 100%;
+}
+.cont__inner:hover .el__bg:after {
+    opacity: 1;
+}
+.el {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 19.2%;
+    height: 100%;
+    background: #252525;
+    transition: transform 0.6s 0.7s, width 0.7s, opacity 0.6s 0.7s,
+        z-index 0s 1.3s;
+    will-change: transform, width, opacity;
+}
+.el:not(.s--active) {
+    cursor: pointer;
+}
+.el__overflow {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+.el__inner {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    transition: transform 1s;
+}
+.cont.s--inactive .el__inner {
+    transform: translate3d(0, 100%, 0);
+}
+.el__bg {
+    position: relative;
+    width: calc(100vw - 140px);
+    height: 100%;
+    transition: transform 0.6s 0.7s;
+    will-change: transform;
+}
+.el__bg:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -5%;
+    width: 100%;
+    height: 110%;
+    background-size: cover;
+    background-position: center center;
+    transition: transform 1s;
+    transform: translate3d(0, 0, 0) scale(1);
+}
+
+.cont.s--inactive .el__bg:before {
+    transform: translate3d(0, -100%, 0) scale(1.2);
+}
+.el.s--active .el__bg:before {
+    transition: transform 0.8s;
+}
+.el__bg:after {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.cont.s--el-active .el__bg:after {
+    transition: opacity 0.5s 1.4s;
+    opacity: 1 !important;
+}
+.el__preview-cont {
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s 1.2s;
+}
+.cont.s--inactive .el__preview-cont {
+    opacity: 0;
+    transform: translateY(10px);
+}
+.cont.s--el-active .el__preview-cont {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s;
+}
+.el__heading {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+.el__content {
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.1s;
+}
+.el.s--active .el__content {
+    z-index: 2;
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.5s 1.4s;
+}
+.el__text {
+    text-transform: uppercase;
+    font-size: 40px;
+    color: #fff;
+}
+.el__close-btn {
+    z-index: -1;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0s 0.45s;
+    cursor: pointer;
+}
+.el.s--active .el__close-btn {
+    z-index: 5;
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0s 1.4s;
+}
+.el__close-btn:before,
+.el__close-btn:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 8px;
+    margin-top: -4px;
+    background: #fff;
+    opacity: 0;
+    transition: opacity 0s;
+}
+.el.s--active .el__close-btn:before,
+.el.s--active .el__close-btn:after {
+    opacity: 1;
+}
+.el__close-btn:before {
+    transform: rotate(45deg) translateX(100%);
+}
+.el.s--active .el__close-btn:before {
+    transition: all 0.3s 1.4s cubic-bezier(0.72, 0.09, 0.32, 1.57);
+    transform: rotate(45deg) translateX(0);
+}
+.el__close-btn:after {
+    transform: rotate(-45deg) translateX(100%);
+}
+.el.s--active .el__close-btn:after {
+    transition: all 0.3s 1.55s cubic-bezier(0.72, 0.09, 0.32, 1.57);
+    transform: rotate(-45deg) translateX(0);
+}
+
+.el:hover .el__bg:before {
+    transform: translate3d(0, 0, 0) scale(1.1);
+}
+
+.cont.s--el-active .el:nth-child(1):not(.s--active) {
+    transform: scale(0.5) translate3d(0%, 0, 0);
+    opacity: 0;
+    transition: transform 0.95s, opacity 0.95s;
+}
+.el:nth-child(1) .el__inner {
+    transition-delay: 0s;
+}
+.el:nth-child(1) .el__bg {
+    transform: translate3d(0%, 0, 0);
+}
+.el:nth-child(1) .el__bg:before {
+    transition-delay: 0s;
+    background-image: url("../../public/Imagens/Acessories/clock.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left;
+}
+.el:nth-child(2) {
+    transform: translate3d(105.2083333333%, 0, 0);
+    transform-origin: 155.2083333333% 50%;
+}
+.cont.s--el-active .el:nth-child(2):not(.s--active) {
+    transform: scale(0.5) translate3d(105.2083333333%, 0, 0);
+    opacity: 0;
+    transition: transform 0.95s, opacity 0.95s;
+}
+.el:nth-child(2) .el__inner {
+    transition-delay: 0.1s;
+}
+.el:nth-child(2) .el__bg {
+    transform: translate3d(-19.2%, 0, 0);
+}
+.el:nth-child(2) .el__bg:before {
+    transition-delay: 0.1s;
+    background-image: url("../../public/Imagens/Living/irene-kredenets.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+.el:nth-child(3) {
+    transform: translate3d(210.4166666667%, 0, 0);
+    transform-origin: 260.4166666667% 50%;
+}
+.cont.s--el-active .el:nth-child(3):not(.s--active) {
+    transform: scale(0.5) translate3d(210.4166666667%, 0, 0);
+    opacity: 0;
+    transition: transform 0.95s, opacity 0.95s;
+}
+.el:nth-child(3) .el__inner {
+    transition-delay: 0.2s;
+}
+.el:nth-child(3) .el__bg {
+    transform: translate3d(-38.4%, 0, 0);
+}
+.el:nth-child(3) .el__bg:before {
+    transition-delay: 0.2s;
+    background-image: url("../../public/Imagens/Furniture/pexels-karolina.jpg");
+}
+.el:nth-child(4) {
+    transform: translate3d(315.625%, 0, 0);
+    transform-origin: 365.625% 50%;
+}
+.cont.s--el-active .el:nth-child(4):not(.s--active) {
+    transform: scale(0.5) translate3d(315.625%, 0, 0);
+    opacity: 0;
+    transition: transform 0.95s, opacity 0.95s;
+}
+.el:nth-child(4) .el__inner {
+    transition-delay: 0.3s;
+}
+.el:nth-child(4) .el__bg {
+    transform: translate3d(-57.6%, 0, 0);
+}
+.el:nth-child(4) .el__bg:before {
+    transition-delay: 0.3s;
+    background-image: url("../../public/Imagens/Lighting/pexels-andreea.jpg");
+}
+.el:nth-child(5) {
+    transform: translate3d(420.8333333333%, 0, 0);
+    transform-origin: 470.8333333333% 50%;
+}
+.cont.s--el-active .el:nth-child(5):not(.s--active) {
+    transform: scale(0.5) translate3d(420.8333333333%, 0, 0);
+    opacity: 0;
+    transition: transform 0.95s, opacity 0.95s;
+}
+.el:nth-child(5) .el__inner {
+    transition-delay: 0.4s;
+}
+.el:nth-child(5) .el__bg {
+    transform: translate3d(-76.8%, 0, 0);
+}
+.el:nth-child(5) .el__bg:before {
+    transition-delay: 0.4s;
+    background-image: url("../../public/Imagens/Dining/tabel-thin-haus.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+.el:hover .el__bg:after {
+    opacity: 0;
+}
+.el.s--active {
+    z-index: 1;
+    width: 100%;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.6s, width 0.7s 0.7s, z-index 0s;
+}
+.el.s--active .el__bg {
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.6s;
+}
+.el.s--active .el__bg:before {
+    transition-delay: 0.6s;
+    transform: scale(1.1);
+}
+.icon-link {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: 32px;
+}
+.icon-link img {
+    width: 100%;
+    vertical-align: top;
+}
+.icon-link--twitter {
+    left: auto;
+    right: 5px;
+}
+/********* END HERO*******/
+/********* CONTENT*******/
+
+#products {
+    height: 730px;
+}
+
+#imgLamp {
+    border: 0;
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+}
+.bolicon {
+    width: 68px;
+    height: 68px;
+    color: white;
+    background-color: #2e2c2c;
+    font-size: 2rem;
+    font-weight: 100;
+    border-radius: 50%;
+    margin-right: 25px;
+    position: relative;
+}
+.icon {
+    position: absolute;
+    left: 18px;
+    top: 13px;
+}
+#articleslamp {
+    margin-left: 10px;
+    display: block;
+}
+.pfont {
+    font-size: smaller;
+    color: #818181;
+    text-decoration: none;
+}
+a.pfont:hover {
+    color: goldenrod;
+}
+/********* END CONTENT*******/
+/********* PUB CONTENT*******/
+#pubCont {
+    height: 500px;
+    background: url("../../imagens/banner_knitted_chair.jpg") no-repeat;
+    background-size: cover;
+    color: white;
+}
+/********* END PUB CONTENT*******/
+
+/********* PRODUCTS CONTENT*******/
+
+/* The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-box {
+    background-color: transparent;
+    max-width: 300px;
+    height: 300px;
+    margin: auto;
+
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+.flip-box-product {
+    background-color: transparent;
+    max-width: 500px;
+    height: 500px;
+
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-box-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-box:hover .flip-box-inner {
+    transform: rotateY(180deg);
+}
+.flip-box-product:hover .flip-box-inner {
+    transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-box-front,
+.flip-box-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-box-front {
+    color: black;
+}
+
+/* Style the back side */
+.flip-box-back {
+    color: white;
+    transform: rotateY(180deg);
+}
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    right: 0;
+
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    transition: 0.5s ease;
+}
+
+.iconproductheart {
+    color: black;
+    font-size: 20px;
+    position: absolute;
+    top: 20px;
+    right: 00px;
+}
+.iconproductsearch {
+    color: black;
+    font-size: 20px;
+    position: absolute;
+    top: 60px;
+    right: 00px;
+}
+.iconproductheart:hover {
+    top: 20px;
+    right: 40px;
+}
+.btn {
+    width: 150px;
+    border: 2px solid black;
+    padding: 15px 0;
+}
+.btn:hover {
+    color: white;
+    background-color: black;
+}
+/********* END PRODUCTS CONTENT*******/
+/********* PUB CONTENT*******/
+#returnPolicy {
+    height: 500px;
+    background: url(../../imagens/banner-harbour-chair.jpg) no-repeat;
+    background-size: cover;
+    color: white;
+}
+/********* END PUB CONTENT*******/
+
+/********* PRODUCT PAGE************************************************************************/
+
+/********* SIDE BAR CONTENT*******/
+.tagbtn {
+    font-size: 0.65rem;
+    color: white;
+    background-color: black;
+    padding: 5px 10px;
+    border: none;
+}
+.tagbtn:hover {
+    color: goldenrod;
+    cursor: pointer;
+}
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.brown {
+    background-color: rgb(75, 51, 51);
+}
+
+/********* SIDE BAR CONTENT*******/
+
+/******************************PRODUCT DETAIL**************************************************/
+
+/********* HERO CONTENT*******/
+
+.productDetail {
+    width: 100%;
+    background: #f5f5f5;
+}
+
+/********* END HERO CONTENT*******/
+.footer-payment {
+    height: 1.5rem;
+    width: auto;
+}
+
+.product-content {
+    max-width: 300px;
+    margin: auto;
+}

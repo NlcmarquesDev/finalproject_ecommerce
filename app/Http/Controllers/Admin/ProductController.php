@@ -18,13 +18,13 @@ class ProductController extends Controller
     public function index()
     {
         //
-//        $brands = Brand::all();
+        //        $brands = Brand::all();
         $products = Product::withTrashed()
             ->paginate(20);
 
         return view("admin.products.index", [
             "products" => $products,
-//            "brands" => $brands
+            //            "brands" => $brands
         ]);
     }
 
@@ -34,9 +34,9 @@ class ProductController extends Controller
     public function create()
     {
         //
-//        $keywords = Keyword::all();
+        //        $keywords = Keyword::all();
         $colors = Color::all();
-        return view("admin.products.create", compact( "colors"));
+        return view("admin.products.create", compact("colors"));
     }
 
     /**
@@ -45,19 +45,21 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        request()->validate([
-            'name'=> ['required','between:3,255'],
-//            'keywords' => ['required', Rule::exists('keywords', 'id')],
-            'description'=>'required',
-            'price'=>'required',
-        ],
+        request()->validate(
             [
-                'name.required'=> 'Product name is required',
-//                'title.between' => 'Product name between 3 and 255 characters required',
-                'description.required'=>'Description is required',
-                'price.required'=>'Price is required',
-//                'keywords.required'=>'Please check minimum one keyword'
-            ]);
+                'name' => ['required', 'between:3,255'],
+                //            'keywords' => ['required', Rule::exists('keywords', 'id')],
+                'description' => 'required',
+                'price' => 'required',
+            ],
+            [
+                'name.required' => 'Product name is required',
+                //                'title.between' => 'Product name between 3 and 255 characters required',
+                'description.required' => 'Description is required',
+                'price.required' => 'Price is required',
+                //                'keywords.required'=>'Please check minimum one keyword'
+            ]
+        );
 
         $product = new Product();
         $product->name = $request->name;
@@ -81,7 +83,7 @@ class ProductController extends Controller
                 $path = $file
                     ->store("products");
                 $photo = Photo::create(["file" => $path, "product_id" => $product->id]);
-//                dd($photo);
+                //                dd($photo);
             }
         }
 
@@ -99,14 +101,13 @@ class ProductController extends Controller
     public function show(Product $product)
     {
 
-        $slug = Product::Slugify($product->name);
+        // $slug = Product::Slugify($product->name);
         $product = Product::findOrFail($product->id);
+        $products = Product::inRandomOrder()->take(3)->get();
+
 
         $color = Color::pluck("name", "id")->all();
-//        $colors = Color::all();
-
-//        dd($slug);
-        return view("ecommerce.single-product", compact("product", "slug", 'color'));
+        return view("ecommerce.single-product", compact("product", 'products', 'color'));
     }
 
     /**
@@ -117,7 +118,7 @@ class ProductController extends Controller
         //
         $colors = Color::all();
         $product = Product::find($id);
-        return view('admin.products.edit',compact('product', 'colors'));
+        return view('admin.products.edit', compact('product', 'colors'));
     }
 
     /**
@@ -126,20 +127,22 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
-        request()->validate([
-            'name'=> ['required','between:5,255'],
-//            'categories' => ['required', Rule::exists('categories', 'id')],
-            'description'=>'required',
-        ],
+        request()->validate(
             [
-                'name.required'=> 'Title is required',
+                'name' => ['required', 'between:5,255'],
+                //            'categories' => ['required', Rule::exists('categories', 'id')],
+                'description' => 'required',
+            ],
+            [
+                'name.required' => 'Title is required',
                 'name.between' => 'Title between 5 and 255 characters required',
-                'description.required'=>'Message is required',
-//                'categories.required'=>'Please check minimum one category'
-            ]);
+                'description.required' => 'Message is required',
+                //                'categories.required'=>'Please check minimum one category'
+            ]
+        );
         $product = Product::findOrFail($id);
         $input = $request->all();
-//        $input['slug'] =  Str::slug($request->title,'-');
+        //        $input['slug'] =  Str::slug($request->title,'-');
         // oude foto verwijderen
         //we kijken eerst of er een foto bestaat
         if ($request->hasFile('photo_id')) {
@@ -151,13 +154,13 @@ class ProductController extends Controller
                     $photo = Photo::create(["file" => $path, "product_id" => $product->id]);
                 }
             }
-//            $path = request()->file('photo_id')->store('users');
+            //            $path = request()->file('photo_id')->store('users');
             if ($oldPhoto) {
                 unlink(public_path($oldPhoto->file));
                 // $oldPhoto->delete();
-                $oldPhoto->update(['file'=>$path]);
+                $oldPhoto->update(['file' => $path]);
                 $input['photo_id'] = $oldPhoto->id;
-            }else{
+            } else {
                 $photo = Photo::create(['file' => $path]);
                 $input['photo_id'] = $photo->id;
             }
@@ -165,7 +168,7 @@ class ProductController extends Controller
         $product->update($input);
 
 
-      $colorIds = collect($request->input('colors', []))->pluck($product->color)->all();
+        $colorIds = collect($request->input('colors', []))->pluck($product->color)->all();
         $ids = [];
 
         foreach ($colorIds as $item) {
@@ -189,22 +192,21 @@ class ProductController extends Controller
     {
         //
 
-//        $product = Product::findOrFail($id);
-//        foreach ($product->photos as $photo) {
-//            $photo->delete();
-//        }
-//        $product->delete();
-//        return redirect()->route('products.index')->with('status', 'Product deleted!');
-//    }
-//    public function productsPerBrand($id){
-//        $brands = Brand::all();
-//        $products = Product::where('brand_id', $id)->with(['keywords','photo','brand','productcategories'])->paginate(10);
-//        return view('admin.products.index', compact('products', 'brands'));
+        //        $product = Product::findOrFail($id);
+        //        foreach ($product->photos as $photo) {
+        //            $photo->delete();
+        //        }
+        //        $product->delete();
+        //        return redirect()->route('products.index')->with('status', 'Product deleted!');
+        //    }
+        //    public function productsPerBrand($id){
+        //        $brands = Brand::all();
+        //        $products = Product::where('brand_id', $id)->with(['keywords','photo','brand','productcategories'])->paginate(10);
+        //        return view('admin.products.index', compact('products', 'brands'));
     }
 
 
-    public function removacart(Request $request ){
-
-
+    public function removacart(Request $request)
+    {
     }
 }

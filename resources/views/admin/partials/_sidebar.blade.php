@@ -20,6 +20,18 @@
                     <a class="nav-link" href="{{route('products.index')}}">All Products</a>
                     <a class="nav-link" href="{{route('products.create')}}">Create Product</a>
                 </x-sidebar-items>
+                {{--                Orders list--}}
+                <x-sidebar-items item="Ordes" icon="fas fa-shopping-cart">
+                    <a class="nav-link" href="{{route('products.index')}}">All Orders</a>
+                </x-sidebar-items>
+                {{--                Orders Items list--}}
+                <x-sidebar-items item="Orders Items" icon="fas fa-shopping-cart">
+                    <a class="nav-link" href="{{route('products.index')}}">All Orders Items</a>
+                </x-sidebar-items>
+                {{--                Payments list--}}
+                <x-sidebar-items item="Payments" icon="fas fa-shopping-cart">
+                    <a class="nav-link" href="{{route('products.index')}}">All Payments</a>
+                </x-sidebar-items>
                 {{--                Categories list--}}
                 <x-sidebar-items item="Categories" icon="fas fa-tint">
                     <a class="nav-link" href="{{route('categories.index')}}">All Categories</a>

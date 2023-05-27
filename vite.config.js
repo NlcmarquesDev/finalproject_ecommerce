@@ -3,10 +3,14 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
+    server: {
+        port: 3001
+    },
     plugins: [
         laravel({
             input: [
                 'resources/sass/app.scss',
+                'resources/sass/admin.scss',
                 'resources/js/app.js',
             ],
             refresh: true,

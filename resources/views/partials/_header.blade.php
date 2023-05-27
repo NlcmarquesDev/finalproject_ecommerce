@@ -200,15 +200,19 @@
                 @endif
 
             </div>
-
+  
+            
             <!-----end button for Login-->
             <!-----button for Checklist-->
-            <x-offcanvas title="Whishlist" display="d-none d-lg-inline-block" >ola</x-offcanvas>
+            @if ($wish && count($wish->content()) > 0)
+            <x-offcanvas title="Wishlist ({{ count($wish->content()) }})" display="d-none d-lg-inline-block" numbercart="{{ count($wish->content()) }}">
+                @include('ecommerce.offcanvas-wishlist');
+            </x-offcanvas>
+            @endif
             <!-----End button for checklist-->
             <!-----button for basket-->
-
-            @if ($showCart())
-                <x-offcanvas title="Your Cart {{$numberOfProducts}}" number="2" icon="fas fa-shopping-bag" numbercart="{{$numberOfProducts}}">
+            @if ($cart && count($cart->content()) > 0)
+                <x-offcanvas title="Your Cart ({{ count($cart->content())}})" number="2" icon="fas fa-shopping-bag" numbercart="{{ count($cart->content()) }}">
                     @include('ecommerce.offcanvas-cart')
                 </x-offcanvas>
             @endif

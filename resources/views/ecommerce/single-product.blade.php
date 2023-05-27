@@ -3,7 +3,7 @@
 <div class="producDetail container-fluid bg-light">
     <div class="row">
         <!--Breadcrumb-->
-        <x-breadcrumb :items="[ ['name' => 'Home', 'route' => route('welcome')], ['name' => 'Products', 'route' => route('products')], ['name' => 'Products Details', 'route' => route('single.product')]]"></x-breadcrumb>
+        <x-breadcrumb :items="[ ['name' => 'Home', 'route' => route('welcome')], ['name' => 'Products', 'route' => route('products')], ['name' => 'Products Details', 'route' => '']]"></x-breadcrumb>
         <div class="col-12 col-lg-10 offset-lg-1 my-4">
             <!---Product Image-->
             <div class="container">
@@ -49,13 +49,18 @@
                             <h2>{{$product->name}}</h2>
                         </header>
                         <!---price and whishlist-->
-                        <div
-                            class="d-flex justify-content-between align-items-center my-3"
-                        >
+                        <div class="d-flex justify-content-between align-items-center my-3">
                             <p class="fs-5 my-auto">&euro; {{$product->price}}- &euro; {{$product->price +10}}</p>
-                            <a href="" class="outline-none"
-                            ><i class="bi bi-heart fs-4"></i
-                                ></a>
+                            <form action="{{ route('add.wishlist') }}" method="POST">
+                                @csrf
+                                @method ('POST')
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                <input type="hidden" name="name" value="{{$product->name}}">
+                                <input type="hidden" name="price" value="{{$product->price}}">
+                                <input type="hidden" name="image" value="{{$product->photos->first() ? asset( $product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62'}}">
+                                <button class="bg-transparent border-0"><i class="bi bi-heart fs-4"></i></button>
+                            </form>
+                            
                         </div>
                         <hr/>
                         <!---detail product-->
@@ -74,7 +79,7 @@
                             </div>
                             <p class="fs-5 ps-2 my-auto">Reviews</p>
                         </div>
-                        <!---Size-->
+                        <!---Color-->
                         @if($product->colors)
                         <div class="d-flex justify-content-between my-3">
                             <p class="fs-5 my-auto">Color</p>
@@ -86,15 +91,6 @@
                         </div>
                         @endif
 
-                        <!---Size-->
-                        <div class="d-flex justify-content-between my-3">
-                            <p class="fs-5 my-auto">Size</p>
-                            <select class="rounded" name="" id="">
-                                <option value="">Size</option>
-                                <option value="">Medium</option>
-                                <option value="">Large</option>
-                            </select>
-                        </div>
                         <!---Quantity-->
                         <div class="d-flex justify-content-between my-3">
                             <p class="fs-5 my-auto">Quantity</p>
@@ -106,6 +102,18 @@
                                 id=""
                             />
                         </div>
+                        <form action="{{ route('addproduct') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $product->id }}">
+                            <input type="hidden" name="name" value="{{ $product->name }}">
+                            <input type="hidden" name="image" value="{{ $product->photos->first()->file ?? 'http://via.placeholder.com/62x62' }}">
+                            <input type="hidden" name="price" value="{{ $product->price }}">
+                            @if(Auth::user())
+                                <button type="submit" class="btn"></button>
+                            @else
+                                <a href="{{ route('register') }}" class="fs-5 "><i class="navicon fa-solid fa-user-pen pfont"></i></a>
+                            @endif
+                        </form>
 
                         <div class="d-flex justify-content-end">
                             <input
@@ -133,6 +141,6 @@
     </div>
 </div>
 <!--END HERO-->
-@include('components.product-sample')
+@include('components.productsfooter')
 @include('partials.newsletter')
 @include('partials._footer')

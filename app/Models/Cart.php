@@ -21,7 +21,7 @@ class Cart extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function addProduct($productId, $productName , $productImage, $productPrice,$productQuantity)
+    public function addProduct($productId, $productName, $productImage, $productPrice, $productQuantity)
     {
         $products = $this->products ?? [];
 
@@ -39,4 +39,42 @@ class Cart extends Model
         $this->save();
     }
 
+    public  function content()
+    {
+        $cartItems = array_map(function ($cartItem) {
+            $product = Product::findOrFail($cartItem['id']);
+            return new CartItem($product, $cartItem['quantity']);
+        }, $this->products);
+
+        return $cartItems;
+    }
+    public function taxes()
+    {
+        $cartItems = $this->content();
+        $totalTaxes = 0;
+
+        foreach ($cartItems as $cartItem) {
+            $totalTaxes += $cartItem->taxes();
+        }
+
+        return $totalTaxes;
+    }
+
+    public function subtotal()
+    {
+        $subtotal = 0;
+        foreach ($this->content() as $cartItem) {
+            $subtotal += $cartItem->subtotal();
+        }
+        return $subtotal;
+    }
+
+    public function total()
+    {
+        $total = 0;
+        foreach ($this->content() as $cartItem) {
+            $total += $cartItem->total();
+        }
+        return $total;
+    }
 }

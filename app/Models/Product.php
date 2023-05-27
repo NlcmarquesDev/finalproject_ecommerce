@@ -25,5 +25,12 @@ class Product extends Model
         return $this->belongsToMany(Color::class,'product_color','product_id', 'color_id');
     }
 
+    public function taxRate(){
+        return 21;
+    }
 
+    public function priceExclTax()
+    {
+        return $this->price / ($this->taxRate() / 100 + 1);
+    }
 }

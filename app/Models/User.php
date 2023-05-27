@@ -52,6 +52,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Cart::class);
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -68,24 +72,26 @@ class User extends Authenticatable
      *
      * @return bool
      */
-    public function isAdmin(){
-        if($this->roleName() == 'administrator' && $this->is_active == 1) {
+    public function isAdmin()
+    {
+        if ($this->roleName() == 'administrator' && $this->is_active == 1) {
             return true;
         }
         return false;
     }
 
-    public function isCustomer(){
-        if($this->roleName() == 'customer' && $this->is_active == 1) {
+    public function isCustomer()
+    {
+        if ($this->roleName() == 'customer' && $this->is_active == 1) {
             return true;
         }
         return false;
     }
-//
-//    public function hasRole($role){
-////        dd($this->role->name);
-//        return $role == $this->role->name && $this->is_active ;
-//    }
+    //
+    //    public function hasRole($role){
+    ////        dd($this->role->name);
+    //        return $role == $this->role->name && $this->is_active ;
+    //    }
 
     /**
      * The attributes that should be cast.
@@ -95,6 +101,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-
 }

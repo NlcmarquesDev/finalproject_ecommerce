@@ -13,10 +13,18 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('status');
-            $table->decimal('total_price',10,2);
-            $table->string('session_id');
-            $table->string('user_id');
+            $table->foreignId('user_id')->unsigned()->constrained()->cascadeOnDelete();
+            $table->string('order_email');
+            $table->string('order_name');
+            $table->string('order_adress');
+            $table->string('order_bus')->nullable();
+            $table->string('order_postcode');
+            $table->string('order_city');
+            $table->string('order_cupon')->nullable();
+            $table->string('order_status')->default('unpaid');
+            $table->integer('order_taxes');
+            $table->integer('order_total');
+            $table->boolean('shipped')->default(false);
             $table->timestamps();
         });
     }

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\User;
 use App\Models\Color;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\User;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class AddCartController extends Controller
@@ -62,17 +63,40 @@ class AddCartController extends Controller
         $cart->save();
 
 
-        return redirect()->back()->with('success', 'Produto adicionado ao carrinho com sucesso!');
+        //REMOVE FROM WISHLIST PRODUCT
+        $wish = Wishlist::where('user_id', $userId)->first();
+
+        // Verifique se o objeto Cart existe e se a coluna 'products' contém JSON válido
+        if ($wish && $wish->products) {
+            // Crie um novo array para armazenar os produtos atualizados
+            $updatedProducts = [];
+
+            // Percorra os produtos do carrinho e adicione apenas os produtos que não correspondem ao ID fornecido
+            foreach ($wish->products as $wishproduct) {
+                if ($wishproduct['id'] != $productId) {
+                    $updatedProducts[] = $wishproduct;
+                }
+            }
+
+            // Atribua o novo array de produtos atualizados à propriedade "products" do objeto "Cart"
+            $wish->products = $updatedProducts;
+            $wish->save();
+
+
+
+
+            return redirect()->back()->with('success', 'Produto adicionado ao carrinho com sucesso!');
+        }
     }
 
-    public function removeProduct(Request $request,$productId)
+    public function removeProduct(Request $request, $productId)
 
     {
         // Recupere o objeto Cart correspondente ao usuário atual
         $userId = Auth::id();
         $cart = Cart::where('user_id', $userId)->first();
 
-// Verifique se o objeto Cart existe e se a coluna 'products' contém JSON válido
+        // Verifique se o objeto Cart existe e se a coluna 'products' contém JSON válido
         if ($cart && $cart->products) {
             // Crie um novo array para armazenar os produtos atualizados
             $updatedProducts = [];
@@ -104,7 +128,7 @@ class AddCartController extends Controller
             // Decodifica cada produto individualmente e atualiza as quantidades
             foreach ($products as $product) {
                 $productId = $product['id'];
-                $quantity = $request->input('quantity_'.$productId );
+                $quantity = $request->input('quantity_' . $productId);
 
                 if ($quantity) {
                     $product['quantity'] = $quantity;
@@ -161,36 +185,14 @@ class AddCartController extends Controller
     public function update(Request $request, string $id)
     {
         //
-
-
-        $cart = $request->session()->get('cart');
-
-        if (isset($cart[$id])) {
-            $cart[$id]['stock'] = $request->input('stock');
-            $request->session()->put('cart', $cart);
-        }
-
-        return redirect()->back()->withCookie(cookie('keepOffcanvas', 'true', 60));
     }
 
     /**
      * Remove the specified resource from storage.
      */
 
-        //
-        public function destroy(Request $request, $id)
+    //
+    public function destroy(Request $request, $id)
     {
-        $cart = $request->session()->get('cart');
-
-        if (isset($cart[$id])) {
-            unset($cart[$id]);
-            $request->session()->put('cart', $cart);
-        }
-
-        return redirect()->back()->with('success', 'Product removed successfully');
     }
-
-
-
 }
-
