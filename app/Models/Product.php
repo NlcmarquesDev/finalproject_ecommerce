@@ -11,21 +11,24 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable=[ 'name', 'description', 'price', 'stock', 'rating'];
+    protected $fillable = ['name', 'description', 'price', 'quantity', 'rating'];
 
     public static function Slugify($value)
     {
         return Str::slug($value);
     }
 
-    public function photos(){
+    public function photos()
+    {
         return $this->hasMany(Photo::class);
     }
-    public function colors(){
-        return $this->belongsToMany(Color::class,'product_color','product_id', 'color_id');
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class, 'product_color', 'product_id', 'color_id');
     }
 
-    public function taxRate(){
+    public function taxRate()
+    {
         return 21;
     }
 

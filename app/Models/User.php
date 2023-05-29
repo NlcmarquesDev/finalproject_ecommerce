@@ -7,14 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
-    use Billable;
+    // use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -87,11 +86,7 @@ class User extends Authenticatable
         }
         return false;
     }
-    //
-    //    public function hasRole($role){
-    ////        dd($this->role->name);
-    //        return $role == $this->role->name && $this->is_active ;
-    //    }
+
 
     /**
      * The attributes that should be cast.

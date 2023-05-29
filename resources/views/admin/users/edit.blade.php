@@ -28,7 +28,7 @@
                             @enderror
                         </div>
                         <div class="col-md-4">
-                            <div class="form-floating"><input class="form-control" id="floatingInputPhone" type="tel" placeholder="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"><label for="floatingInputPhone">Phone</label></div>
+                            <div class="form-floating"><input class="form-control" id="floatingInputPhone" type="tel" placeholder="phone" pattern="[0-9]{10}"><label for="floatingInputPhone">Phone</label></div>
                         </div>
 
                         <div class=" col-md-8">

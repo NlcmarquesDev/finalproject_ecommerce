@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->decimal('price', 10,2)->nullable();
+            $table->decimal('price', 10, 2)->nullable();
             $table->integer('rating')->nullable();
-            $table->integer('stock');
+            $table->integer('quantity');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -36,23 +36,23 @@ return new class extends Migration
             $table->timestamps();
             $table->unique(["product_id", "color_id"]);
         });
-//        Schema::create("product_color", function (Blueprint $table) {
-//            $table->id();
-//            $table->unsignedBigInteger("product_id");
-//            $table->unsignedBigInteger("color_id");
-//            $table->timestamps();
-//            $table->unique(["product_id", "color_id"]);
-//            $table
-//                ->foreign("product_id")
-//                ->references("id")
-//                ->on("products")
-//                ->onDelete("cascade");
-//            $table
-//                ->foreign("color_id")
-//                ->references("id")
-//                ->on("color")
-//                ->onDelete("cascade");
-//        });
+        //        Schema::create("product_color", function (Blueprint $table) {
+        //            $table->id();
+        //            $table->unsignedBigInteger("product_id");
+        //            $table->unsignedBigInteger("color_id");
+        //            $table->timestamps();
+        //            $table->unique(["product_id", "color_id"]);
+        //            $table
+        //                ->foreign("product_id")
+        //                ->references("id")
+        //                ->on("products")
+        //                ->onDelete("cascade");
+        //            $table
+        //                ->foreign("color_id")
+        //                ->references("id")
+        //                ->on("color")
+        //                ->onDelete("cascade");
+        //        });
 
     }
 

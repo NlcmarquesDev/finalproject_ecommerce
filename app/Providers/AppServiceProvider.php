@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Cart;
 use App\Helpers\Price;
 use App\Models\Wishlist;
+use App\Models\Product;
 use Illuminate\View\View;
 use Illuminate\Pagination\Paginator;
 //use Illuminate\Support\Facades\View;
@@ -42,6 +43,25 @@ class AppServiceProvider extends ServiceProvider
             $userId = Auth::id();
             $wish = Wishlist::where('user_id', $userId)->first();
             $view->with('wish', $wish);
+        });
+        //Wishlist Product id
+        view()->composer('*', function ($view) {
+            $products = Product::all();
+            $wishlistProductIds = [];
+
+            foreach ($products as $product) {
+                $wishlistProduct = Wishlist::where('products', 'like', '%"id": "' . $product->id . '"%')->first();
+
+                if ($wishlistProduct) {
+                    $wishlistProductData = $wishlistProduct['products'];
+
+                    foreach ($wishlistProductData as $item) {
+                        $wishlistProductIds[] = $item['id'];
+                    }
+                }
+            }
+
+            $view->with('wishlistProductIds', $wishlistProductIds);
         });
     }
 }

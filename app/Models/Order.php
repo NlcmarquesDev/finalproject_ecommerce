@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = ['user_id', 'order_email', 'order_name', 'order_adress', 'order_bus', 'order_postcode', 'order_city', 'order_cupon', 'order_status', 'order_taxes', 'order_total', 'shipped',];
 

@@ -27,7 +27,10 @@ class AddCartController extends Controller
         $productName = $request->input('name');
         $productImage = $request->input('image');
         $productPrice = $request->input('price');
-        $productQuantity = 1;
+        $productQuantity = $request->input('quantity');
+
+
+        // dd($productQuantity);
 
         $cart->expires_at = now()->addDay();
 
@@ -81,12 +84,8 @@ class AddCartController extends Controller
             // Atribua o novo array de produtos atualizados à propriedade "products" do objeto "Cart"
             $wish->products = $updatedProducts;
             $wish->save();
-
-
-
-
-            return redirect()->back()->with('success', 'Produto adicionado ao carrinho com sucesso!');
         }
+        return redirect()->back()->with('success', 'Produto adicionado ao carrinho com sucesso!');
     }
 
     public function removeProduct(Request $request, $productId)

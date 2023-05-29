@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Traits\Slugify;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CategoriesController extends Controller
 {
@@ -24,7 +25,7 @@ class CategoriesController extends Controller
     public function create()
     {
         //
-        return view ('admin.categories.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -34,7 +35,7 @@ class CategoriesController extends Controller
     {
         //
         request()->validate([
-            'name' =>'required|string|unique:categories|between:2,255',
+            'name' => 'required|string|unique:categories|between:2,255',
         ]);
         $categories = new Category();
         $categories->slug = Slugify::slugify($request->name);
@@ -54,7 +55,7 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit( $id)
+    public function edit($id)
     {
         //
         return view("admin.categories.edit", [

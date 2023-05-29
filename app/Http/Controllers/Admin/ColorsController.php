@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\color;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ColorsController extends Controller
 {
@@ -14,7 +15,7 @@ class ColorsController extends Controller
     {
         //
         $colors = Color::withTrashed()->paginate(10);
-        return view ( 'admin.colors.index', compact('colors'));
+        return view('admin.colors.index', compact('colors'));
     }
 
     /**
@@ -23,7 +24,7 @@ class ColorsController extends Controller
     public function create()
     {
         //
-        return view ( 'admin.colors.create');
+        return view('admin.colors.create');
     }
 
     /**
@@ -33,9 +34,9 @@ class ColorsController extends Controller
     {
         //
         request()->validate([
-            'name' =>'required|string|unique:categories|between:2,255',
+            'name' => 'required|string|unique:categories|between:2,255',
         ]);
-        Color::create(["name" => $request->name, "code"=> $request->code]);
+        Color::create(["name" => $request->name, "code" => $request->code]);
         return redirect()->route("colors.index");
     }
 
@@ -68,7 +69,6 @@ class ColorsController extends Controller
         return redirect()
             ->route("colors.index")
             ->with("status", $color->name . " has been updated");
-
     }
 
     /**

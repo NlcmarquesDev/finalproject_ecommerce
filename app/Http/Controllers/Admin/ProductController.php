@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Color;
 use App\Models\Photo;
 use App\Models\Product;
 use App\Traits\Slugify;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
@@ -100,10 +101,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-
         // $slug = Product::Slugify($product->name);
         $product = Product::findOrFail($product->id);
         $products = Product::inRandomOrder()->take(3)->get();
+
 
 
         $color = Color::pluck("name", "id")->all();

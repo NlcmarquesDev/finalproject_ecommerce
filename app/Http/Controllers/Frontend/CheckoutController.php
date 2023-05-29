@@ -14,21 +14,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -39,17 +24,14 @@ class CheckoutController extends Controller
         $userId = Auth::id();
         $cart = Cart::firstOrNew(['user_id' => $userId]);
 
-        // $productCart = $cart->products;
-
         $taxes = 0;
         $total = 0;
 
-        // Obtenha os itens do carrinho
+        // Products from the Cart
         $cartItems = $cart->content();
 
         foreach ($cartItems as $cartItem) {
-            //  $taxes += $cartItem->taxes(); // Adicione as taxes de cada item
-            $total += $cartItem->total(); // Some o valor total de cada item
+            $total += $cartItem->total();
         }
 
         $order = new Order();
@@ -67,13 +49,12 @@ class CheckoutController extends Controller
 
         //CREATE THE DATA ON ORDER_ITEM
 
-        $products = $cart->products; // Supondo que você tenha os dados dos produtos em um array chamado "products"
+        $products = $cart->products;
 
         foreach ($products as $product) {
             $orderItem = new OrderItem();
             $orderItem->order_id = $order->id;
             $orderItem->quantity = $product['quantity'];
-            // $orderItem->product_name = 'nuno';
             $orderItem->product_name = $product['name'];
             $orderItem->product_price = $product['price'];
             // $orderItem->product_taxes = $product['taxes'];
@@ -88,37 +69,5 @@ class CheckoutController extends Controller
 
         $molliController = new MollieController();
         $molliController->preparePayment($order);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

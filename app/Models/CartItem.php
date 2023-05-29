@@ -27,11 +27,13 @@ class CartItem
      * Total excluding tax
      * @return float|int
      */
-    public function subtotal() {
+    public function subtotal()
+    {
         return $this->product()->priceExclTax() * $this->quantity();
     }
 
-    public function taxes() {
+    public function taxes()
+    {
         return $this->total() - $this->subtotal();
     }
 }

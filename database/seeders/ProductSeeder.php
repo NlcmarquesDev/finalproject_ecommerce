@@ -15,17 +15,15 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-          $colors = Color::all();
-                $photos = Photo::all();
-                for ($i = 0; $i < 25; $i++) {
-                    $product = new Product();
-                    $product->name = fake()->words(2, true);
-                    $product->description = fake()->paragraphs(3, true);
-                    $product->stock = fake()->numberBetween(10,100);
-                    $product->price = fake()->numberBetween(0,1000);
-//                    $product->_id = $colors->random()->id;
-                    $product->save();
-                }
-//        $products =  Product::factory()->count(20)->create();
+        $colors = Color::all();
+        $photos = Photo::all();
+        for ($i = 0; $i < 25; $i++) {
+            $product = new Product();
+            $product->name = fake()->words(2, true);
+            $product->description = fake()->paragraphs(3, true);
+            $product->quantity = fake()->numberBetween(10, 100);
+            $product->price = fake()->numberBetween(0, 1000);
+            $product->save();
+        }
     }
 }

@@ -51,6 +51,7 @@
                         <!---price and whishlist-->
                         <div class="d-flex justify-content-between align-items-center my-3">
                             <p class="fs-5 my-auto">&euro; {{$product->price}}- &euro; {{$product->price +10}}</p>
+                            @if(Auth::user())
                             <form action="{{ route('add.wishlist') }}" method="POST">
                                 @csrf
                                 @method ('POST')
@@ -58,9 +59,14 @@
                                 <input type="hidden" name="name" value="{{$product->name}}">
                                 <input type="hidden" name="price" value="{{$product->price}}">
                                 <input type="hidden" name="image" value="{{$product->photos->first() ? asset( $product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62'}}">
-                                <button class="bg-transparent border-0"><i class="bi bi-heart fs-4"></i></button>
+                                    @if(in_array($product->id, $wishlistProductIds))
+                                    <i class="bi bi-heart-fill fs-4 text-danger"></i><!-- Ícone de estrela preenchida -->
+                                    @else
+                                    <button class="bg-transparent border-0"><i class="bi bi-heart fs-4"></i></button>
+                                    @endif
                             </form>
-                            
+                            @endif
+                            {{-- @dd($wishlistProductId) --}}
                         </div>
                         <hr/>
                         <!---detail product-->
@@ -83,46 +89,33 @@
                         @if($product->colors)
                         <div class="d-flex justify-content-between my-3">
                             <p class="fs-5 my-auto">Color</p>
-                            <select class="rounded" name="" id="">
+                            <select class="rounded border" name="color">
                                 @foreach($product->colors as $color)
                                 <option value="">{{$color->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         @endif
-
+                        @if(Auth::user())
+                        <form action="{{ route('addproduct') }}" method="POST">
+                            @csrf
                         <!---Quantity-->
                         <div class="d-flex justify-content-between my-3">
                             <p class="fs-5 my-auto">Quantity</p>
-                            <input
-                                class="rounded px-2 border-secondary"
-                                size="3"
-                                type="text"
-                                name=""
-                                id=""
-                            />
+                            <input class="rounded px-2 border" name="quantity" type="number"  value="1" />
                         </div>
-                        <form action="{{ route('addproduct') }}" method="POST">
-                            @csrf
+                       
+                        
                             <input type="hidden" name="id" value="{{ $product->id }}">
                             <input type="hidden" name="name" value="{{ $product->name }}">
                             <input type="hidden" name="image" value="{{ $product->photos->first()->file ?? 'http://via.placeholder.com/62x62' }}">
                             <input type="hidden" name="price" value="{{ $product->price }}">
-                            @if(Auth::user())
-                                <button type="submit" class="btn"></button>
-                            @else
-                                <a href="{{ route('register') }}" class="fs-5 "><i class="navicon fa-solid fa-user-pen pfont"></i></a>
-                            @endif
+                            <button type="submit" class="btn w-100"> Add to Cart</button>
+                         @else
+                            <a href="{{ route('register') }}" class="btn w-100 ">Register</a>
+                        @endif
                         </form>
-
-                        <div class="d-flex justify-content-end">
-                            <input
-                                type="submit"
-                                value="Add Cart"
-                                class="btn"
-                                style="width: 100%"
-                            />
-                        </div>
+                     
                         <!---categorie product-->
                         <div class="my-3">
                             <p><b>Categories:</b> Diving, living</p>

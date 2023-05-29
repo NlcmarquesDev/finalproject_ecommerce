@@ -31,6 +31,8 @@
                             <input type="hidden" name="name" value="{{ $wishlist->product()->name }}">
                             <input type="hidden" name="image" value="{{ $wishlist->product()->photos->first()->file ?? 'http://via.placeholder.com/62x62' }}">
                             <input type="hidden" name="price" value="{{ $wishlist->product()->price }}">
+                            <input type="hidden" name="quantity" value="1">
+                            
                         <div>
                              <!-- update -->
                             <button class="bg-transparent border-0 text-decoration-underline" type="submit">Add to Cart</button>
@@ -57,9 +59,11 @@
 
     <!-- Footer -->
     <div class="offcanvas-footer justify-between lh-fixed fs-sm bg-light mt-5 py-3">
+        @if($cart !=null)
         <strong>Subtotal</strong> <strong class="ms-auto">{{ app('price')->format($cart->subtotal()) }}</strong><br/>
         <strong>Tax</strong> <strong class="ms-auto">{{ app('price')->format($cart->taxes()) }}</strong><br/>
         <strong>Total</strong> <strong class="ms-auto">{{ app('price')->format($cart->total()) }}</strong>
+        @endif
     </div>
 
     <!-- Buttons -->

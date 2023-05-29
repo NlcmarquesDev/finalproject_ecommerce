@@ -21,19 +21,16 @@
                     <a class="nav-link" href="{{route('products.create')}}">Create Product</a>
                 </x-sidebar-items>
                 {{--                Orders list--}}
-                <x-sidebar-items item="Ordes" icon="fas fa-shopping-cart">
-                    <a class="nav-link" href="{{route('products.index')}}">All Orders</a>
-                </x-sidebar-items>
-                {{--                Orders Items list--}}
-                <x-sidebar-items item="Orders Items" icon="fas fa-shopping-cart">
-                    <a class="nav-link" href="{{route('products.index')}}">All Orders Items</a>
+                <x-sidebar-items item="Orders" icon="fa-solid fa-truck">
+                    <a class="nav-link" href="{{route('orders.index')}}">All Orders</a>
+                    <a class="nav-link" href="{{route('orders.items')}}">Orders Items</a>
                 </x-sidebar-items>
                 {{--                Payments list--}}
-                <x-sidebar-items item="Payments" icon="fas fa-shopping-cart">
-                    <a class="nav-link" href="{{route('products.index')}}">All Payments</a>
+                <x-sidebar-items item="Payments" icon="fa-brands fa-cc-stripe">
+                    <a class="nav-link" href="{{route('payment')}}">All Payments</a>
                 </x-sidebar-items>
                 {{--                Categories list--}}
-                <x-sidebar-items item="Categories" icon="fas fa-tint">
+                <x-sidebar-items item="Categories" icon="fas fa-tags">
                     <a class="nav-link" href="{{route('categories.index')}}">All Categories</a>
                     <a class="nav-link" href="{{route('categories.create')}}">Create Category</a>
                 </x-sidebar-items>
@@ -41,11 +38,6 @@
                 <x-sidebar-items item="Colors" icon="fa-solid fa-droplet">
                     <a class="nav-link" href="{{route('colors.index')}}">All Colors</a>
                     <a class="nav-link" href="{{route('colors.create')}}">Create Color</a>
-                </x-sidebar-items>
-                {{--                Brands list--}}
-                <x-sidebar-items item="Brands" icon="fas fa-tags">
-                    <a class="nav-link" href="#">All Brands</a>
-                    <a class="nav-link" href="#">Create Brand</a>
                 </x-sidebar-items>
                 {{--                Tags list--}}
                 <x-sidebar-items item="Tags" icon="fas fa-hashtag">

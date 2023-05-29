@@ -6,13 +6,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ColorsController;
-use App\Http\Controllers\FrontEnd\CheckoutController;
-use App\Http\Controllers\EcommerceController;
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Frontend\AddCartController;
+use App\Http\Controllers\Admin\ColorsController;
 use App\Http\Controllers\MollieController;
+use App\Http\Controllers\EcommerceController;
+use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\OrderItemController;
+use App\Http\Controllers\Frontend\AddCartController;
+use App\Http\Controllers\FrontEnd\CheckoutController;
 use App\Http\Controllers\Frontend\WishlistController;
 
 /*
@@ -26,33 +29,28 @@ use App\Http\Controllers\Frontend\WishlistController;
 |
 */
 /*FRONTEND ROUTES*/
-//Route::get('/', function () {
-//    return view('welcome');
-//})->name('welcome');
+//HOMEPAGE
 Route::get('/', [EcommerceController::class, 'index'])->name('welcome');
-//Page All products
+//ALL PRODUCTS
 Route::get('/products', [EcommerceController::class, 'products'])->name('products');
-//Single Product Page
-Route::get('admin/products/{product}', 'ProductController@show')->name('products.show');
-Route::get('/singleproduct', [EcommerceController::class, 'singleProduct'])->name('single.product');
-//contact page
+//SINGLE PRODUCTS Page
+// Route::get('admin/products/', 'ProductController@show')->name('products.show');
+Route::get('/singleproduct/{product}', [EcommerceController::class, 'singleProduct'])->name('single.product');
+//CONTACT page
 Route::get('/contactus', [EcommerceController::class, 'contact'])->name('contact');
-//About page
+//ABOUTpage
 Route::get('/aboutus', [EcommerceController::class, 'about'])->name('about');
 //FAQ page
 Route::get('/faq', [EcommerceController::class, 'faq'])->name('faq');
-//Add To Cart
+//ADD TO CART
 Route::resource('addcart', AddCartController::class);
 Route::delete('/cart/{productId}', [AddCartController::class, 'removeProduct'])->name('cart.remove');
 Route::patch('/cart/update', [AddCartController::class, 'updateCart'])->name('cart.update');
-//wishlist
-Route::post('/wishlist', [WishlistController::class, 'addToWishlist'])->name('add.wishlist');
-Route::delete('/wishlist/{productId}', [WishlistController::class, 'removeFromWishlist'])->name('wish.remove');
-
 Route::match(['get', 'post'], '/addcart', [AddCartController::class, 'addProduct'])->name('addproduct');
 
-//chekout product
-Route::post('/checkout', [CheckoutController::class, 'store'])->name('store.checkout');
+//WISHLIST 
+Route::post('/wishlist', [WishlistController::class, 'addToWishlist'])->name('add.wishlist');
+Route::delete('/wishlist/{productId}', [WishlistController::class, 'removeFromWishlist'])->name('wish.remove');
 
 
 //MOLLIE PAYMENT
@@ -60,28 +58,24 @@ Route::get('payment-success/{order}', [MollieController::class, 'paymentSuccess'
 Route::get('payment-cancel', [MollieController::class, 'paymentCanceled'])->name('payment.cancel');
 
 
+//ROUTE JUST FOR CUSTOMERS AND ADMIN
 Route::middleware(['role:administrator,customer'])->group(function () {
     //CHECKOUT
-    Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout');
+    Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout'); //chekout product - to go make the payment final
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('store.checkout');
 
-    //Cart page
+    //CART PAGE
     Route::get('/cart', [EcommerceController::class, 'cart'])->name('cart');
 });
 
-
-Route::get('/category/{category:slug}', [CategoriesController::class, 'category'])->name('category.category');
+//
+// Route::get('/category/{category:slug}', [CategoriesController::class, 'category'])->name('category.category');
 
 Auth::routes();
 
-/* C0STUMER ROUTES*/
 
-
-
-
-
-/*BACKEND ROUTES*/
+//BACKEND ROUTES AND ADMIN ROUTES
 Route::prefix('admin')->middleware(['role:administrator'])->group(function () {
-    //Route::group(['prefix' => 'admin', 'middleware'=>'auth','admin' ], function (){
 
     //BACKEND HOMEPAGE
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -94,9 +88,9 @@ Route::prefix('admin')->middleware(['role:administrator'])->group(function () {
     ])->name("users.restore");
     //FAQ page
     Route::resource('faq', faqController::class);
-    //
+    //PRODUCTS PAGE
     Route::resource('products', ProductController::class);
-    //Categories Page
+    //CATEGORIES PAGE
     Route::resource('categories', CategoriesController::class);
     Route::post("categories/restore/{category}", [
         CategoriesController::class,
@@ -108,4 +102,9 @@ Route::prefix('admin')->middleware(['role:administrator'])->group(function () {
         ColorsController::class,
         "colorRestore",
     ])->name("colors.restore");
+    //ORDERS PAGE
+    Route::get('orders', [OrderController::class, 'orders'])->name("orders.index");
+    Route::get('orderItems', [OrderItemController::class, 'orderItems'])->name("orders.items");
+    //PAYMENT PAGE
+    Route::get('payments', [PaymentController::class, 'payment'])->name("payment");
 });

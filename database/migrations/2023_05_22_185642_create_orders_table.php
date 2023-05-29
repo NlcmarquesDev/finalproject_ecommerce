@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('order_total');
             $table->boolean('shipped')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
