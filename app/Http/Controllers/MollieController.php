@@ -40,6 +40,8 @@ class MollieController extends Controller
         $payment->save();
 
 
+
+
         // Atualize o registro de pagamento com o ID do pagamento retornado pelo Mollie
         header("Location: " . $transaction->getCheckoutUrl(), true, 303);
         exit();
@@ -53,6 +55,13 @@ class MollieController extends Controller
     public function paymentSuccess(Order $order)
     {
         if ($order->isPaid()) {
+
+            $order = Order::findOrFail($order->id);
+
+            if ($order) {
+                $order->order_status = 'paid';
+                $order->save();
+            }
             // echo 'payment has been received';
             return view('ecommerce.thankyou');
         } else {

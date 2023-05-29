@@ -64,8 +64,8 @@ Route::middleware(['role:administrator,customer'])->group(function () {
     Route::get('/checkout', [EcommerceController::class, 'checkout'])->name('checkout'); //chekout product - to go make the payment final
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('store.checkout');
 
-    //CART PAGE
-    Route::get('/cart', [EcommerceController::class, 'cart'])->name('cart');
+    //MY ORDERS PAGE
+    Route::get('/myorders/{id}', [OrderController::class, 'show'])->name('my.orders');
 });
 
 //

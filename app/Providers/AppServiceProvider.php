@@ -4,12 +4,13 @@ namespace App\Providers;
 
 use Carbon\Carbon;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Helpers\Price;
-use App\Models\Wishlist;
 use App\Models\Product;
+use App\Models\Wishlist;
 use Illuminate\View\View;
-use Illuminate\Pagination\Paginator;
 //use Illuminate\Support\Facades\View;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -43,6 +44,14 @@ class AppServiceProvider extends ServiceProvider
             $userId = Auth::id();
             $wish = Wishlist::where('user_id', $userId)->first();
             $view->with('wish', $wish);
+        });
+
+        //orderid
+
+        view()->composer('*', function ($view) {
+            $userId = Auth::id();
+            $order = Order::where('user_id', $userId)->first();
+            $view->with('order', $order);
         });
         //Wishlist Product id
         view()->composer('*', function ($view) {

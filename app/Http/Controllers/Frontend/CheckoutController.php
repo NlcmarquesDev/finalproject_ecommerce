@@ -35,7 +35,7 @@ class CheckoutController extends Controller
         }
 
         $order = new Order();
-        $order->user_id = $cart->id;
+        $order->user_id = $userId;
         $order->order_email = $request->email;
         $order->order_name = $request->name;
         $order->order_adress = $request->adress;
