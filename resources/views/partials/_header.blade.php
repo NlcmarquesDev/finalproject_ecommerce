@@ -179,10 +179,11 @@
 
                 <!-----end button for Login-->
                 <!-----button for Checklist-->
-                @if ($wish && count($wish->content()) > 0)
-                    <x-offcanvas title="Wishlist ({{ count($wish->content()) }})" display="d-none d-lg-inline-block"
-                        numbercart="{{ count($wish->content()) }}">
-                        @include('ecommerce.offcanvas-wishlist');
+                {{-- @dd(session('wishlist')) --}}
+                @if ($wishlist && count($wishlist->products) > 0)
+                    <x-offcanvas title="Wishlist ({{ count($wishlist->products) }})"
+                        display="d-none d-lg-inline-block" numbercart="{{ count($wishlist->products) }}">
+                        @include('ecommerce.offcanvas-wishlist')
                     </x-offcanvas>
                 @endif
                 <!-----End button for checklist-->

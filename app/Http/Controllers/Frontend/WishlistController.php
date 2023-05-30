@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use Carbon\Carbon;
-use App\Models\Cart;
+use App\Models\Wishlist;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
@@ -16,46 +15,26 @@ class WishlistController extends Controller
 
     public function addToWishlist(Request $request)
     {
-        $userId = Auth::id();
-        $wishlist = Wishlist::firstOrNew(['user_id' => $userId]);
-
+        // Obtenha os detalhes do produto do request...
         $productId = $request->input('id');
         $productName = $request->input('name');
         $productImage = $request->input('image');
         $productPrice = $request->input('price');
 
-        $wishlist->expires_at = now()->addweek();
 
-        $products = $wishlist->products ?? [];
+        // Recupere o carrinho da sessão ou crie um novo objeto Wishlist se ainda não existir
+        $wishlist = session()->get('wishlist') ?? new Wishlist();
 
-        // Verificar se o produto já existe no carrinho
-        $existingProduct = null;
-
-        foreach ($products as $key => $product) {
-            if ($product['id'] == $productId) {
-                $existingProduct = $key;
-                break;
-            }
+        // Verifique se o $wishlist é um objeto Wishlist
+        if (!$wishlist instanceof Wishlist) {
+            $wishlist = new Wishlist();
         }
 
-        if ($existingProduct !== null) {
-            // O produto já existe no carrinho, então incrementar a quantidade
-            return redirect()->back()->with('success', 'Produto ja foi adicionado a sua wishlist com sucesso!');
-        } else {
-            // Adicionar um novo produto ao carrinho
-            $newProduct = [
-                'id' => $productId,
-                'name' => $productName,
-                'image' => $productImage,
-                'price' => $productPrice,
-            ];
+        // Adicione o produto ao carrinho usando o método addProduct()
+        $wishlist->addToWishlist($productId, $productName, $productImage, $productPrice);
 
-            $products[] = $newProduct;
-        }
-
-        $wishlist->products = $products;
-        $wishlist->save();
-
+        // Armazene o objeto Wishlist atualizado na sessão
+        session()->put('wishlist', $wishlist);
 
         return redirect()->back()->with('success', 'Produto adicionado a sua wishlist com sucesso!');
     }
@@ -63,11 +42,11 @@ class WishlistController extends Controller
     public function removeFromWishlist(Request $request, $productId)
 
     {
-        // Recupere o objeto Cart correspondente ao usuário atual
+        // Recupere o objeto Wishlist correspondente ao usuário atual
         $userId = Auth::id();
         $wishlist = Wishlist::where('user_id', $userId)->first();
 
-        // Verifique se o objeto Cart existe e se a coluna 'products' contém JSON válido
+        // Verifique se o objeto Wishlist existe e se a coluna 'products' contém JSON válido
         if ($wishlist && $wishlist->products) {
             // Crie um novo array para armazenar os produtos atualizados
             $updatedProducts = [];
@@ -79,7 +58,7 @@ class WishlistController extends Controller
                 }
             }
 
-            // Atribua o novo array de produtos atualizados à propriedade "products" do objeto "Cart"
+            // Atribua o novo array de produtos atualizados à propriedade "products" do objeto "Wishlist"
             $wishlist->products = $updatedProducts;
             $wishlist->save();
         }

@@ -28,6 +28,8 @@ class AddCartController extends Controller
         $productPrice = $request->input('price');
         $productQuantity = $request->input('quantity');
 
+
+
         // Recupere o carrinho da sessão ou crie um novo objeto Cart se ainda não existir
         $cart = session()->get('cart') ?? new Cart();
 
@@ -42,7 +44,22 @@ class AddCartController extends Controller
         // Armazene o objeto Cart atualizado na sessão
         session()->put('cart', $cart);
 
-        // ... (o restante do seu código)
+        //Acesse a sessão "wishlist" e remova o produto correspondente
+        $wishlist = session('wishlist');
+
+        if ($wishlist && is_array($wishlist->products)) {
+            $products = $wishlist->products;
+
+            foreach ($products as $key => $product) {
+                if ($product && isset($product['id']) && $product['id'] == $productId) {
+                    unset($products[$key]);
+                    break; // Saia do loop após remover o item
+                }
+            }
+
+            $wishlist->products = $products;
+            session()->put('wishlist', $wishlist);
+        }
 
         return redirect()->back()->with('success', 'Produto adicionado ao carrinho com sucesso!');
     }

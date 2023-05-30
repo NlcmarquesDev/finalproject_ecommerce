@@ -9,17 +9,17 @@ class Cart extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'products', 'expires_at'];
+    // protected $fillable = ['user_id', 'products', 'expires_at'];
 
-    protected $casts = [
-        'products' => 'array',
-        'expires_at' => 'datetime',
-    ];
+    // protected $casts = [
+    //     'products' => 'array',
+    //     'expires_at' => 'datetime',
+    // ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 
     public function addProduct($productId, $productName, $productImage, $productPrice, $productQuantity)
     {

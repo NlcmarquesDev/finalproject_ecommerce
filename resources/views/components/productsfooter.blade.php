@@ -39,8 +39,10 @@
                                         <input type="hidden" name="id" value="{{ $product->id }}">
                                         <input type="hidden" name="name" value="{{ $product->name }}">
                                         <input type="hidden" name="price" value="{{ $product->price }}">
-                                        <input type="hidden" name="image"
-                                            value="{{ $product->photos->first() ? asset($product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62' }}">
+                                        @if ($product->photos->first() != null)
+                                            <input type="hidden" name="image"
+                                                value="{{ $product->photos->first() ? asset($product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62' }}">
+                                        @endif
                                         @if (in_array($product->id, $wishlistProductIds))
                                             <i class="bi bi-heart-fill fs-4 text-danger"></i>
                                             <!-- Ícone de estrela preenchida -->

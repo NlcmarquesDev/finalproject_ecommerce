@@ -21,21 +21,32 @@ class Wishlist extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function addProductWishlist($productId, $productName, $productImage, $productPrice)
+    public function addToWishlist($productId, $productName, $productImage, $productPrice)
     {
         $products = $this->products ?? [];
 
-        $product = [
-            'id' => $productId,
-            'name' => $productName,
-            'image' => $productImage,
-            'price' => $productPrice,
-        ];
+        $existingProductIndex = null;
 
-        $products[] = $product;
+        foreach ($products as $index => $product) {
+            if ($product['id'] == $productId) {
+                $existingProductIndex = $index;
+                break;
+            }
+        }
+
+        if ($existingProductIndex == null) {
+            // Adicionar um novo produto ao carrinho
+            $newProduct = [
+                'id' => $productId,
+                'name' => $productName,
+                'image' => $productImage,
+                'price' => $productPrice,
+            ];
+
+            $products[] = $newProduct;
+        }
 
         $this->products = $products;
-        $this->save();
     }
 
     public  function content()

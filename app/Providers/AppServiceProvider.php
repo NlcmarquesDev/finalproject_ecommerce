@@ -32,16 +32,15 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFive();
 
-
-        // view()->composer('*', function ($view) {
-        //     $userId = Auth::id();
-        //     $cart = Cart::where('user_id', $userId)->first();
-        //     $view->with('cart', $cart);
-        // });
-
+        //CART VARIABLE
         view()->composer('*', function ($view) {
             $cart = session()->get('cart', []);
             $view->with('cart', $cart);
+        });
+        //WISHLIST VARIABLE
+        view()->composer('*', function ($view) {
+            $wishlist = session()->get('wishlist', []);
+            $view->with('wishlist', $wishlist);
         });
 
         app()->bind('price', function () {
