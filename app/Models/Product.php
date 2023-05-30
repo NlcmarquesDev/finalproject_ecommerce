@@ -36,4 +36,8 @@ class Product extends Model
     {
         return $this->price / ($this->taxRate() / 100 + 1);
     }
+    public function hastag()
+    {
+        return $this->morphToMany(Hastag::class, 'hastagable');
+    }
 }

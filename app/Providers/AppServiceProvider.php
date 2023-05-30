@@ -31,9 +31,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+
+
+        // view()->composer('*', function ($view) {
+        //     $userId = Auth::id();
+        //     $cart = Cart::where('user_id', $userId)->first();
+        //     $view->with('cart', $cart);
+        // });
+
         view()->composer('*', function ($view) {
-            $userId = Auth::id();
-            $cart = Cart::where('user_id', $userId)->first();
+            $cart = session()->get('cart', []);
             $view->with('cart', $cart);
         });
 

@@ -25,18 +25,33 @@ class Cart extends Model
     {
         $products = $this->products ?? [];
 
-        $product = [
-            'id' => $productId,
-            'name' => $productName,
-            'image' => $productImage,
-            'price' => $productPrice,
-            'quantity' => $productQuantity,
-        ];
+        // Verificar se o produto já existe no carrinho
+        $existingProductIndex = null;
 
-        $products[] = $product;
+        foreach ($products as $index => $product) {
+            if ($product['id'] == $productId) {
+                $existingProductIndex = $index;
+                break;
+            }
+        }
+
+        if ($existingProductIndex !== null) {
+            // O produto já existe no carrinho, então incrementar a quantidade
+            $products[$existingProductIndex]['quantity'] += 1;
+        } else {
+            // Adicionar um novo produto ao carrinho
+            $newProduct = [
+                'id' => $productId,
+                'name' => $productName,
+                'image' => $productImage,
+                'price' => $productPrice,
+                'quantity' => $productQuantity,
+            ];
+
+            $products[] = $newProduct;
+        }
 
         $this->products = $products;
-        $this->save();
     }
 
     public  function content()

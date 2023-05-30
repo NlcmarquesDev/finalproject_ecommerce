@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Color;
 use App\Models\Photo;
+use App\Models\Hastag;
 use App\Models\Product;
 use App\Traits\Slugify;
 use App\Models\Wishlist;
@@ -37,7 +38,8 @@ class ProductController extends Controller
         //
         //        $keywords = Keyword::all();
         $colors = Color::all();
-        return view("admin.products.create", compact("colors"));
+        $hastags = Hastag::all();
+        return view("admin.products.create", compact("colors", "hastags"));
     }
 
     /**
@@ -67,7 +69,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->rating = $request->rating;
-        $product->stock = $request->stock;
+        $product->quantity = $request->quantity;
 
 
         $product->save();
@@ -86,6 +88,11 @@ class ProductController extends Controller
                 $photo = Photo::create(["file" => $path, "product_id" => $product->id]);
                 //                dd($photo);
             }
+        }
+
+        foreach ($request->hastags as $hastag) {
+            $hastagFind = Hastag::findOrFail($hastag);
+            $product->hastag()->save($hastagFind);
         }
 
         return redirect()->route('products.index')->with([
