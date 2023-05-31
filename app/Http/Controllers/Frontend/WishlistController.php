@@ -40,28 +40,28 @@ class WishlistController extends Controller
     }
 
     public function removeFromWishlist(Request $request, $productId)
-
     {
-        // Recupere o objeto Wishlist correspondente ao usuário atual
-        $userId = Auth::id();
-        $wishlist = Wishlist::where('user_id', $userId)->first();
+        // Recupere o objeto Cart da sessão
+        $wishlist = session('wishlist');
 
-        // Verifique se o objeto Wishlist existe e se a coluna 'products' contém JSON válido
-        if ($wishlist && $wishlist->products) {
+        if ($wishlist instanceof Wishlist) {
             // Crie um novo array para armazenar os produtos atualizados
             $updatedProducts = [];
 
             // Percorra os produtos do carrinho e adicione apenas os produtos que não correspondem ao ID fornecido
-            foreach ($wishlist->products as $wishproduct) {
-                if ($wishproduct['id'] != $productId) {
-                    $updatedProducts[] = $wishproduct;
+            foreach ($wishlist->products as $product) {
+                if ($product['id'] != $productId) {
+                    $updatedProducts[] = $product;
                 }
             }
 
-            // Atribua o novo array de produtos atualizados à propriedade "products" do objeto "Wishlist"
+            // Atribua o novo array de produtos atualizados à propriedade "products" do objeto "Cart"
             $wishlist->products = $updatedProducts;
-            $wishlist->save();
+
+            // Armazene o objeto Cart atualizado na sessão
+            session(['wishlist' => $wishlist]);
         }
-        return redirect()->back()->with('success', 'Produto removido ao Wishlist com sucesso!');
+
+        return redirect()->back()->with('success', 'Produto removido do carrinho com sucesso!');
     }
 }
