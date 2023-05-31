@@ -14,6 +14,7 @@
     <!--      crossorigin="anonymous"-->
     <!--    />-->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @livewireStyles
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 </head>
@@ -47,8 +48,6 @@
                         <!-- Button to close the overlay navigation -->
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                         <div class="text-center">
-
-
                             <a class="dropdown-item" href="{{ route('checkout') }}">My Checkout</a>
                             <a class="dropdown-item" href="{{ route('about') }}">Orders</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
@@ -56,8 +55,6 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
                             </form>
-
-
                             <a href="#">Shop</a>
                             <a href="#">FAQ`s</a>
                             <a href="#">Contact</a>
@@ -124,7 +121,6 @@
                                         My Account
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{ route('faq') }}">Dashboard</a></li>
                                         <li><a class="dropdown-item" href="#">My Whishlist</a></li>
                                         <li><a class="dropdown-item" href="{{ route('checkout') }}">My Checkout</a></li>
                                         @if ($order != null)
@@ -146,13 +142,9 @@
 
                 </div>
             </nav>
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex justify-content-center align-items-center position-relative">
                 <!-----button for Search-->
-                <div class="searchBox">
-                    <input type="search" class="no-outline" placeholder="Search" />
-                    <i class="fa-solid fa-magnifying-glass navicon  m-2"></i>
-                </div>
-                <!-----end button for Search-->
+                @livewire('search-all')
                 <!-----button for Login-->
                 <div class="d-flex align-items-center">
                     @if (Route::has('login'))
@@ -176,26 +168,21 @@
 
                 </div>
 
-
-                <!-----end button for Login-->
                 <!-----button for Checklist-->
-                {{-- @dd(session('wishlist')) --}}
                 @if ($wishlist && count($wishlist->products) > 0)
                     <x-offcanvas title="Wishlist ({{ count($wishlist->products) }})"
                         display="d-none d-lg-inline-block" numbercart="{{ count($wishlist->products) }}">
                         @include('ecommerce.offcanvas-wishlist')
                     </x-offcanvas>
                 @endif
-                <!-----End button for checklist-->
+
                 <!-----button for basket-->
-                {{-- @dd(count($cart->products)); --}}
                 @if ($cart && count($cart->products) > 0)
                     <x-offcanvas title="Your Cart ({{ count($cart->products) }})" number="2"
                         icon="fas fa-shopping-bag" numbercart="{{ count($cart->products) }}">
                         @include('ecommerce.offcanvas-cart')
                     </x-offcanvas>
                 @endif
-                <!----- end button for basket-->
             </div>
         </div>
     </header>

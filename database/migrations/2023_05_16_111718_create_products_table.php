@@ -36,24 +36,21 @@ return new class extends Migration
             $table->timestamps();
             $table->unique(["product_id", "color_id"]);
         });
-        //        Schema::create("product_color", function (Blueprint $table) {
-        //            $table->id();
-        //            $table->unsignedBigInteger("product_id");
-        //            $table->unsignedBigInteger("color_id");
-        //            $table->timestamps();
-        //            $table->unique(["product_id", "color_id"]);
-        //            $table
-        //                ->foreign("product_id")
-        //                ->references("id")
-        //                ->on("products")
-        //                ->onDelete("cascade");
-        //            $table
-        //                ->foreign("color_id")
-        //                ->references("id")
-        //                ->on("color")
-        //                ->onDelete("cascade");
-        //        });
-
+        Schema::create("product_category", function (Blueprint $table) {
+            $table->id();
+            $table
+                ->foreignId("product_id")
+                ->unsigned()
+                ->constrained()
+                ->cascadeOnDelete();
+            $table
+                ->foreignId("category_id")
+                ->unsigned()
+                ->constrained()
+                ->cascadeOnDelete();
+            $table->timestamps();
+            $table->unique(["product_id", "category_id"]);
+        });
     }
 
     /**

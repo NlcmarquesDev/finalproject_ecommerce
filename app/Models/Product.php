@@ -26,6 +26,10 @@ class Product extends Model
     {
         return $this->belongsToMany(Color::class, 'product_color', 'product_id', 'color_id');
     }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'product_category', 'product_id', 'category_id');
+    }
 
     public function taxRate()
     {
