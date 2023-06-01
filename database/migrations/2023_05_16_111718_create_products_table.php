@@ -36,7 +36,7 @@ return new class extends Migration
             $table->timestamps();
             $table->unique(["product_id", "color_id"]);
         });
-        Schema::create("product_category", function (Blueprint $table) {
+        Schema::create("category_product", function (Blueprint $table) {
             $table->id();
             $table
                 ->foreignId("product_id")

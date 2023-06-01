@@ -7,6 +7,7 @@ use App\Models\Photo;
 use App\Models\Hastag;
 use App\Models\Product;
 use App\Traits\Slugify;
+use App\Models\Category;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -35,11 +36,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
-        //        $keywords = Keyword::all();
         $colors = Color::all();
         $hastags = Hastag::all();
-        return view("admin.products.create", compact("colors", "hastags"));
+        $categories = Category::all();
+        return view("admin.products.create", compact("colors", "hastags", "categories"));
     }
 
     /**
@@ -80,6 +80,8 @@ class ProductController extends Controller
             $ids[] = $obj->id;
         }
         $product->colors()->sync($ids);
+
+        $product->categories()->sync($request->categories, true);
 
         if ($files = $request->file("photo_id")) {
             foreach ($files as $file) {

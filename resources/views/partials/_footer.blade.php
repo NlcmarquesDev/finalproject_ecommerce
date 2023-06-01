@@ -63,6 +63,7 @@
     </div>
 </div>
 </section>
+@livewireScripts
 <!--END NEWSLETTER AND DISCOUNT-->
 
 
@@ -72,7 +73,7 @@
 {{--    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" --}}
 {{--    crossorigin="anonymous" --}}
 {{-- ></script> --}}
-@livewireScripts
+
 <script src="{{ asset('js/script.js') }}"></script>
 </body>
 

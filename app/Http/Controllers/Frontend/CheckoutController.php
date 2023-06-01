@@ -22,11 +22,9 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
         $userId = Auth::id();
-        $cart = Cart::firstOrNew(['user_id' => $userId]);
 
         $taxes = 0;
         $total = 0;
-
 
         $cart = session('cart');
 

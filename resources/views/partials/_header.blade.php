@@ -121,7 +121,6 @@
                                         My Account
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">My Whishlist</a></li>
                                         <li><a class="dropdown-item" href="{{ route('checkout') }}">My Checkout</a></li>
                                         @if ($order != null)
                                             <li><a class="dropdown-item"

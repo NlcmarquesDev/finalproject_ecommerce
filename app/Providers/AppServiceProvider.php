@@ -46,11 +46,11 @@ class AppServiceProvider extends ServiceProvider
         app()->bind('price', function () {
             return new Price();
         });
-        view()->composer('*', function ($view) {
-            $userId = Auth::id();
-            $wish = Wishlist::where('user_id', $userId)->first();
-            $view->with('wish', $wish);
-        });
+        // view()->composer('*', function ($view) {
+        //     $userId = Auth::id();
+        //     $wish = Wishlist::where('user_id', $userId)->first();
+        //     $view->with('wish', $wish);
+        // });
 
         //orderid
 
@@ -65,7 +65,8 @@ class AppServiceProvider extends ServiceProvider
             $wishlistProductIds = [];
 
             foreach ($products as $product) {
-                $wishlistProduct = Wishlist::where('products', 'like', '%"id": "' . $product->id . '"%')->first();
+                $wishlistProduct = session()->get('wishlist', []);
+                // $wishlistProduct = Wishlist::where('products', 'like', '%"id": "' . $product->id . '"%')->first();
 
                 if ($wishlistProduct) {
                     $wishlistProductData = $wishlistProduct['products'];

@@ -67,18 +67,33 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class=" col-md-12">
-                            <label>Hastags:</label>
-                            @foreach ($hastags as $hastag)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="{{ $hastag->id }}"
-                                        id="hastag{{ $hastag->id }}" name="hastags[]">
-                                    <label class="form-check-label"
-                                        for="hastag{{ $hastag->id }}">{{ $hastag->name }}</label>
-                                </div>
-                            @endforeach
+                        <div class="d-flex">
+                            <div class=" col-md-6">
+                                <label>Hastags:</label>
+                                @foreach ($hastags as $hastag)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="{{ $hastag->id }}"
+                                            id="hastag{{ $hastag->id }}" name="hastags[]">
+                                        <label class="form-check-label"
+                                            for="hastag{{ $hastag->id }}">{{ $hastag->name }}</label>
+                                    </div>
+                                @endforeach
 
+                            </div>
+                            <div class=" col-md-12">
+                                <label>Categories:</label>
+                                @foreach ($categories as $category)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
+                                            id="category{{ $category->id }}" name="categories[]">
+                                        <label class="form-check-label"
+                                            for="category{{ $category->id }}">{{ $category->name }}</label>
+                                    </div>
+                                @endforeach
+
+                            </div>
                         </div>
+
                         <div class="col-12 d-flex justify-content-end mt-6">
                             <button type="submit" class="btn btn-primary ms-2">Create Product</button>
                         </div>

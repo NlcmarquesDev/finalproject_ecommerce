@@ -23,33 +23,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                <livewire:filter-products />
+                <livewire:filter-shop />
             </div>
         </div>
         <!-- Filter Section -->
-        <aside class="col-lg-2 col-md-4 filter my-auto d-none d-lg-inline-block ps-4 ">
-            <livewire:filter-products />
-        </aside>
-        <!-- Products Section -->
-        <section class="col-lg-10 col-md-12">
-            <div class="row">
 
-                <section id="sampleProduct" class="container my-5">
-                    <div class="row d-flex justify-content-center">
-                        <div class="container">
-                            <div class="row">
-                                @foreach ($products as $product)
-                                    @livewire('show-product', ['product' => $product])
-                                @endforeach
-                            </div>
-                            <div class="mt-5">
-                                {{ $products->links() }}
-                            </div>
-                        </div>
-                </section>
-            </div>
+        <livewire:filter-shop />
 
-        </section>
         @include('partials.return-policy')
     </div>
 </div>

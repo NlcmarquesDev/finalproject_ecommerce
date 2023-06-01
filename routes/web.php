@@ -31,11 +31,13 @@ use App\Http\Controllers\Frontend\WishlistController;
 /*FRONTEND ROUTES*/
 //HOMEPAGE
 Route::get('/', [EcommerceController::class, 'index'])->name('welcome');
+
+
 //ALL PRODUCTS
 Route::get('/products', [EcommerceController::class, 'products'])->name('products');
 //SINGLE PRODUCTS Page
-// Route::get('admin/products/', 'ProductController@show')->name('products.show');
 Route::get('/singleproduct/{product}', [EcommerceController::class, 'singleProduct'])->name('single.product');
+
 //CONTACT page
 Route::get('/contactus', [EcommerceController::class, 'contact'])->name('contact');
 //ABOUTpage
@@ -48,7 +50,7 @@ Route::delete('/cart/{productId}', [AddCartController::class, 'removeProduct'])-
 Route::patch('/cart/update', [AddCartController::class, 'updateCart'])->name('cart.update');
 Route::match(['get', 'post'], '/addcart', [AddCartController::class, 'addProduct'])->name('addproduct');
 
-//WISHLIST 
+//WISHLIST
 Route::post('/wishlist', [WishlistController::class, 'addToWishlist'])->name('add.wishlist');
 Route::delete('/wishlist/{productId}', [WishlistController::class, 'removeFromWishlist'])->name('wish.remove');
 
