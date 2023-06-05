@@ -1,6 +1,7 @@
 @extends('admin.index')
 @section('content')
-    <x-admin.heading_table title="Edit Product" button="All Products" rota="{{ route('products.index') }}">
+    <x-admin.heading_table title="Create Product" name="New Product" button="All Products"
+        route="{{ route('products.index') }}">
     </x-admin.heading_table>
     <div class="row">
         <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">

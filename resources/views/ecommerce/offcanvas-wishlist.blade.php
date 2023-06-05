@@ -11,7 +11,7 @@
 
                 <div class="col-4">
                     <!-- Image -->
-                    <a href="{{ route('products.show', $wishlist['id']) }}">
+                    <a href="{{ route('single.product', $wishlist['id']) }}">
                         <img class="img-fluid" src="{{ $wishlist['image'] ?? 'http://via.placeholder.com/62x62' }}"
                             alt="...">
                     </a>
@@ -21,7 +21,7 @@
                         <!-- Title -->
                         <p class="fs-sm fw-bold mb-6">
                             <a class="text-body"
-                                href="{{ route('products.show', $wishlist['id']) }}">{{ $wishlist['name'] }}</a>
+                                href="{{ route('single.product', $wishlist['id']) }}">{{ $wishlist['name'] }}</a>
                             <br>
                             <span class="text-muted">{{ app('price')->format($wishlist['price']) }}</span>
                         </p>

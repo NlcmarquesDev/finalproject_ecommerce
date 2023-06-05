@@ -11,6 +11,7 @@ use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AddCartController extends Controller
 {
@@ -27,8 +28,6 @@ class AddCartController extends Controller
         $productImage = $request->input('image');
         $productPrice = $request->input('price');
         $productQuantity = $request->input('quantity');
-
-
 
         // Recupere o carrinho da sessão ou crie um novo objeto Cart se ainda não existir
         $cart = session()->get('cart') ?? new Cart();
@@ -60,8 +59,8 @@ class AddCartController extends Controller
             $wishlist->products = $products;
             session()->put('wishlist', $wishlist);
         }
-
-        return redirect()->back()->with('success', 'Produto adicionado ao carrinho com sucesso!');
+        Alert::success('Added to cart Successfully', 'Thank for your choice!');
+        return redirect()->back();
     }
 
     public function removeProduct(Request $request, $productId)
@@ -86,8 +85,8 @@ class AddCartController extends Controller
             // Armazene o objeto Cart atualizado na sessão
             session(['cart' => $cart]);
         }
-
-        return redirect()->back()->with('success', 'Produto removido do carrinho com sucesso!');
+        Alert::warning('Removed from the cart Successfully');
+        return redirect()->back();
     }
 
     public function updateCart(Request $request)
@@ -109,8 +108,8 @@ class AddCartController extends Controller
             $cart->products = $products;
             session(['cart' => $cart]);
         }
-
-        return redirect()->back()->with('success', 'Produto atualizado no carrinho com sucesso!');
+        Alert::success('Cart updated Successfully', 'Thank for your choice!');
+        return redirect()->back();
     }
 
     /**
@@ -135,8 +134,6 @@ class AddCartController extends Controller
     public function show(string $id)
     {
         //
-
-
         $products = Product::findOrFail($id);
         return view("ecommerce.single-product", compact("products"));
     }

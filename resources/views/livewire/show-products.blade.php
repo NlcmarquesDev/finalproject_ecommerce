@@ -1,11 +1,11 @@
-<div class="col-md-6 col-lg-4">
-    <a href="{{ route('products.show', $product->id) }}" class="text-decoration-none">
+<div class="col-12 col-md-6 col-xl-4">
+    <a href="{{ route('single.product', $product->id) }}" class="text-decoration-none">
         <div class="boximg">
             <div class="flip-box">
                 <div class="flip-box-inner">
                     <div class="flip-box-front">
                         <img src="{{ $product->photos->first() ? asset($product->photos->first()->file) : 'http://via.placeholder.com/62x62' }}"
-                            alt="stone lamp" style="width: 300px; height: 300px" />
+                            alt="{{ $product->name }}" style="width: 300px; height: 300px" />
                         @foreach ($product->categories as $category)
                             <p class="category-image badge text-bg-secondary">
                                 {{ $category->name }}</p>
@@ -13,10 +13,8 @@
                     @endforeach
                 </div>
                 <div class="flip-box-back">
-                    @if ($product->photos->skip(1)->first() != null)
-                        <img src="{{ $product->photos->first() ? asset($product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62' }}"
-                            alt="stone lamp" style="width: 300px; height: 300px" />
-                    @endif
+                    <img src="{{ $product->photos->first() ? asset($product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62' }}"
+                        alt="{{ $product->name }}" style="width: 300px; height: 300px" />
                 </div>
             </div>
         </div>
@@ -30,7 +28,7 @@
         </div>
         <div class="mt-2">
             @if (Auth::user())
-                <form action="{{ route('add.wishlist') }}" method="POST">
+                <form action="{{ route('add.wishlist') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method ('POST')
                     <input type="hidden" name="id" value="{{ $product->id }}">
@@ -45,7 +43,7 @@
                         <button class="bg-transparent border-0"><i class="bi bi-heart fs-4"></i></button>
                     @endif
                 </form>
-                <form action="{{ route('addproduct') }}" method="POST">
+                <form action="{{ route('addproduct') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id" value="{{ $product->id }}">
                     <input type="hidden" name="name" value="{{ $product->name }}">

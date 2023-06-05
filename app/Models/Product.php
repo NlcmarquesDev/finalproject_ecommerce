@@ -26,6 +26,10 @@ class Product extends Model
     {
         return $this->belongsToMany(Color::class, 'product_color', 'product_id', 'color_id');
     }
+    public function hastags()
+    {
+        return $this->belongsToMany(Hastag::class, 'hastag_product');
+    }
     public function categories()
     {
         return $this->belongsToMany(Category::class);

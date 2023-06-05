@@ -12,21 +12,6 @@
         </div>
 
         <!-- Filter modal Section -->
-        <a class="btn btn-sm  d-lg-none mx-auto" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-            aria-controls="offcanvasExample">
-            Filter
-        </a>
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-            aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filter</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <livewire:filter-shop />
-            </div>
-        </div>
-        <!-- Filter Section -->
 
         <livewire:filter-shop />
 

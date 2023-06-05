@@ -1,8 +1,9 @@
 @extends('admin.index')
 @section('content')
-    <x-admin.heading_table title="Edit Color" button="All Color"  rota="{{route('colors.index')}}"></x-admin.heading_table>
+    <x-admin.heading_table title="Edit Color" button="All Color" rota="{{ route('colors.index') }}"></x-admin.heading_table>
     <div class="row">
-        <form action="{{action("\App\Http\Controllers\ColorsController@store")}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ action('\App\Http\Controllers\Admin\ColorsController@store') }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @method('POST')
             <div class="d-xl-flex col-xl-12">
@@ -11,20 +12,22 @@
                     <div class="row g-3 mb-9">
                         <div class=" col-md-12">
                             <div class="form-floating">
-                                <input class="form-control" name="name" id="floatingInputName" type="text" placeholder="First name">
+                                <input class="form-control" name="name" id="floatingInputName" type="text"
+                                    placeholder="First name">
                                 <label for="floatingInputName">Name Color</label>
                             </div>
                             @error('name')
-                            <p class="text-danger fs-6">{{$message}}</p>
+                                <p class="text-danger fs-6">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-8">
                             <div class="form-floating">
-                                <input class="form-control" name="code" id="floatingInputCode" type="text" placeholder="code color">
+                                <input class="form-control" name="code" id="floatingInputCode" type="text"
+                                    placeholder="code color">
                                 <label for="floatingInputCode">Code Color</label>
                             </div>
                             @error('code')
-                            <p class="text-danger fs-6">{{$message}}</p>
+                                <p class="text-danger fs-6">{{ $message }}</p>
                             @enderror
                         </div>
                         <div>

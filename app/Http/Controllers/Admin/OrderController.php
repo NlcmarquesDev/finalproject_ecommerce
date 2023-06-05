@@ -14,10 +14,11 @@ class OrderController extends Controller
     public function orders()
     {
         $orders = Order::withTrashed()->paginate(10);
-        return view('admin.orders.index', compact('orders'));
+        $totalOrders = Order::count();
+        return view('admin.orders.index', compact('orders', 'totalOrders'));
     }
 
-    public function show(string $id)
+    public function show($id)
     {
         $user = User::findOrFail($id);
         $orders = Order::where('user_id', $id)->get();

@@ -46,20 +46,19 @@ class AppServiceProvider extends ServiceProvider
         app()->bind('price', function () {
             return new Price();
         });
-        // view()->composer('*', function ($view) {
-        //     $userId = Auth::id();
-        //     $wish = Wishlist::where('user_id', $userId)->first();
-        //     $view->with('wish', $wish);
-        // });
 
         //orderid
-
         view()->composer('*', function ($view) {
             $userId = Auth::id();
             $order = Order::where('user_id', $userId)->first();
             $view->with('order', $order);
         });
-        //Wishlist Product id
+        //userid
+        view()->composer('*', function ($view) {
+            $user = Auth::user();
+            $view->with('user', $user);
+        });
+        // Wishlist Product id
         view()->composer('*', function ($view) {
             $products = Product::all();
             $wishlistProductIds = [];

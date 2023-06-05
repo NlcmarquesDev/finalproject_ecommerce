@@ -4,25 +4,25 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-sm-3 d-flex flex-column align-items-center">
+            <div class="col-sm-3 d-flex flex-column align-items-center py-3 py-lg-0">
                 <h5 class="text-dark">Get started</h5>
                 <a href="{{ route('welcome') }}" class="pfont">Home</a>
                 <a href="{{ route('home') }}" class="pfont my-2">Sign up</a>
                 <a href="#" class="pfont">Downloads</a>
             </div>
-            <div class="col-sm-3 d-flex flex-column align-items-center">
+            <div class="col-sm-3 d-flex flex-column align-items-center py-3 py-lg-0">
                 <h5 class="text-dark">About us</h5>
                 <a href="{{ route('about') }}" class="pfont">Company Information</a>
                 <a href="{{ route('contact') }}" class="pfont my-2">Contact us</a>
                 <a href="#" class="pfont">Reviews</a>
             </div>
-            <div class="col-sm-3 d-flex flex-column align-items-center">
+            <div class="col-sm-3 d-flex flex-column align-items-center py-3 py-lg-0">
                 <h5 class="text-dark">Support</h5>
                 <a href="{{ route('faq') }}" class="pfont">FAQ</a>
                 <a href="#" class="pfont my-2">Help desk</a>
                 <a href="#" class="pfont">Forums</a>
             </div>
-            <div class="col-sm-3 info">
+            <div class="col-sm-3 info pt-3 pt-lg-0">
                 <h5 class="text-dark">Information</h5>
                 <p class="text-muted"> Lorem ipsum dolor amet, consectetur adipiscing elit. Etiam consectetur aliquet
                     aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
@@ -32,7 +32,7 @@
 </div>
 
 
-<div class="py-5 ">
+<div class="py-lg-5 ">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-4">
@@ -50,7 +50,7 @@
                 <a href="#"><i class="bi bi-youtube navicon m-2"></i></a>
             </div>
 
-            <div class="col-sm-4 text-center">
+            <div class="col-sm-4 text-center py-3 p-lg-0">
 
                 <!-- Payment methods -->
                 <img class="footer-payment small" src="{{ asset('imagens/mastercard.svg') }}" alt="...">
@@ -64,6 +64,7 @@
 </div>
 </section>
 @livewireScripts
+
 <!--END NEWSLETTER AND DISCOUNT-->
 
 

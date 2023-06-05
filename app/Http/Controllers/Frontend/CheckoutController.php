@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Cart;
+
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\OrderItem;
+use App\Models\Locations;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MollieController;
-use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
@@ -22,6 +21,7 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
         $userId = Auth::id();
+
 
         $taxes = 0;
         $total = 0;

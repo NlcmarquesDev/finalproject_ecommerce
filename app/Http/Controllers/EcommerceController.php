@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Faq;
+use App\Models\User;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Wishlist;
+use App\Models\Locations;
 use Illuminate\Http\Request;
+use DrewM\MailChimp\MailChimp;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class EcommerceController extends Controller
 {
@@ -16,38 +20,26 @@ class EcommerceController extends Controller
     {
 
         $products = Product::inRandomOrder()->take(3)->get();
-
-
+        // dd($products);
         return view('welcome', compact('products'));
     }
 
     public function products()
     {
-        $products = Product::with('photos', 'colors')->paginate(12);
 
+        // $products = Product::with('photos', 'colors')->paginate(12);
+        $products = Product::all();
+
+        // dd($products);
         return view('ecommerce.products', compact('products'));
     }
     public function singleProduct(Product $product)
     {
-        $wishlistProduct = Wishlist::where('products', 'like', '%"id": "' . $product->id . '"%')->first();
-
-        $wishlistProductIds = [];
-
-        if ($wishlistProduct) {
-            $wishlistProductData = $wishlistProduct['products'];
-
-            foreach ($wishlistProductData as $item) {
-                $wishlistProductIds[] = $item['id'];
-            }
-        }
 
         $product = Product::findOrFail($product->id);
         $products = Product::inRandomOrder()->take(3)->get();
-
-
-
         $color = Color::pluck("name", "id")->all();
-        return view("ecommerce.single-product", compact("product", 'products', 'color', 'wishlistProduct', 'wishlistProductIds'));;
+        return view("ecommerce.single-product", compact("product", 'products', 'color'));
     }
     public function contact()
     {
@@ -64,7 +56,26 @@ class EcommerceController extends Controller
     }
     public function checkout()
     {
+        $userId = Auth::id();
+        $location = Locations::FindOrfail($userId);
+        $user = User::findOrFail($userId);
 
-        return view('ecommerce.checkout');
+
+        return view('ecommerce.checkout', compact('location', 'user'));
+    }
+    public function Subscriber(Request $request)
+    {
+
+        $MailChimp = new MailChimp(env('API_KEY_MAILCHIMP'));
+        $list_id = env('LIST_ID_MAILCHIMP');
+
+        $result = $MailChimp->post("lists/$list_id/members", [
+            'email_address' => $request->email,
+            'status'        => 'subscribed',
+        ]);
+        // dd($result);
+        Alert::success('Added the our newsletter Successfully', 'Thank for your choice!');
+
+        return back();
     }
 }

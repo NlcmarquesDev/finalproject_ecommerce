@@ -14,7 +14,8 @@ class FaqController extends Controller
     {
         //
         $faqs = Faq::all();
-        return view('admin.faq.index', compact('faqs'));
+        $totalFaqs = Faq::count();
+        return view('admin.faq.index', compact('faqs', 'totalFaqs'));
     }
 
     /**

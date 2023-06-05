@@ -87,19 +87,8 @@
                     <div class="navbar-nav">
                         <a class="nav-link active d-none d-lg-inline-block mx-2" aria-current="page"
                             href="{{ route('welcome') }}">Home</a>
-                        <li class="nav-item dropdown mx-2">
-                            <a class="nav-link dropdown-toggle d-none d-lg-inline-block" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Products
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Accessories</a></li>
-                                <li><a class="dropdown-item" href="#">Dining</a></li>
-                                <li><a class="dropdown-item" href="#">Furniture</a></li>
-                                <li><a class="dropdown-item" href="#">Lighting</a></li>
-                                <li><a class="dropdown-item" href="#">Living</a></li>
-                            </ul>
-                        </li>
+                        <a class="nav-link active d-none d-lg-inline-block mx-2" aria-current="page"
+                            href="{{ route('products') }}">Products</a>
                         <li class="nav-item dropdown mx-2">
                             <a class="nav-link dropdown-toggle d-none d-lg-inline-block" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -121,12 +110,17 @@
                                         My Account
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{ route('checkout') }}">My Checkout</a></li>
+                                        @if ($cart != null)
+                                            <li><a class="dropdown-item" href="{{ route('checkout') }}">My Checkout</a>
+                                            </li>
+                                        @endif
                                         @if ($order != null)
                                             <li><a class="dropdown-item"
                                                     href="{{ route('my.orders', $order->id) }}">Orders</a></li>
                                         @endif
-                                        <li><a class="dropdown-item" href="{{ route('about') }}">My Settings</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('mysettings.index', $user->id) }}">My
+                                                Settings</a>
+                                        </li>
                                         <li><a class="dropdown-item" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -158,7 +152,7 @@
                                         class="navicon fa-solid fa-right-to-bracket m-2"></i></a>
 
                                 @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="d-none d-lg-inline-block"><i
+                                    <a href="{{ route('register') }}" class="d-none d-lg-inline-block m-auto  "><i
                                             class="navicon fa-solid fa-user-pen"></i></a>
                                 @endif
                             @endauth

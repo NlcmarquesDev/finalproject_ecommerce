@@ -16,6 +16,22 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        Schema::create("hastag_product", function (Blueprint $table) {
+            $table->id();
+            $table
+                ->foreignId("hastag_id")
+                ->unsigned()
+                ->constrained()
+                ->cascadeOnDelete();
+            $table
+                ->foreignId("product_id")
+                ->unsigned()
+                ->constrained()
+                ->cascadeOnDelete();
+            $table->timestamps();
+            $table->unique(["hastag_id", "product_id"]);
+        });
     }
 
     /**

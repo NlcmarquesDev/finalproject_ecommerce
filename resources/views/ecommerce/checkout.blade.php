@@ -27,7 +27,7 @@
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <input type="email" name="email" class="form-control" id="floatingInput"
-                                                placeholder="name@example.com">
+                                                value="{{ $user->email }}" placeholder="name@example.com">
                                             <label for="floatingInput">Email address</label>
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <input type="name" name="name" class="form-control" id="floatingInput"
-                                                placeholder="your name...">
+                                                value="{{ $user->name }}" placeholder="your name...">
                                             <label for="floatingInput">Name</label>
                                         </div>
                                     </div>
@@ -47,8 +47,8 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
-                                            <input type="address" name="adress" class="form-control" id="floatingInput"
-                                                placeholder="Straat , Nr.">
+                                            <input type="address" name="adress" value="{{ $location->street }}"
+                                                class="form-control" id="floatingInput" placeholder="Straat , Nr.">
                                             <label for="floatingInput">Address and number</label>
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
                                         <input type="postcode" name="postcode" class="form-control" id="floatingInput"
-                                            placeholder="Vorbield: 8930 ">
+                                            value="{{ $location->zipcode }}" placeholder="Vorbield: 8930 ">
                                         <label for="floatingInput">Postcode</label>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <input type="city" name="city" class="form-control" id="floatingInput"
-                                                placeholder="Stad">
+                                                value="{{ $location->city }}" placeholder="Stad">
                                             <label for="floatingInput">Stad</label>
                                         </div>
                                     </div>

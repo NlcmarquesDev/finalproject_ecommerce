@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\color;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ColorsController extends Controller
 {
@@ -37,6 +38,7 @@ class ColorsController extends Controller
             'name' => 'required|string|unique:categories|between:2,255',
         ]);
         Color::create(["name" => $request->name, "code" => $request->code]);
+        Alert::success('Color Created Successfully');
         return redirect()->route("colors.index");
     }
 
@@ -66,9 +68,9 @@ class ColorsController extends Controller
     {
         //
         $color->update($request->all());
+        Alert::success('Color updated Successfully');
         return redirect()
-            ->route("colors.index")
-            ->with("status", $color->name . " has been updated");
+            ->route("colors.index");
     }
 
     /**
@@ -78,13 +80,15 @@ class ColorsController extends Controller
     {
         //
         $color->delete();
-        return back()->with("status", $color->name . "Deleted");
+        Alert::warning('Color deleted Successfully');
+        return back();
     }
     public function colorRestore($id)
     {
         $color = Color::onlyTrashed()
             ->where("id", $id)
             ->restore();
-        return back()->with("status", "has been restored");
+        Alert::info('Color Restored Successfully');
+        return back();
     }
 }

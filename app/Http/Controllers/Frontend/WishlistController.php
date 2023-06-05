@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use Carbon\Carbon;
-use App\Models\Wishlist;
 use App\Models\Product;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class WishlistController extends Controller
 {
@@ -35,8 +36,8 @@ class WishlistController extends Controller
 
         // Armazene o objeto Wishlist atualizado na sessão
         session()->put('wishlist', $wishlist);
-
-        return redirect()->back()->with('success', 'Produto adicionado a sua wishlist com sucesso!');
+        Alert::success('Added to you Wishlist Successfully', 'Thank for your choice!');
+        return redirect()->back();
     }
 
     public function removeFromWishlist(Request $request, $productId)
@@ -61,7 +62,7 @@ class WishlistController extends Controller
             // Armazene o objeto Cart atualizado na sessão
             session(['wishlist' => $wishlist]);
         }
-
-        return redirect()->back()->with('success', 'Produto removido do carrinho com sucesso!');
+        Alert::warning('Deleted from your Wishlist Successfully');
+        return redirect()->back();
     }
 }

@@ -12,6 +12,7 @@ use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
@@ -21,13 +22,15 @@ class ProductController extends Controller
     public function index()
     {
         //
-        //        $brands = Brand::all();
         $products = Product::withTrashed()
             ->paginate(20);
+        // dd($products);
+
+        $totalProducts = Product::count();
 
         return view("admin.products.index", [
             "products" => $products,
-            //            "brands" => $brands
+            "totalProducts" => $totalProducts,
         ]);
     }
 
@@ -52,13 +55,11 @@ class ProductController extends Controller
             [
                 'name' => ['required', 'between:3,255'],
                 //            'keywords' => ['required', Rule::exists('keywords', 'id')],
-                'description' => 'required',
                 'price' => 'required',
             ],
             [
                 'name.required' => 'Product name is required',
                 //                'title.between' => 'Product name between 3 and 255 characters required',
-                'description.required' => 'Description is required',
                 'price.required' => 'Price is required',
                 //                'keywords.required'=>'Please check minimum one keyword'
             ]
@@ -97,27 +98,17 @@ class ProductController extends Controller
             $product->hastag()->save($hastagFind);
         }
 
-        return redirect()->route('products.index')->with([
-            'alert' => [
-                'message' => 'Product added',
-                'type' => 'success'
-            ]
-        ]);
+
+        Alert::success('Product Created Successfully');
+        return redirect()->route('products.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show()
     {
-        // $slug = Product::Slugify($product->name);
-        $product = Product::findOrFail($product->id);
-        $products = Product::inRandomOrder()->take(3)->get();
-
-
-
-        $color = Color::pluck("name", "id")->all();
-        return view("ecommerce.single-product", compact("product", 'products', 'color'));
+        //
     }
 
     /**
@@ -139,22 +130,15 @@ class ProductController extends Controller
         //
         request()->validate(
             [
-                'name' => ['required', 'between:5,255'],
-                //            'categories' => ['required', Rule::exists('categories', 'id')],
-                'description' => 'required',
+                'name' => ['required', 'between:2,255'],
             ],
             [
                 'name.required' => 'Title is required',
-                'name.between' => 'Title between 5 and 255 characters required',
-                'description.required' => 'Message is required',
-                //                'categories.required'=>'Please check minimum one category'
+                'name.between' => 'Title between 2 and 255 characters required',
             ]
         );
         $product = Product::findOrFail($id);
         $input = $request->all();
-        //        $input['slug'] =  Str::slug($request->title,'-');
-        // oude foto verwijderen
-        //we kijken eerst of er een foto bestaat
         if ($request->hasFile('photo_id')) {
             $oldPhoto = $product->photo; // de huidige foto van de gebruiker
             if ($files = $request->file("photo_id")) {
@@ -164,7 +148,6 @@ class ProductController extends Controller
                     $photo = Photo::create(["file" => $path, "product_id" => $product->id]);
                 }
             }
-            //            $path = request()->file('photo_id')->store('users');
             if ($oldPhoto) {
                 unlink(public_path($oldPhoto->file));
                 // $oldPhoto->delete();
@@ -187,12 +170,8 @@ class ProductController extends Controller
         }
         $product->colors()->sync($ids);
 
-        return redirect()->route('products.index')->with([
-            'alert' => [
-                'message' => 'Product updated',
-                'type' => 'success'
-            ]
-        ]);
+        Alert::success('Product updated Successfully');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -213,10 +192,5 @@ class ProductController extends Controller
         //        $brands = Brand::all();
         //        $products = Product::where('brand_id', $id)->with(['keywords','photo','brand','productcategories'])->paginate(10);
         //        return view('admin.products.index', compact('products', 'brands'));
-    }
-
-
-    public function removacart(Request $request)
-    {
     }
 }

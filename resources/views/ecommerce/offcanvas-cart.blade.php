@@ -12,7 +12,7 @@
 
                 <div class="col-4">
                     <!-- Image -->
-                    <a href="{{ route('products.show', $cartItem['id']) }}">
+                    <a href="{{ route('single.product', $cartItem['id']) }}">
                         <img class="img-fluid" src="{{ $cartItem['image'] ?? 'http://via.placeholder.com/62x62' }}"
                             alt="...">
                     </a>
@@ -22,7 +22,7 @@
                         <!-- Title -->
                         <p class="fs-sm fw-bold mb-6">
                             <a class="text-body"
-                                href="{{ route('products.show', $cartItem['id']) }}">{{ $cartItem['name'] }}</a>
+                                href="{{ route('single.product', $cartItem['id']) }}">{{ $cartItem['name'] }}</a>
                             <br>
                             <span class="text-muted">{{ app('price')->format($cartItem['price']) }}</span>
                         </p>
@@ -34,7 +34,7 @@
                             <div class="d-flex flex-column justify-content-between align-items-center">
                                 <input type="number" class="form-control" name="quantity_{{ $cartItem['id'] }}"
                                     id="{{ $cartItem['quantity'] }}" value="{{ $cartItem['quantity'] }}" min="1"
-                                    oninput="this.value = 
+                                    oninput="this.value =
                                 !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
                             </div>
                             <div class="d-flex justify-content-between mt-3 ">
@@ -70,4 +70,7 @@
 <!-- Buttons -->
 <div class="offcanvas-body">
     <a class="btn w-100 btn-dark" href="{{ route('checkout') }}">Continue to Checkout</a>
+</div>
+<div class="offcanvas-body">
+    <a class="btn w-100 btn-dark" href="{{ route('products') }}">Continue Shooping</a>
 </div>

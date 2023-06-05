@@ -15,9 +15,7 @@
                     </div>
                     <div class="el__content">
                         <div class="el__text">
-                            <a href="#" class="text-decoration-none text-white"
-                            >Marbel Wall Clock</a
-                            >
+                            <a href="#" class="text-decoration-none text-white">Marbel Wall Clock</a>
                         </div>
 
                         <div class="el__close-btn"></div>
@@ -36,9 +34,7 @@
                     </div>
                     <div class="el__content">
                         <div class="el__text">
-                            <a href="#" class="text-decoration-none text-white"
-                            >Kredenets Sneackers</a
-                            >
+                            <a href="#" class="text-decoration-none text-white">Kredenets Sneackers</a>
                         </div>
                         <div class="el__close-btn"></div>
                     </div>
@@ -56,8 +52,7 @@
                     </div>
                     <div class="el__content">
                         <div class="el__text">
-                            <a href="#" class="text-decoration-none text-white"
-                            >Andrea light
+                            <a href="#" class="text-decoration-none text-white">Andrea light
                             </a>
                         </div>
                         <div class="el__close-btn"></div>
@@ -76,8 +71,7 @@
                     </div>
                     <div class="el__content">
                         <div class="el__text">
-                            <a href="#" class="text-decoration-none text-white"
-                            >Andreea light
+                            <a href="#" class="text-decoration-none text-white">Andreea light
                             </a>
                         </div>
                         <div class="el__close-btn"></div>
@@ -96,8 +90,7 @@
                     </div>
                     <div class="el__content">
                         <div class="el__text">
-                            <a href="#" class="text-decoration-none text-white"
-                            >Thin Haus Tabel
+                            <a href="#" class="text-decoration-none text-white">Thin Haus Tabel
                             </a>
                         </div>
                         <div class="el__close-btn"></div>
@@ -112,40 +105,30 @@
 <!--END HERO-->
 
 <!--CONTENT -->
-<section
-    id="products"
-    class="container d-flex justify-content-center align-items-center"
->
+<section id="products" class="container d-flex justify-content-center align-items-center">
     <div class="row justify-content-center">
         <div class="col-12 col-md-6">
-            <img
-                id="imgLamp"
-                src="{{asset('imagens/Lighting/Cast_Sconce_Wall_Lamp_left.png')}}"
-                alt="cast lamp"
-            />
+            <img id="imgLamp" src="{{ asset('imagens/Lighting/Cast_Sconce_Wall_Lamp_left.png') }}" alt="cast lamp" />
         </div>
-        <div
-            id="articleslamp"
-            class="col-12 col-lg-4 d-flex flex-column justify-content-center"
-        >
+        <div id="articleslamp" class="col-12 col-lg-4 d-flex flex-column justify-content-center mb-5 mb-md-0">
             <div class="d-flex align-items-center">
                 <div class="bolicon"><i class="bi bi-lightbulb icon"></i></div>
                 <div>
                     <h4>Industrial Design</h4>
                     <p class="pfont">
-                        Geometric forms rendered in <br/>
+                        Geometric forms rendered in <br />
                         industrial, cast aluminum.
                     </p>
                 </div>
             </div>
-            <div class="d-flex align-items-center my-5">
+            <div class="d-flex align-items-center my-md-5">
                 <div class="bolicon">
                     <i class="bi bi-box-arrow-in-up icon"></i>
                 </div>
                 <div class="mt-3">
                     <h4>Sophisticated Built</h4>
                     <p class="pfont">
-                        Pleasant, glare-free illumination <br/>
+                        Pleasant, glare-free illumination <br />
                         delivered via sculptural fixtures.
                     </p>
                 </div>
@@ -155,7 +138,7 @@
                 <div>
                     <h4>Superb Finish</h4>
                     <p class="pfont">
-                        Cast aluminum with a smooth, warm <br/>
+                        Cast aluminum with a smooth, warm <br />
                         and tactile finish.
                     </p>
                 </div>
@@ -174,13 +157,13 @@
                 <h2 class="my-5">Redefine how we use space</h2>
                 <p class="fw-lighter">
                     Top designers and craftspeople around the world to create
-                    contemporary furniture, lighting and <br/>
+                    contemporary furniture, lighting and <br />
                     accessories that are clean, clever and natural.
                 </p>
             </div>
         </div>
     </div>
-    
+
 </section>
 <!--END CONTENT VIDEO -->
 
@@ -192,5 +175,7 @@
 
 <!--NEWSLETTER AND DISCOUNT-->
 @include('partials.newsletter')
+
+@include('sweetalert::alert')
 
 @include('partials._footer')

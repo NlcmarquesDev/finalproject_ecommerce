@@ -7,19 +7,22 @@ use App\Models\Hastag;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
-use App\Models\Hastagables;
 use Livewire\WithPagination;
-use Illuminate\Database\Eloquent\Builder;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 
 class FilterShop extends Component
 {
-    // use WithPagination;
+    use WithPagination;
 
-    // protected $paginationTheme = 'bootstrap';
-    // public $products;
+    protected $paginationTheme = 'bootstrap';
+
     public $search = '';
     public $selectCategory;
+    public $selectColor;
+    public $selectHastag;
+    public $hight = false;
+    public $low = false;
     protected $queryString = ['selectCategory'];
 
 
@@ -27,20 +30,36 @@ class FilterShop extends Component
 
     public function sortBy($category)
     {
-
         $this->selectCategory = $category;
-        //dd($this->selectCategory);
     }
+    public function colorBy($color)
+    {
+        $this->selectColor = $color;
+    }
+    public function hastagBy($hastag)
+    {
+        $this->selectHastag = $hastag;
+    }
+
+
 
     public function render()
     {
-        // $this->selectCategory = 'Accessories'; // Apenas para teste, substitua pelo valor real selecionado
+        $products = Product::with('photos', 'colors')->where('name', 'like', '%' . $this->search . '%')->whereHas('categories', function ($query) {
+            $query->where('name', 'like', '%' . $this->selectCategory . '%');
+        })->whereHas('colors', function ($query) {
+            $query->where('name', 'like', '%' . $this->selectColor . '%');
+        })->whereHas('hastags', function ($query) {
+            $query->where('name', 'like', '%' . $this->selectHastag . '%');
+        });
 
-        $products = Product::where('name', 'like', '%' . $this->search . '%')->get();
-
-        // $products = Product::whereHas('categories', function ($query) {
-        //     $query->where('name', 'like', '%' . $this->selectCategory . '%');
-        // })->get();
+        if ($this->hight) {
+            $products = $products->orderByDesc('price');
+        } elseif ($this->low) {
+            $products = $products->orderBy('price', 'asc');
+        }
+        // dd($products);
+        $products = $products->paginate(9);
 
         $categories = Category::all();
         $colors = Color::all();

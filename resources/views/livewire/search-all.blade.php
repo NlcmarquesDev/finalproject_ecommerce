@@ -10,7 +10,7 @@
                 <ul class="list-group list-group-flush  ">
                     @foreach ($productSearch as $result)
                         <li class="list-group-item border  border-dark bg-grey">
-                            <a href="{{ route('products.show', $result['id']) }}" class="py-2 d-flex  ">
+                            <a href="{{ route('single.product', $result['id']) }}" class="py-2 d-flex  ">
                                 <img class="img-fluid" height="40" width="40"
                                     src="{{ $result['image'] ?? 'http://via.placeholder.com/62x62' }}"
                                     alt="{{ $result['name'] }}">
