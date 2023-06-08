@@ -7,10 +7,12 @@ use App\Models\User;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Wishlist;
+use App\Mail\ContactMail;
 use App\Models\Locations;
 use Illuminate\Http\Request;
 use DrewM\MailChimp\MailChimp;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class EcommerceController extends Controller
@@ -27,11 +29,7 @@ class EcommerceController extends Controller
     public function products()
     {
 
-        // $products = Product::with('photos', 'colors')->paginate(12);
-        $products = Product::all();
-
-        // dd($products);
-        return view('ecommerce.products', compact('products'));
+        return view('ecommerce.products');
     }
     public function singleProduct(Product $product)
     {
@@ -44,6 +42,13 @@ class EcommerceController extends Controller
     public function contact()
     {
         return view('ecommerce.contact');
+    }
+    public function contactMail(Request $request)
+    {
+        $data = $request->all();
+        Mail::to(request('email'))->send(new ContactMail($data));
+        Alert::success('Email send with Success');
+        return  back();
     }
     public function about()
     {

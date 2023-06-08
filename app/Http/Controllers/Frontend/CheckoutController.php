@@ -22,18 +22,9 @@ class CheckoutController extends Controller
     {
         $userId = Auth::id();
 
-
-        $taxes = 0;
-        $total = 0;
-
         $cart = session('cart');
 
         if (!is_null($cart) && is_array($cart->products)) {
-            $cartItems = $cart->products;
-
-            foreach ($cartItems as $cartItem) {
-                $total += $cartItem['price'] * $cartItem['quantity'];
-            }
 
             $order = new Order();
             $order->user_id = $userId;
@@ -44,18 +35,16 @@ class CheckoutController extends Controller
             $order->order_postcode = $request->postcode;
             $order->order_city = $request->city;
             $order->order_taxes = $cart->taxes();
-            $order->order_total = $total + $taxes;
+            $order->order_total = $cart->total();
             $order->save();
 
-            // Criação dos itens do pedido (OrderItem)
-            foreach ($cartItems as $cartItem) {
-
+            foreach ($cart->content() as $cartItem) {
                 $orderItem = new OrderItem();
                 $orderItem->order_id = $order->id;
-                $orderItem->quantity = $cartItem['quantity'];
-                $orderItem->product_name = $cartItem['name'];
-                $orderItem->product_price = $cartItem['price'];
-                $orderItem->product_taxes = ($cartItem['price'] * 0.21);
+                $orderItem->quantity = $cartItem->quantity();
+                $orderItem->product_name = $cartItem->product()->name;
+                $orderItem->product_price = $cartItem->product()->price;
+                $orderItem->product_taxes = $cartItem->product()->taxes();
                 $orderItem->save();
             }
         }

@@ -64,6 +64,8 @@
 </div>
 </section>
 @livewireScripts
+{{-- <script src="../sweetalert.all.js"></script> --}}
+@include('sweetalert::alert')
 
 <!--END NEWSLETTER AND DISCOUNT-->
 
@@ -76,6 +78,7 @@
 {{-- ></script> --}}
 
 <script src="{{ asset('js/script.js') }}"></script>
+
 </body>
 
 </html>

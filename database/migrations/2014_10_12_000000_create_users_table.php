@@ -17,13 +17,15 @@ return new class extends Migration
             $table->string("name");
             $table->string("email")->unique();
             $table->timestamp("email_verified_at")->nullable();
-            $table->foreignId('role_id')->index()->unsigned()->default(3);
+            $table->foreignId('role_id')->index()->unsigned()->default(2);
 
             $table->string("photo_id")->default("");
             $table
                 ->string("password")
                 ->nullable()
                 ->default("NULL");
+            $table->string("oauth_id")->nullable();
+            $table->string("oauth_type")->default('website');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

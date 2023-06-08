@@ -41,16 +41,15 @@
                             <div class="col-md-12"><label class="labels">City</label><input type="text"
                                     class="form-control" placeholder="{{ $location->city }}"
                                     value="{{ $location->city }}" name="city"></div>
-                            <div class="col-md-12"><label class="labels">Area</label><input type="text"
-                                    class="form-control" placeholder="Phone number" value="{{ $location->number_tel }}"
-                                    value="{{ $location->number_tel }}"></div>
+                            <div class="col-md-12"><label class="labels">Phone Number</label>
+                                <input type="text" class="form-control" placeholder="{{ $location->phone }}"
+                                    name="phone" value="{{ $location->phone }}">
+                            </div>
                             <div class="col-md-12"><label class="labels">Email ID</label><input type="text"
                                     class="form-control" placeholder="{{ $user->email }}" value="{{ $user->email }}"
                                     name="email"></div>
-                            <div class="col-md-12"><label class="labels">Password change:</label><input type="password"
-                                    class="form-control" placeholder="{{ $user->password }}"
-                                    value="{{ $user->password }}" name="password"></div>
                         @endforeach
+
                     </div>
                     <div class="mt-5 text-center">
                         <button class="btn btn-dark profile-button" type="submit">Save Profile</button>
@@ -93,14 +92,13 @@
                                             </p>
                                         </div>
                                         <div class="d-flex justify-content-between">
-                                            <form action="{{ route('addproduct') }}" method="POST" >
+                                            <form action="{{ route('addproduct') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $wishlist['id'] }}">
                                                 <input type="hidden" name="name" value="{{ $wishlist['name'] }}">
                                                 <input type="hidden" name="image"
                                                     value="{{ $wishlist['image'] ?? 'http://via.placeholder.com/62x62' }}">
-                                                <input type="hidden" name="price"
-                                                    value="{{ $wishlist['price'] }}">
+                                                <input type="hidden" name="price" value="{{ $wishlist['price'] }}">
                                                 <input type="hidden" name="quantity" value="1">
 
                                                 <div>

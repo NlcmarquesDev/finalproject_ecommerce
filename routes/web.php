@@ -9,15 +9,17 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\MollieController;
 use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Frontend\SettingUserController;
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Admin\ColorsController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\OrderItemController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Frontend\AddCartController;
 use App\Http\Controllers\FrontEnd\CheckoutController;
 use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\Frontend\SettingUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +60,14 @@ Route::get('payment-cancel', [MollieController::class, 'paymentCanceled'])->name
 
 //MAILCHIMP ROUTE
 Route::post('mailchimp', [EcommerceController::class, 'subscriber'])->name('mailchimp.subscribe');
+
+//GOOGLE LOGIN ACCOUNT
+Route::get('/auth/google/redirect', [GoogleController::class, 'googleRedirect'])->name('google.login');
+Route::get('/auth/google/callback', [GoogleController::class, 'googleCallback']);
+
+//CONTACT MESSAGE
+Route::post('/contact', [EcommerceController::class, 'contactMail'])->name('send.mail');
+
 
 
 //ROUTE JUST FOR CUSTOMERS AND ADMIN
@@ -114,4 +124,7 @@ Route::prefix('admin')->middleware(['role:administrator'])->group(function () {
     Route::get('orderItems', [OrderItemController::class, 'orderItems'])->name("orders.items");
     //PAYMENT PAGE
     Route::get('payments', [PaymentController::class, 'payment'])->name("payment");
+    //SETTINGS ADMIN
+    Route::get('settings', [SettingsController::class, 'favicon'])->name("settings.admin");
+    Route::post('settings/favicon', [SettingsController::class, 'addFavicon'])->name("add.favicon");
 });

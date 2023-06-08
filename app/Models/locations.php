@@ -10,8 +10,11 @@ class Locations extends Model
     use HasFactory;
 
     protected $fillable = [
-        'street', 'user_id',
-        'city', 'number', 'zipcode', 'adrees2', 'is_primary', 'is_delivery',
+        'user_id',
+        'street',
+        'city',
+        'phone',
+        'zipcode',
     ];
 
     public function users()

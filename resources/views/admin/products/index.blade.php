@@ -21,9 +21,7 @@
         </thead>
         <tbody>
             @foreach ($products as $product)
-                {{--     @dd($users) --}}
                 <tr class="{{ $product->deleted_at ? 'bg-warning' : '' }}">
-
                     <td>{{ $product->id }}</td>
                     <td>
                         <div class="d-flex align-items-center">
@@ -32,10 +30,10 @@
                                 alt="{{ $product->title }}">
                         </div>
                     </td>
-                    <td>{{ $product->name }}</td>
+                    <td><strong>{{ $product->name }}</strong></td>
                     <td>{{ $product->description }}</td>
-                    <td>{{ $product->price }}</td>
-                    <td>{{ $product->stock }}</td>
+                    <td>{{ app('price')->format($product->price) }}</td>
+                    <td><span class="badge bg-success">{{ $product->quantity }}</span></td>
                     <td>{{ $product->rating }}</td>
                     <td>{{ $product->created_at }}</td>
                     <td>{{ $product->updated_at }}</td>

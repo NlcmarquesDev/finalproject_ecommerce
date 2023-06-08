@@ -54,6 +54,7 @@ class UsersController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->is_active = $request->is_active;
+        $user->oauth_type = 'backend';
         $user->password = Hash::make($request->password);
         if ($file = $request->file("photo_id")) {
             $path = request()
@@ -135,7 +136,7 @@ class UsersController extends Controller
                 $input['photo_id'] = $photo->id;
             }
         }
-
+        // dd($input);
         $user->update($input);
         $location->update($input);
         Alert::success('User updated Successfully', 'Please continue our work!');

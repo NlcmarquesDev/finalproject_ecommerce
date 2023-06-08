@@ -21,15 +21,18 @@ class Cart extends Model
     //     return $this->belongsTo(User::class);
     // }
 
-    public function addProduct($productId, $productName, $productImage, $productPrice, $productQuantity)
+    public function addProduct(Product $product, $quantity)
     {
+
+
         $products = $this->products ?? [];
 
         // Verificar se o produto já existe no carrinho
         $existingProductIndex = null;
 
-        foreach ($products as $index => $product) {
-            if ($product['id'] == $productId) {
+
+        foreach ($products as $index => $cartProduct) {
+            if ($cartProduct['id'] == $product->id) {
                 $existingProductIndex = $index;
                 break;
             }
@@ -41,11 +44,8 @@ class Cart extends Model
         } else {
             // Adicionar um novo produto ao carrinho
             $newProduct = [
-                'id' => $productId,
-                'name' => $productName,
-                'image' => $productImage,
-                'price' => $productPrice,
-                'quantity' => $productQuantity,
+                'id' => $product->id,
+                'quantity' => $quantity,
             ];
 
             $products[] = $newProduct;
@@ -54,7 +54,7 @@ class Cart extends Model
         $this->products = $products;
     }
 
-    public  function content()
+    public function content()
     {
         $cartItems = array_map(function ($cartItem) {
             $product = Product::findOrFail($cartItem['id']);

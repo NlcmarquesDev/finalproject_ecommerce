@@ -22,9 +22,8 @@ return new class extends Migration
             $table->string('order_city');
             $table->string('order_cupon')->nullable();
             $table->string('order_status')->default('unpaid');
-            $table->integer('order_taxes');
-            $table->integer('order_total');
-            $table->boolean('shipped')->default(false);
+            $table->decimal('order_taxes', 10, 2);
+            $table->decimal('order_total', 10, 2);
             $table->timestamps();
             $table->softDeletes();
         });

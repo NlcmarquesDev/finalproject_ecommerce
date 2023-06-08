@@ -41,27 +41,29 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function login(Request $request){
-        $credentials =$request->validate([
-            'email'=>'required|email',
-            'password'=>'required',
+    protected function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $user_role = Auth::user()->role_id;
 
-            switch($user_role){
+            switch ($user_role) {
                 case 1:
                     return redirect('/admin');
                     break;
                 case 2:
                     return redirect('/');
-                    default:
-                        Auth::logout();
-                        return redirect('/login');
+                case 3:
+                    return redirect('/');
+                default:
+                    Auth::logout();
+                    return redirect('/login');
             }
-
-        }else{
-           return redirect('/login');
+        } else {
+            return redirect('/login');
         }
     }
 }

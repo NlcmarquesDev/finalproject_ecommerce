@@ -31,12 +31,12 @@
                     <div class="d-flex flex-column">
                         <h5 class="fw-lighter">Sort by</h5>
                         <div class="form-check">
-                            <input wire:model="hight" type="checkbox" class="form-check-input pfont">
-                            <label class="form-check-label pfont">Price: hight to low</label>
+                            <input wire:model="high" type="checkbox" class="form-check-input pfont">
+                            <label class="form-check-label pfont">Price: high to low</label>
                         </div>
                         <div class="form-check">
                             <input wire:model="low" type="checkbox" class="form-check-input pfont">
-                            <label class="form-check-label pfont">Price: low to hight</label>
+                            <label class="form-check-label pfont">Price: low to high</label>
                         </div>
                     </div>
                     <hr>
@@ -44,7 +44,7 @@
                         <h5 class="fw-lighter">Color</h5>
                         @foreach ($colors as $color)
                             <div class="d-flex align-items-center">
-                                <span class="dot bg-{{ $color->name }} me-2"></span>
+                                <span class="dot me-2" style="background-color: {{ $color->code }};"></span>
                                 <a wire:click="colorBy('{{ $color->name }}')" class="pfont my-auto"
                                     href="#">{{ $color->name }}</a>
                             </div>
@@ -54,7 +54,7 @@
                     <div>
                         <h5 class="fw-lighter">Tag</h5>
                         @foreach ($hastags as $hastag)
-                            <button wire:click="hastagBy('{{ $hastag->name }}')"
+                            <button wire:click="toggleHastag('{{ $hastag->name }}')"
                                 class="rounded-pill tagbtn my-1">{{ $hastag->name }}</button>
                         @endforeach
                     </div>
@@ -85,12 +85,16 @@
         <div class="d-flex flex-column">
             <h5 class="fw-lighter">Sort by</h5>
             <div class="form-check">
-                <input wire:model="hight" type="checkbox" class="form-check-input pfont">
-                <label class="form-check-label pfont">Price: hight to low</label>
+                <label class="form-check-label pfont">
+                    <input wire:model="high" type="checkbox" class="form-check-input pfont">
+                    Price: high to low
+                </label>
             </div>
             <div class="form-check">
-                <input wire:model="low" type="checkbox" class="form-check-input pfont">
-                <label class="form-check-label pfont">Price: low to hight</label>
+                <label class="form-check-label pfont">
+                    <input wire:model="low" type="checkbox" class="form-check-input pfont">
+                    Price: low to high
+                </label>
             </div>
         </div>
         <hr>
@@ -98,7 +102,7 @@
             <h5 class="fw-lighter">Color</h5>
             @foreach ($colors as $color)
                 <div class="d-flex align-items-center">
-                    <span class="dot bg-{{ $color->name }} me-2"></span>
+                    <span class="dot me-2" style="background-color: {{ $color->code }};"></span>
                     <a wire:click="colorBy('{{ $color->name }}')" class="pfont my-auto"
                         href="#">{{ $color->name }}</a>
                 </div>
@@ -108,7 +112,7 @@
         <div>
             <h5 class="fw-lighter">Tag</h5>
             @foreach ($hastags as $hastag)
-                <button wire:click="hastagBy('{{ $hastag->name }}')"
+                <button wire:click="toggleHastag('{{ $hastag->name }}')"
                     class="rounded-pill tagbtn my-1">{{ $hastag->name }}</button>
             @endforeach
         </div>
@@ -122,6 +126,11 @@
             <section id="sampleProduct" class="container my-5">
                 <div class="row d-flex justify-content-center">
                     <div class="container">
+                        <div class="ms-5 mb-2">
+                            @foreach ($selectedHastags as $hastag)
+                                <span class="badge bg-dark">{{ $hastag }}</span>
+                            @endforeach
+                        </div>
                         <div class="row">
                             {{-- @dd($products) --}}
                             @foreach ($products as $product)

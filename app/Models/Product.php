@@ -40,9 +40,14 @@ class Product extends Model
         return 21;
     }
 
+    public function taxes()
+    {
+        return $this->price * ($this->taxRate() / 100);
+    }
+
     public function priceExclTax()
     {
-        return $this->price / ($this->taxRate() / 100 + 1);
+        return $this->price - $this->price * ($this->taxRate() / 100);
     }
     public function hastag()
     {

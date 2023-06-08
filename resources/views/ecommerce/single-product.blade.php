@@ -98,7 +98,10 @@
                                 <!---Quantity-->
                                 <div class="d-flex justify-content-between my-3">
                                     <p class="fs-5 my-auto">Quantity</p>
-                                    <input class="rounded px-2 border" name="quantity" type="number" value="1" />
+                                    <input class="rounded px-2 border" name="quantity" type="number"
+                                        value="quantity_{{ $product->id }}" min="1"
+                                        oninput="this.value =
+                                        !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" />
                                 </div>
 
 

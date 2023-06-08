@@ -16,7 +16,7 @@
                 <th>Order bus</th>
                 <th>Order postcode</th>
                 <th>Order city</th>
-                <th>Order cupon</th>
+                <th>Order coupon</th>
                 <th>Order Taxes</th>
                 <th>Order Total</th>
                 <th>Shipped</th>

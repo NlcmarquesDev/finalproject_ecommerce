@@ -90,9 +90,9 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-floating">
-                                    <input name="number_tel" class="form-control" value="{{ $location->number_tel }}"
+                                    <input name="phone" class="form-control" value="{{ $location->phone }}"
                                         id="floatingInputPhone" type="number" placeholder="Phone number">
-                                    <label for="floatingInputPhone">{{ $location->number_tel }}</label>
+                                    <label for="floatingInputPhone">{{ $location->phone }}</label>
                                 </div>
                             </div>
                             <div class="col-sm-6">

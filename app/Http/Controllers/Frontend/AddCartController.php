@@ -24,10 +24,11 @@ class AddCartController extends Controller
     {
         // Obtenha os detalhes do produto do request...
         $productId = $request->input('id');
-        $productName = $request->input('name');
-        $productImage = $request->input('image');
-        $productPrice = $request->input('price');
+        $product = Product::findOrFail($productId);
         $productQuantity = $request->input('quantity');
+
+
+
 
         // Recupere o carrinho da sessão ou crie um novo objeto Cart se ainda não existir
         $cart = session()->get('cart') ?? new Cart();
@@ -38,7 +39,9 @@ class AddCartController extends Controller
         }
 
         // Adicione o produto ao carrinho usando o método addProduct()
-        $cart->addProduct($productId, $productName, $productImage, $productPrice, $productQuantity);
+        $cart->addProduct($product, $productQuantity);
+
+
 
         // Armazene o objeto Cart atualizado na sessão
         session()->put('cart', $cart);
@@ -85,7 +88,7 @@ class AddCartController extends Controller
             // Armazene o objeto Cart atualizado na sessão
             session(['cart' => $cart]);
         }
-        Alert::warning('Removed from the cart Successfully');
+        Alert::success('Removed from the cart Successfully');
         return redirect()->back();
     }
 
@@ -108,7 +111,9 @@ class AddCartController extends Controller
             $cart->products = $products;
             session(['cart' => $cart]);
         }
+
         Alert::success('Cart updated Successfully', 'Thank for your choice!');
+
         return redirect()->back();
     }
 

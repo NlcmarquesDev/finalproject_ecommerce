@@ -2,6 +2,7 @@
 
 
 <!--HERO -->
+{{-- @dd(bcrypt(12345678)) --}}
 <div class="cont s--inactive">
     <!-- cont inner start -->
     <div class="cont__inner">
@@ -176,6 +177,6 @@
 <!--NEWSLETTER AND DISCOUNT-->
 @include('partials.newsletter')
 
-@include('sweetalert::alert')
+
 
 @include('partials._footer')

@@ -37,7 +37,7 @@
                     <input type="hidden" name="image"
                         value="{{ $product->photos->first() ? asset($product->photos->first()->file) : 'http://via.placeholder.com/62x62' }}">
                     @if (in_array($product->id, $wishlistProductIds))
-                        <i class="bi bi-heart-fill fs-4 text-danger"></i>
+                        <i class="bi bi-heart-fill fs-4 text-warning-emphasis"></i>
                         <!-- Ícone de estrela preenchida -->
                     @else
                         <button class="bg-transparent border-0"><i class="bi bi-heart fs-4"></i></button>

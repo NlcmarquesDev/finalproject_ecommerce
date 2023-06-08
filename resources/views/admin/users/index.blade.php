@@ -15,11 +15,16 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Status</th>
                 <th>Role</th>
+                <th>Auth-type</th>
+                <th>Adress</th>
+                <th>City</th>
+                <th>Phone</th>
+                <th>Zipcode</th>
                 <th>Created_at</th>
                 <th>Updated_at</th>
                 <th>Deleted_at</th>
-                <th>Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -42,17 +47,21 @@
                     <td>
                         <p class="text-muted mb-0">{{ $user->email }}</p>
                     </td>
-                    <td>
-
-                        <span class="badge text-bg-info text-white">{{ $user->role->name }}</span>
-
-                    </td>
-                    <td>{{ $user->created_at }}</td>
-                    <td>{{ $user->updated_at }}</td>
-                    <td>{{ $user->deleted_at ? $user->deleted_at->diffForHumans() : '' }}</td>
                     <td> <span
                             class="badge rounded-pill {{ $user->is_active == 1 ? 'bg-success' : 'bg-danger' }}">{{ $user->is_active == 1 ? 'Active' : 'Not Active' }}</span>
                     </td>
+                    <td> <span class="badge text-bg-info text-white">{{ $user->role->name }}</span> </td>
+                    <td>{{ $user->oauth_type }}</td>
+                    @foreach ($user->locations as $location)
+                        <td>{{ $location->street }}</td>
+                        <td>{{ $location->city }}</td>
+                        <td>{{ $location->phone }}</td>
+                        <td>{{ $location->zipcode }}</td>
+                    @endforeach
+                    <td>{{ $user->created_at }}</td>
+                    <td>{{ $user->updated_at }}</td>
+                    <td>{{ $user->deleted_at ? $user->deleted_at->diffForHumans() : '' }}</td>
+
                     <td class="d-flex gap-2">
                         @if ($user->deleted_at != null)
                             <form action="{{ route('users.restore', $user->id) }}" method="POST">

@@ -27,6 +27,8 @@ class User extends Authenticatable
         'role_id',
         'photo_id',
         'password',
+        'oauth_id',
+        'oauth_type'
     ];
 
     public function role()
@@ -86,6 +88,13 @@ class User extends Authenticatable
         }
         return false;
     }
+    // public function isEditor()
+    // {
+    //     if ($this->roleName() == 'editor' && $this->is_active == 1) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
 
     /**

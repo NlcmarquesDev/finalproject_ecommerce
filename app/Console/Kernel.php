@@ -14,9 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->call(function () {
-            Cart::where('expires_at','<', Carbon::now())->delete();
-        })->hourly();
+        // $schedule->call(function () {
+        //     Cart::where('expires_at','<', Carbon::now())->delete();
+        // })->hourly();
     }
 
     /**
@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

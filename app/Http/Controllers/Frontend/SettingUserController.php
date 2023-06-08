@@ -37,7 +37,7 @@ class SettingUserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         //
     }
@@ -64,14 +64,11 @@ class SettingUserController extends Controller
     public function update(Request $request, string $id)
     {
         $user = User::findOrFail($id);
-        // dd($user);
+
         $location = Locations::findOrFail($id);
-        if (trim($request->password) == '') {
-            $input = $request->except('password');
-        } else {
-            $input = $request->all();
-            $input['password'] = Hash::make($request['password']);
-        }
+
+        // dd($location);
+        $input = $request->all();
         // oude foto verwijderen
         //we kijken eerst of er een foto bestaat
         if ($request->hasFile('photo_id')) {
@@ -87,7 +84,6 @@ class SettingUserController extends Controller
                 $input['photo_id'] = $photo->id;
             }
         }
-
 
         $user->update($input);
         $location->update($input);

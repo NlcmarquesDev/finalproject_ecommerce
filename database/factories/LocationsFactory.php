@@ -24,7 +24,7 @@ class LocationsFactory extends Factory
             'user_id' => User::factory(),
             'street' => $this->faker->streetName,
             'city' => $this->faker->city,
-            'number_tel' => $this->faker->e164PhoneNumber,
+            'phone' => $this->faker->e164PhoneNumber,
             'zipcode' => $this->faker->postcode,
         ];
     }

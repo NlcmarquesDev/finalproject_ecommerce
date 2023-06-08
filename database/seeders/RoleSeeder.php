@@ -25,12 +25,5 @@ class RoleSeeder extends Seeder
             "created_at" => now(),
             "updated_at" => now(),
         ]);
-        DB::table("roles")->insert([
-            "name" => "editor",
-            "created_at" => now(),
-            "updated_at" => now(),
-        ]);
-
-
     }
 }

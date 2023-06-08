@@ -60,7 +60,7 @@ this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this
                         <div class=" col-md-12">
                             <div class="form-floating">
                                 <select name="colors[]" class="form-select" id="floatingSelectIndustry"
-                                    style="height: 100px; " multiple>
+                                    style="height: 100px; " multiple required>
                                     @foreach ($colors as $color)
                                         <option value="{{ $color }}">{{ $color->name }}</option>
                                     @endforeach

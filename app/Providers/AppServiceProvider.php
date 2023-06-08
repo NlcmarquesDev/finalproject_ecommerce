@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\View\View;
 //use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
@@ -31,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+
+        Str::macro('formatPrice', function ($price, $currency = '€') {
+            return number_format($price, 2) . $currency;
+        });
 
         //CART VARIABLE
         view()->composer('*', function ($view) {
