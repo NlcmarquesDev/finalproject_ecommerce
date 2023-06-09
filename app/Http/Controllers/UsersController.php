@@ -24,13 +24,11 @@ class UsersController extends Controller
     public function index()
     {
         //
-        $fillableFields = ['name', 'is_active', 'email', 'role_id'];
-        $users = User::withTrashed()->paginate(10);
+        // $fillableFields = ['name', 'is_active', 'email', 'role_id'];
+        // $users = User::withTrashed()->paginate(10);
         $totalUsers = User::count();
 
-        return view("admin.users.index", compact('users', 'fillableFields', 'totalUsers'));
-        //of
-        //return view('admin.users.index',compact('users'));
+        return view("admin.users.index", compact('totalUsers'));
     }
 
     /**
@@ -69,9 +67,10 @@ class UsersController extends Controller
         $location = new locations();
         $location->user_id = $user->id;
         $location->street = $request->street;
-        $location->number_tel = $request->number;
+        $location->phone = $request->phone;
         $location->city = $request->city;
         $location->zipcode = $request->zipcode;
+        // dd($request->all());
         $location->save();
 
         $user->role_id = $request->role_id;
@@ -87,6 +86,11 @@ class UsersController extends Controller
     public function show(string $id)
     {
         //
+        $userDetail = User::findOrFail($id);
+        $locationDetail = Locations::findOrFail($id);
+
+
+        return view('admin.users.show', compact('userDetail', 'locationDetail'));
     }
 
     /**
@@ -150,6 +154,8 @@ class UsersController extends Controller
     {
         //
         $user = User::findOrFail($id);
+        $user->is_active = 0;
+        $user->save();
 
         $user->delete();
         Alert::warning('User deleted Successfully');

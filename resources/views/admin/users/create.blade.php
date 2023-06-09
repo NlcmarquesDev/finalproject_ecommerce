@@ -13,7 +13,7 @@
                         <div class=" col-md-12">
                             <div class="form-floating">
                                 <input class="form-control" name="name" id="floatingInputFirstname" type="text"
-                                    placeholder="First name">
+                                    placeholder="First name" required>
                                 <label for="floatingInputFirstname">Full Name</label>
                             </div>
                             @error('name')
@@ -22,8 +22,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input class="form-control" name="email" id="floatingInputEmail" type="text"
-                                    placeholder="email">
+                                <input class="form-control" name="email" id="floatingInputEmail" type="email"
+                                    placeholder="email" value=" " required>
                                 <label for="floatingInputEmail">Your Email address</label>
                             </div>
                             @error('email')
@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating">
-                                <select class="form-select" name="is_active" id="floatingSelectRating">
+                                <select class="form-select" name="is_active" id="floatingSelectRating" required>
                                     <option value="1">Active</option>
                                     <option value="0" selected>Not Active</option>
                                 </select>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input name="number" class="form-control" id="floatingInputCompany" type="text"
+                                <input name="phone" class="form-control" id="floatingInputCompany" type="text"
                                     placeholder="phone">
                                 <label for="floatingInputCompany">Phone number: +32 </label>
                             </div>
@@ -101,15 +101,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 d-flex justify-content-center align-items-center">
-                    <div class="d-flex align-items-end position-relative mb-7">
-                        <input class="d-none" id="upload-avatar" type="file">
-                        <div class=" rounded-circle cursor-pointer d-flex flex-center mb-5"
-                            style="max-width: 300px; max-height: 300px">
-                            <div class="form-group">
-                                <input name="photo_id" id="photo_id" type="file">
-                                <label for="photo_id"></label>
-                            </div>
+                <div class="col-lg-3 d-flex align-items-center ps-5">
+                    <input class="d-none" id="upload-avatar" type="file">
+                    <div class=" rounded-circle cursor-pointer d-flex flex-center mb-5"
+                        style="max-width: 300px; max-height: 300px">
+                        <div class="form-group">
+                            <input name="photo_id" id="photo_id" type="file">
+                            <label for="photo_id"></label>
                         </div>
                     </div>
                 </div>

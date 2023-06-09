@@ -19,18 +19,24 @@ class SettingsController extends Controller
     public function addFavicon(Request $request)
     {
 
-        // $request->validate([
-        //     'favicon' => 'required',
-        // ]);
+        if ($request->hasFile('favicon')) {
+            $image = $request->file('favicon');
 
-        $file = $request->file('favicon');
+            // Defina o diretório de destino onde o arquivo será salvo
+            $destinationPath = public_path();
 
-        if (File::exists(public_path('favicon.png'))) {
-            File::delete(public_path('favicon.png'));
+            // Gere um nome único para o arquivo
+            $fileName = 'favicon.' . $image->getClientOriginalExtension();
+
+            // dd($image);
+            // Mova o arquivo para o diretório de destino com o nome gerado
+            $image->move($destinationPath, $fileName);
+
+            // Salve o caminho do arquivo no banco de dados ou faça qualquer outra operação necessária
+
+            // Exemplo de retorno de uma resposta de sucesso
+            Alert::success('Favicon added successfully');
+            return view('admin.settings-admin');
         }
-        $file->move(public_path(), 'favicon.png');
-
-        Alert::success('Favicon added successfully');
-        return view('admin.settings-admin');
     }
 }

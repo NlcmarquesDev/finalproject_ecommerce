@@ -1,6 +1,6 @@
 @extends('admin.index')
 @section('content')
-    <x-admin.heading_table title="All Users" name="{{ $userEdit->name }}" button="All User"
+    <x-admin.heading_table title="Update User" name="{{ $userEdit->name }}" button="All User"
         route="{{ route('users.index') }}">
     </x-admin.heading_table>
 
@@ -78,7 +78,6 @@
                                     <input name="street" class="form-control" value="{{ $location->street }}"
                                         id="floatingInputStreet" type="text" placeholder="street">
                                     <label for="floatingInputStreet">{{ $location->street }}</label>
-                                    {{--                                @dd($userEdit->locations) --}}
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -102,29 +101,22 @@
                                     <label for="floatingInputZipcode">{{ $location->zipcode }}</label>
                                 </div>
                             </div>
-                            <div>
+                            <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary ms-2">Update User</button>
                             </div>
                         @endforeach
-                        <div class="col-12 d-flex justify-content-end mt-6">
-
-
-
-
-                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 d-flex justify-content-center align-items-center">
-                    <input class="d-none" id="upload-avatar" type="file">
-                    <div class=" rounded-circle cursor-pointer  flex-center mb-5">
-                        <div class="form-group">
-                            <img class="rounded-circle mb-2 "
-                                src="{{ $userEdit->photo ? asset($userEdit->photo->file) : 'https://i.pravatar.cc/250' }}"
-                                alt="" style="max-width: 200px; max-height: 200px">
-                            <input name="photo_id" id="photo_id" type="file">
-                            <label for="photo_id"></label>
-                        </div>
+                <div class="col-lg-3 ps-5">
+                    {{-- <input class="d-none" id="upload-avatar" type="file"> --}}
+                    <div class="form-group ">
+                        <img class="rounded-circle mb-2 "
+                            src="{{ $userEdit->photo ? asset($userEdit->photo->file) : 'https://i.pravatar.cc/250' }}"
+                            alt="" style="max-width: 200px; max-height: 200px">
+                        <input name="photo_id" id="photo_id" type="file">
+                        <label for="photo_id"></label>
                     </div>
+
                 </div>
             </div>
         </form>

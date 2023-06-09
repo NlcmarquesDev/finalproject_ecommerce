@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\View\View;
 //use Illuminate\Support\Facades\View;
+use App\Models\SocialMedia;
 use Illuminate\Support\Str;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +63,11 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $user = Auth::user();
             $view->with('user', $user);
+        });
+        //SocialMedia
+        view()->composer('*', function ($view) {
+            $socials = SocialMedia::all();
+            $view->with('socials', $socials);
         });
         // Wishlist Product id
         view()->composer('*', function ($view) {

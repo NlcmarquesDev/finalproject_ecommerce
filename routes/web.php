@@ -10,6 +10,7 @@ use App\Http\Controllers\MollieController;
 use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\Admin\ColorsController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProductController;
@@ -127,4 +128,5 @@ Route::prefix('admin')->middleware(['role:administrator'])->group(function () {
     //SETTINGS ADMIN
     Route::get('settings', [SettingsController::class, 'favicon'])->name("settings.admin");
     Route::post('settings/favicon', [SettingsController::class, 'addFavicon'])->name("add.favicon");
+    Route::post('settings/socialmedia', [SocialMediaController::class, 'socialMedia'])->name('social.media');
 });

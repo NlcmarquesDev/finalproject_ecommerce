@@ -48,10 +48,10 @@ class GoogleController extends Controller
 
                 $location = Locations::create([
                     'user_id' => $newUser->id,
-                    'street' => '',
+                    'street' => 'Your Street',
                     'postcode' => '0000',
-                    'number' => '',
-                    'city' => '',
+                    'number' => ' number',
+                    'city' => 'city',
                 ]);
                 Auth::login($newUser);
                 Alert::success('Login Successfully');

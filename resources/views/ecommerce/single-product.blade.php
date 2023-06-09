@@ -122,10 +122,11 @@
                         </div>
                         <!---Social media icon-->
                         <div class="iconfooter">
-                            <a href="#"><i class="bi bi-instagram navicon m-2"></i></a>
-                            <a href="#"><i class="bi bi-facebook navicon m-2"></i></a>
-                            <a href="#"><i class="bi bi-pinterest navicon m-2"></i></a>
-                            <a href="#"><i class="bi bi-youtube navicon m-2"></i></a>
+                            @foreach ($socials as $social)
+                                {{-- @dd($social->name) --}}
+                                <a href="{{ $social->url }}"><i
+                                        class="bi bi-{{ $social->name }} navicon m-2"></i></a>
+                            @endforeach
                         </div>
                     </div>
                 </div>

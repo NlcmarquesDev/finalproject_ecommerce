@@ -8,8 +8,10 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>NM - luxury items for you thought of you </title>
-    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
+    {{-- <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}"> --}}
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/icon" />
     @vite(['resources/sass/admin.scss', 'resources/js/app.js'])
+    @livewireStyles
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>

@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Traits\Slugify;
 use App\Models\Category;
 use App\Models\Wishlist;
+use App\Models\SocialMedia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -24,8 +25,6 @@ class ProductController extends Controller
         //
         $products = Product::withTrashed()
             ->paginate(20);
-        // dd($products);
-
         $totalProducts = Product::count();
 
         return view("admin.products.index", [
