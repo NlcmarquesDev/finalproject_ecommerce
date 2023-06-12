@@ -1,6 +1,6 @@
 <div>
     <div class="d-flex justify-content-between align-items-baseline">
-        <input wire:model="tablesearch" type="search" name="tablesearch" class="form-control bg-white border-0 small w-50"
+        <input wire:model="tablesearch" type="search" name="tablesearch" class="form-control bg-white mb-3 small w-50"
             placeholder="Search for..">
         <div class="form-check">
             <input wire:model="is_active" type="checkbox" id="is_active" name="is_active">
@@ -81,7 +81,6 @@
                                 </form>
                             @endif
                         </div>
-
                     </td>
                 </tr>
             @endforeach

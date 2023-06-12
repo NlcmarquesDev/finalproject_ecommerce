@@ -88,15 +88,10 @@ class ProductController extends Controller
                 $path = $file
                     ->store("products");
                 $photo = Photo::create(["file" => $path, "product_id" => $product->id]);
-                //                dd($photo);
             }
         }
 
-        foreach ($request->hastags as $hastag) {
-            $hastagFind = Hastag::findOrFail($hastag);
-            $product->hastag()->save($hastagFind);
-        }
-
+        $product->hastags()->sync($request->hastags, true);
 
         Alert::success('Product Created Successfully');
         return redirect()->route('products.index');
@@ -105,9 +100,12 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Product $product)
     {
         //
+        $product = Product::findOrFail($product->id);
+
+        return view('admin.products.show', compact('product'));
     }
 
     /**
@@ -178,18 +176,23 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
 
-        //        $product = Product::findOrFail($id);
-        //        foreach ($product->photos as $photo) {
-        //            $photo->delete();
-        //        }
-        //        $product->delete();
-        //        return redirect()->route('products.index')->with('status', 'Product deleted!');
-        //    }
-        //    public function productsPerBrand($id){
-        //        $brands = Brand::all();
-        //        $products = Product::where('brand_id', $id)->with(['keywords','photo','brand','productcategories'])->paginate(10);
-        //        return view('admin.products.index', compact('products', 'brands'));
+
+        $product = Product::findOrFail($product->id);
+        foreach ($product->photos as $photo) {
+            $photo->delete();
+        }
+        $product->delete();
+        Alert::success('Product deleted Successfully');
+        return redirect()->route('products.index');
+    }
+    public function productRestore($id)
+    {
+        Product::onlyTrashed()->where('id', $id)->restore();
+        // herstel ook alle posts van de gebruiker
+        $product = Product::withTrashed()->where('id', $id)->first();
+        $product->save();
+        Alert::info('Product restore Successfully');
+        return redirect()->route('products.index');
     }
 }

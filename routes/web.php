@@ -108,6 +108,10 @@ Route::prefix('admin')->middleware(['role:administrator'])->group(function () {
     Route::resource('faq', faqController::class);
     //PRODUCTS PAGE
     Route::resource('products', ProductController::class);
+    Route::post("products/restore/{id}", [
+        ProductController::class,
+        "productRestore",
+    ])->name("products.restore");
     //CATEGORIES PAGE
     Route::resource('categories', CategoriesController::class);
     Route::post("categories/restore/{category}", [

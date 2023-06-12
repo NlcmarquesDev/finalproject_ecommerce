@@ -23,21 +23,28 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-floating">
                             <input class="form-control" name="email" id="floatingInputEmail" type="text"
                                 placeholder="email" value="{{ $userDetail->is_active == 1 ? 'Active' : 'Inactive' }}">
                             <label for="floatingSelectRating">Status</label>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input class="form-control" name="login" id="floatingInputEmail" type="text"
+                                placeholder="email" value="{{ $userDetail->oauth_type }}">
+                            <label for="floatingSelectRating">Registration by:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-floating">
                             <input class="form-control" name="created" id="floatingInputCreated" type="text"
                                 placeholder="created" value="{{ $userDetail->created_at }}">
                             <label for="floatingSelectRating">Created at</label>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-floating">
                             <input class="form-control" name="updated" id="floatingInputupdated" type="text"
                                 placeholder="updated" value="{{ $userDetail->updated_at }}">

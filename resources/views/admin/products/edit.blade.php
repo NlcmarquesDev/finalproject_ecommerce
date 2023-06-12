@@ -15,7 +15,7 @@
                             <div class="form-floating">
                                 <input class="form-control" name="name" value="{{ $product->name }}"
                                     id="floatingInputFirstname" type="text" placeholder="Product name">
-                                <label for="floatingInputFirstname">{{ $product->name }}</label>
+                                <label for="floatingInputFirstname">Product Name</label>
                             </div>
                             @error('name')
                                 <p class="text-danger fs-6">{{ $message }}</p>
@@ -25,36 +25,43 @@
                             <div class="form-floating">
                                 <textarea class="form-control" name="description" value="{{ $product->description }}" rows="14" cols="50"
                                     id="floatingInputdescription" type="text" placeholder="description">{{ $product->description }}</textarea>
-                                <label for="floatingInputdescription">{{ $product->description }}</label>
+                                <label for="floatingInputdescription">Product Description</label>
                             </div>
                             @error('description')
                                 <p class="text-danger fs-6">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="number" placeholder="0.00" required name="price" min="0"
-                                    value="{{ $product->price }}" step="0.01" title="Currency"
-                                    pattern="^\d+(?:\.\d{1,2})?$"
-                                    onblur="
-this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'
+                                <input class="form-control" type="number" id="floatingInputprice" placeholder="0.00"
+                                    required name="price" min="0" value="{{ $product->price }}" step="0.01"
+                                    title="Currency" pattern="^\d+(?:\.\d{1,2})?$"
+                                    onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'">
 
-                                <label for="floatingInputPhone">{{ $product->price }}</label>
+                                <label for="floatingInputprice">Product
+                                    Name</label>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-floating">
-                                <input class="form-control" name="stock" value=" {{ $product->stock }}"
-                                    id="floatingInputPhone" type="number" placeholder="Stock">
-                                <label for="floatingInputPhone">{{ $product->stock }}</label>
+                                <p class="form-control">{{ app('price')->format($product->price) }}</p>
+                                <label for="floatingInputPhone">Old Product
+                                    Price</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input class="form-control" name="quantity" value="{{ $product->quantity }}"
+                                    id="floatingInputPhone" type="number" placeholder="quantity">
+                                <label for="floatingInputPhone">Product Quantity</label>
                             </div>
                         </div>
 
-                        <div class=" col-md-12">
+                        <div class=" col-md-6">
                             <div class="form-floating">
                                 <input class="form-control" name="rating" value="{{ $product->rating }}"
                                     id="floatingInputCompany" type="number" placeholder="Rating">
-                                <label for="floatingInputCompany">{{ $product->rating }}</label>
+                                <label for="floatingInputCompany">Product Rating</label>
                             </div>
                         </div>
                         <div class=" col-md-12">
@@ -73,7 +80,7 @@ this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this
                             </div>
                         </div>
                         <div class="col-12 d-flex justify-content-end mt-6">
-                            <button type="submit" class="btn btn-primary ms-2">Create Product</button>
+                            <button type="submit" class="btn btn-primary ms-2">Update Product</button>
                         </div>
                     </div>
                 </div>
