@@ -12,7 +12,7 @@
                         <li class="list-group-item border  border-dark bg-grey">
                             <a href="{{ route('single.product', $result['id']) }}" class="py-2 d-flex  ">
                                 <img class="img-fluid" height="40" width="40"
-                                    src="{{ $result['image'] ?? 'http://via.placeholder.com/62x62' }}"
+                                    src="{{ $result->photos->first()->file ?? 'http://via.placeholder.com/62x62' }}"
                                     alt="{{ $result['name'] }}">
                                 <p class="ps-3">{{ $result['name'] }}</p>
                             </a>

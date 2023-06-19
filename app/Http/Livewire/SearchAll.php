@@ -16,7 +16,7 @@ class SearchAll extends Component
         $productSearch = [];
 
         if (strlen($this->search) >= 2) {
-            $productSearch = Product::where('name', 'like', '%' . $this->search . '%')->get();
+            $productSearch = Product::with('photos')->where('name', 'like', '%' . $this->search . '%')->get();
         }
 
 
