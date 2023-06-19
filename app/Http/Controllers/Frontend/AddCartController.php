@@ -22,12 +22,12 @@ class AddCartController extends Controller
 
     public function addProduct(Request $request)
     {
+
         // Obtenha os detalhes do produto do request...
         $productId = $request->input('id');
         $product = Product::findOrFail($productId);
+        $productColor = $request->input('color');
         $productQuantity = $request->input('quantity');
-
-
 
 
         // Recupere o carrinho da sessão ou crie um novo objeto Cart se ainda não existir
@@ -39,12 +39,11 @@ class AddCartController extends Controller
         }
 
         // Adicione o produto ao carrinho usando o método addProduct()
-        $cart->addProduct($product, $productQuantity);
-
-
+        $cart->addProduct($product, $productQuantity, $productColor);
 
         // Armazene o objeto Cart atualizado na sessão
         session()->put('cart', $cart);
+
 
         //Acesse a sessão "wishlist" e remova o produto correspondente
         $wishlist = session('wishlist');
@@ -71,13 +70,16 @@ class AddCartController extends Controller
         // Recupere o objeto Cart da sessão
         $cart = session('cart');
 
+        $color = $request->color;
+
+
         if ($cart instanceof Cart) {
             // Crie um novo array para armazenar os produtos atualizados
             $updatedProducts = [];
 
             // Percorra os produtos do carrinho e adicione apenas os produtos que não correspondem ao ID fornecido
             foreach ($cart->products as $product) {
-                if ($product['id'] != $productId) {
+                if ($product['id'] != $productId || $product['color'] != $color) {
                     $updatedProducts[] = $product;
                 }
             }

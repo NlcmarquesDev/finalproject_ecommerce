@@ -13,6 +13,7 @@
     <!--      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"-->
     <!--      crossorigin="anonymous"-->
     <!--    />-->
+
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @livewireStyles
 
@@ -49,15 +50,19 @@
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                         <div class="text-center">
                             <a class="dropdown-item" href="{{ route('checkout') }}">My Checkout</a>
-                            <a class="dropdown-item" href="{{ route('about') }}">Orders</a>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                            @if ($order != null)
+                                <a class="dropdown-item" href="{{ route('my.orders', $order->id) }}">Orders</a>
+                            @endif
+
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
                             </form>
-                            <a href="#">Shop</a>
-                            <a href="#">FAQ`s</a>
-                            <a href="#">Contact</a>
+                            <a href="{{ route('products') }}">Products</a>
+                            <a href="{{ route('faq') }}">FAQ`s</a>
+                            <a href="{{ route('contact') }}">Contact</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+
 
                             <div>
                                 @auth
@@ -74,11 +79,11 @@
                             </div>
 
                         </div>
-                        <div class="mt-5 text-center">
-                            <i class="bi bi-instagram socialicon"></i>
-                            <i class="bi bi-facebook socialicon"></i>
-                            <i class="bi bi-pinterest socialicon"></i>
-                            <i class="bi bi-youtube socialicon"></i>
+                        <div class="mt-5 d-flex justify-content-center">
+                            @foreach ($socials as $social)
+                                <a href="{{ $social->url }}"><i
+                                        class="bi bi-{{ Str::lower($social->name) }} m-2"></i></a>
+                            @endforeach
                         </div>
                     </div>
                     <!-- Use any element to open/show the overlay navigation menu -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Faq;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class FaqController extends Controller
 {
@@ -13,7 +14,7 @@ class FaqController extends Controller
     public function index()
     {
         //
-        $faqs = Faq::all();
+        $faqs = Faq::withTrashed()->paginate(10);
         $totalFaqs = Faq::count();
         return view('admin.faq.index', compact('faqs', 'totalFaqs'));
     }
@@ -33,6 +34,12 @@ class FaqController extends Controller
     public function store(Request $request)
     {
         //
+        request()->validate([
+            'question' => 'required|between:2,255',
+        ]);
+        Faq::create(["question" => $request->question, "answer" => $request->answer]);
+        Alert::success('Faq Created Successfully');
+        return redirect()->route("faq.index");
     }
 
     /**
@@ -49,6 +56,8 @@ class FaqController extends Controller
     public function edit(Faq $faq)
     {
         //
+        $faq = Faq::findOrFail($faq->id);
+        return view('admin.faq.edit', compact('faq'));
     }
 
     /**
@@ -57,6 +66,10 @@ class FaqController extends Controller
     public function update(Request $request, Faq $faq)
     {
         //
+        $faq->update($request->all());
+        // dd($request->all());
+        Alert::success('Faq updated Successfully');
+        return redirect()->route("faq.index");
     }
 
     /**
@@ -65,5 +78,16 @@ class FaqController extends Controller
     public function destroy(Faq $faq)
     {
         //
+        $faq->delete();
+        Alert::warning('Faq deleted Successfully');
+        return back();
+    }
+    public function faqRestore($id)
+    {
+        $faq = Faq::onlyTrashed()
+            ->where("id", $id)
+            ->restore();
+        Alert::info('Faq Restored Successfully');
+        return back();
     }
 }

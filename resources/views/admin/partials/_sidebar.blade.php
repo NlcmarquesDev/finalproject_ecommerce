@@ -26,7 +26,7 @@
                     {{--                Orders list --}}
                     <x-sidebar-items item="Orders" icon="fa-solid fa-truck">
                         <a class="nav-link" href="{{ route('orders.index') }}">All Orders</a>
-                        <a class="nav-link" href="{{ route('orders.items') }}">Orders Items</a>
+                        {{-- <a class="nav-link" href="{{ route('orders.items') }}">Orders Items</a> --}}
                     </x-sidebar-items>
                     {{--                Payments list --}}
                     <x-sidebar-items item="Payments" icon="fa-brands fa-cc-stripe">
@@ -42,12 +42,12 @@
                         <a class="nav-link" href="{{ route('colors.index') }}">All Colors</a>
                         <a class="nav-link" href="{{ route('colors.create') }}">Create Color</a>
                     </x-sidebar-items>
-                    {{--                Tags list --}}
-                    <x-sidebar-items item="Tags" icon="fas fa-hashtag">
-                        <a class="nav-link" href="#">All Tags</a>
-                        <a class="nav-link" href="#">Create Tag</a>
+                    {{--                Hastags list --}}
+                    <x-sidebar-items item="Hastags" icon="fas fa-hashtag">
+                        <a class="nav-link" href="{{ route('hastags.index') }}">All Hastags</a>
+                        <a class="nav-link" href="{{ route('hastags.create') }}">Create Hastag</a>
                     </x-sidebar-items>
-                    {{--                Tags list --}}
+                    {{--                Faqs list --}}
                     <x-sidebar-items item="Faq" icon="fa-solid fa-circle-question">
                         <a class="nav-link" href="{{ route('faq.index') }}">All Faq's</a>
                         <a class="nav-link" href="{{ route('faq.create') }}">Create Faq</a>
@@ -56,6 +56,10 @@
                     <x-sidebar-items item="Settings" icon="fa-solid fa-gear">
                         <a class="nav-link" href="{{ route('settings.admin') }}">Settings</a>
                     </x-sidebar-items>
+                    {{--                SLiders Home Page Admin list --}}
+                    {{-- <x-sidebar-items item="Sliders" icon="fa-solid fa-image">
+                        <a class="nav-link" href="{{ route('admin.slider') }}">Sliders</a>
+                    </x-sidebar-items> --}}
 
                     {{--                extra items --}}
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"

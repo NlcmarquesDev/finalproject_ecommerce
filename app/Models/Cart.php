@@ -21,7 +21,7 @@ class Cart extends Model
     //     return $this->belongsTo(User::class);
     // }
 
-    public function addProduct(Product $product, $quantity)
+    public function addProduct(Product $product, $quantity, $color)
     {
 
 
@@ -30,25 +30,45 @@ class Cart extends Model
         // Verificar se o produto já existe no carrinho
         $existingProductIndex = null;
 
-
         foreach ($products as $index => $cartProduct) {
-            if ($cartProduct['id'] == $product->id) {
+            if ($cartProduct['id'] == $product->id && $cartProduct['color'] == $color) {
                 $existingProductIndex = $index;
                 break;
             }
         }
 
         if ($existingProductIndex !== null) {
-            // O produto já existe no carrinho, então incrementar a quantidade
-            $products[$existingProductIndex]['quantity'] += 1;
+            // O produto com a mesma cor já existe no carrinho, então incrementar a quantidade
+            $products[$existingProductIndex]['quantity'] += $quantity;
         } else {
-            // Adicionar um novo produto ao carrinho
-            $newProduct = [
-                'id' => $product->id,
-                'quantity' => $quantity,
-            ];
+            // Verificar se existe um produto com o mesmo ID, mas cor diferente
+            $existingProductDifferentColorIndex = null;
 
-            $products[] = $newProduct;
+            foreach ($products as $index => $cartProduct) {
+                if ($cartProduct['id'] == $product->id && $cartProduct['color'] != $color) {
+                    $existingProductDifferentColorIndex = $index;
+                    break;
+                }
+            }
+
+            if ($existingProductDifferentColorIndex !== null) {
+                // O produto com o mesmo ID, mas cor diferente, já existe no carrinho
+                // Neste caso, criamos um novo produto com a cor diferente
+                $products[] = [
+                    'id' => $product->id,
+                    'quantity' => $quantity,
+                    'color' => $color,
+                ];
+            } else {
+                // Adicionar um novo produto ao carrinho
+                $newProduct = [
+                    'id' => $product->id,
+                    'quantity' => $quantity,
+                    'color' => $color,
+                ];
+
+                $products[] = $newProduct;
+            }
         }
 
         $this->products = $products;
@@ -58,7 +78,7 @@ class Cart extends Model
     {
         $cartItems = array_map(function ($cartItem) {
             $product = Product::findOrFail($cartItem['id']);
-            return new CartItem($product, $cartItem['quantity']);
+            return new CartItem($product, $cartItem['quantity'], $cartItem['color']);
         }, $this->products);
 
         return $cartItems;
@@ -91,5 +111,9 @@ class Cart extends Model
             $total += $cartItem->total();
         }
         return $total;
+    }
+    public function totalWithShip($shipment)
+    {
+        return $this->total() + $shipment;
     }
 }

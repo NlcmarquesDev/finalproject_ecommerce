@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('social_media', function (Blueprint $table) {
+        Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('url')->nullable();
+            $table->string('name');
+            $table->decimal('price', 10, 2);
+            $table->integer('days_delivery');
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('social_media');
+        Schema::dropIfExists('shipments');
     }
 };

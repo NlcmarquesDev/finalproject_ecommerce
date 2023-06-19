@@ -20,14 +20,35 @@ class CheckoutController extends Controller
 
     public function store(Request $request)
     {
+
+        request()->validate(
+            [
+                'name' => ['required', 'between:2,255'],
+                'address' => ['required', 'between:2,255'],
+                'postcode' => ['required', 'beetween:2,6'],
+                'city' => ['required', 'between:2,255'],
+                'email' => ['required', 'between:2,255'],
+            ],
+            [
+                'name.required' => 'name is required',
+                //                'title.between' => 'Product name between 3 and 255 characters required',
+
+                //                'keywords.required'=>'Please check minimum one keyword'
+            ]
+        );
+
         $userId = Auth::id();
 
         $cart = session('cart');
 
         if (!is_null($cart) && is_array($cart->products)) {
 
+
+            $shipment = $request->ship_price;
+
             $order = new Order();
             $order->user_id = $userId;
+            $order->shipment_id = $request->shipment;
             $order->order_email = $request->email;
             $order->order_name = $request->name;
             $order->order_adress = $request->adress;
@@ -36,6 +57,7 @@ class CheckoutController extends Controller
             $order->order_city = $request->city;
             $order->order_taxes = $cart->taxes();
             $order->order_total = $cart->total();
+            $order->order_total_with_ship = $cart->totalWithShip($shipment);
             $order->save();
 
             foreach ($cart->content() as $cartItem) {

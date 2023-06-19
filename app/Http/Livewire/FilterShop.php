@@ -17,7 +17,7 @@ class FilterShop extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $search = '';
-    public $selectCategory;
+    public $selectCategory = null;
     public $selectColor;
     public $selectedHastags = [];
     public $high = false;
@@ -29,7 +29,15 @@ class FilterShop extends Component
 
     public function sortBy($category)
     {
-        $this->selectCategory = $category;
+        if (is_array($this->selectCategory)) {
+            if (in_array($category, $this->selectCategory)) {
+                $this->selectCategory = array_diff($this->selectCategory, [$category]);
+            } else {
+                $this->selectCategory[] = $category;
+            }
+        } else {
+            $this->selectCategory = [$category];
+        }
     }
     public function colorBy($color)
     {
@@ -43,6 +51,26 @@ class FilterShop extends Component
             $this->selectedHastags[] = $hastag;
         }
     }
+    public function removeHastag($hastag)
+    {
+        $index = array_search($hastag, $this->selectedHastags);
+        if ($index !== false) {
+            unset($this->selectedHastags[$index]);
+            $this->selectedHastags = array_values($this->selectedHastags);
+        }
+    }
+    // public function getSelectCategoryProperty()
+    // {
+    //     return !empty($this->selectedCategory);
+    // }
+
+    public function deselectColor($color)
+    {
+        if ($this->selectColor === $color) {
+            $this->selectColor = null;
+        }
+    }
+
 
     public function updatedHigh()
     {
@@ -58,11 +86,18 @@ class FilterShop extends Component
     {
         $query = Product::with('photos', 'colors')->where('name', 'like', '%' . $this->search . '%');
 
+        // if ($this->selectCategory) {
+        //     $query->whereHas('categories', function ($query) {
+        //         $query->where('name', 'like', '%' . $this->selectCategory . '%');
+        //     });
+        // }
         if ($this->selectCategory) {
-            $query->whereHas('categories', function ($query) {
-                $query->where('name', 'like', '%' . $this->selectCategory . '%');
+            $categories = is_array($this->selectCategory) ? $this->selectCategory : [$this->selectCategory];
+            $query->whereHas('categories', function ($query) use ($categories) {
+                $query->whereIn('name', $categories);
             });
         }
+
 
         if ($this->selectColor) {
             $query->whereHas('colors', function ($query) {
@@ -76,9 +111,9 @@ class FilterShop extends Component
             });
         }
         if ($this->high) {
-            $products = $query->orderByDesc('price');
+            $query->orderByDesc('price');
         } elseif ($this->low) {
-            $products = $query->orderBy('price', 'asc');
+            $query->orderBy('price', 'asc');
         }
 
         if (!$this->selectCategory && !$this->selectColor && !$this->selectedHastags) {
@@ -93,49 +128,4 @@ class FilterShop extends Component
 
         return view('livewire.filter-shop', compact('products', 'colors', 'hastags', 'categories'));
     }
-
-
-
-    // public function render()
-    // {
-    //     $query = Product::where('name', 'like', '%' . $this->search . '%');
-
-    //     if ($this->selectCategory) {
-    //         $query->whereHas('categories', function ($query) {
-    //             $query->where('name', 'like', '%' . $this->selectCategory . '%');
-    //         });
-    //     }
-
-    //     if ($this->selectColor) {
-    //         $query->whereHas('colors', function ($query) {
-    //             $query->where('name', 'like', '%' . $this->selectColor . '%');
-    //         });
-    //     }
-
-    //     if ($this->selectedHastags) {
-    //         $query->whereHas('hastags', function ($query) {
-    //             $query->where('name', 'like', '%' . $this->selectedHastags . '%');
-    //         });
-    //     }
-    //     // ->whereHas('hastags', function ($query) {
-    //     //     $query->where('name', 'like', '%' . $this->selectHastag . '%');
-    //     // });
-
-    //     if ($this->hight) {
-    //         $products = $query->orderByDesc('price');
-    //     } elseif ($this->low) {
-    //         $products = $query->orderBy('price', 'asc');
-    //     }
-    //     sort($this->selectedHastags);
-    //     // dd($products);
-    //     $products = $products->paginate(9);
-
-    //     // dd($products);
-
-    //     $categories = Category::all();
-    //     $colors = Color::all();
-    //     $hastags = Hastag::all();
-
-    //     return view('livewire.filter-shop', compact('products', 'colors', 'hastags', 'categories'));
-    // }
 }

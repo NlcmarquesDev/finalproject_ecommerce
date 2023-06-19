@@ -4,7 +4,7 @@ namespace App\Models;
 
 class CartItem
 {
-    public function __construct(private Product $product, private int $quantity = 1)
+    public function __construct(private Product $product, private int $quantity = 1, public ?string $color = null)
     {
     }
 
@@ -16,6 +16,10 @@ class CartItem
     public function quantity()
     {
         return $this->quantity;
+    }
+    public function color()
+    {
+        return $this->color;
     }
 
     public function total()

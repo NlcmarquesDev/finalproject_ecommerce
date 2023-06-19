@@ -18,7 +18,7 @@
                 <div id="collapse{{ $order->id }}" class="accordion-collapse collapse show"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body ">
-                        <h5 class="pb-4">Deliveryed to:</h5>
+                        <h5 class="pb-4">Delivered to:</h5>
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <p><b>Adress: </b> {{ $order->order_adress }}</p>
@@ -32,8 +32,11 @@
                                     <span
                                         class="badge {{ $order->order_status == 'unpaid' ? 'text-bg-danger' : 'text-bg-success' }} ">{{ $order->order_status }}</span>
                                 </p>
+
+                                <p><b>Shipment :</b> {{ $order->shipment->name }}</p>
+
                                 <p><b>Taxes: </b>{{ app('price')->format($order->order_taxes) }}</p>
-                                <p><b>Total : </b>{{ app('price')->format($order->order_total) }} </p>
+                                <p><b>Total : </b>{{ app('price')->format($order->order_total_with_ship) }} </p>
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 @foreach ($order->orderItems as $orderItem)

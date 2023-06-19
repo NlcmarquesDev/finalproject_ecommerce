@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Faq;
 use App\Models\User;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\Shipment;
 use App\Models\Wishlist;
 use App\Mail\ContactMail;
 use App\Models\Locations;
@@ -64,9 +66,12 @@ class EcommerceController extends Controller
         $userId = Auth::id();
         $location = Locations::FindOrfail($userId);
         $user = User::findOrFail($userId);
+        $shipments = Shipment::all();
+        $currentDate = Carbon::now();
 
 
-        return view('ecommerce.checkout', compact('location', 'user'));
+
+        return view('ecommerce.checkout', compact('location', 'user', 'shipments', 'currentDate'));
     }
     public function Subscriber(Request $request)
     {

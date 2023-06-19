@@ -7,11 +7,13 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\MollieController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\Admin\ColorsController;
+use App\Http\Controllers\Admin\HastagController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -106,6 +108,10 @@ Route::prefix('admin')->middleware(['role:administrator'])->group(function () {
     ])->name("users.restore");
     //FAQ page
     Route::resource('faq', faqController::class);
+    Route::post("faq/restore/{faq}", [
+        faqController::class,
+        "faqRestore",
+    ])->name("faqs.restore");
     //PRODUCTS PAGE
     Route::resource('products', ProductController::class);
     Route::post("products/restore/{id}", [
@@ -124,13 +130,22 @@ Route::prefix('admin')->middleware(['role:administrator'])->group(function () {
         ColorsController::class,
         "colorRestore",
     ])->name("colors.restore");
+    //Hastags Page
+    Route::resource('hastags', HastagController::class);
+    Route::post("hastags/restore/{hastag}", [
+        HastagController::class,
+        "hastagRestore",
+    ])->name("hastags.restore");
     //ORDERS PAGE
-
-    Route::get('orderItems', [OrderItemController::class, 'orderItems'])->name("orders.items");
+    Route::get('orderItems/{order}', [OrderController::class, 'orderItems'])->name("orders.items");
     //PAYMENT PAGE
     Route::get('payments', [PaymentController::class, 'payment'])->name("payment");
     //SETTINGS ADMIN
     Route::get('settings', [SettingsController::class, 'favicon'])->name("settings.admin");
     Route::post('settings/favicon', [SettingsController::class, 'addFavicon'])->name("add.favicon");
     Route::post('settings/socialmedia', [SocialMediaController::class, 'socialMedia'])->name('social.media');
+    //SLIDER HOMEPAGE
+    // Route::get('/slider', AdminHomeSliderComponent::class)->name('admin.slider');
+    // Route::get('/slider/add', AdminAddHomeSlider::class)->name('admin.slider.add');
+    // Route::get('/slider/edit/{slide_id}', AdminEditHomeSlider::class)->name('admin.slider.edit');
 });

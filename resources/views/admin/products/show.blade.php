@@ -9,7 +9,7 @@
             @method('PATCH')
             <div class="d-xl-flex col-xl-12">
                 <div class="col-lg-6">
-                    <h4 class="mb-3">Product Deatil Information</h4>
+                    <h4 class="mb-3">Product Detail Information</h4>
                     <div class="row g-3 mb-9">
                         <div class=" col-md-12">
                             <div class="form-floating">
@@ -97,13 +97,14 @@
                     <div class="d-flex align-items-end position-relative mb-7">
                         <div class=" rounded-circle cursor-pointer d-flex flex-column flex-center mb-5 ">
                             <h3 class="m-auto pb-3">Principal Photo</h3>
-                            <img src="{{ $product->photos->first() ? asset($product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62' }}"
+                            <img src="{{ $product->photos->first() ? asset($product->photos->first()->file) : 'http://via.placeholder.com/62x62' }}"
                                 alt="" style="width: 200px; height: 200px" class="m-auto" />
                             <div class="d-flex flex-column justify-content-center">
                                 <h3 class="m-auto py-3">All Photos</h3>
-                                <div class="">
+                                <div>
                                     <img src="{{ $product->photos->first() ? asset($product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62' }}"
-                                        alt="stone lamp" style="width: 150px; height: 150px" />
+                                        alt="{{ $product->name }}" style="width: 150px; height: 150px" />
+
                                     <img src="{{ $product->photos->first() ? asset($product->photos->first()->file) : 'http://via.placeholder.com/62x62' }}"
                                         alt="stone lamp" style="width: 150px; height: 150px" />
                                 </div>

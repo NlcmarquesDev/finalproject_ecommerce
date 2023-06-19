@@ -27,7 +27,6 @@
                         @endforeach
                     </div>
                     <hr>
-
                     <div class="d-flex flex-column">
                         <h5 class="fw-lighter">Sort by</h5>
                         <div class="form-check">
@@ -43,10 +42,20 @@
                     <div class="d-flex flex-column">
                         <h5 class="fw-lighter">Color</h5>
                         @foreach ($colors as $color)
-                            <div class="d-flex align-items-center">
-                                <span class="dot me-2" style="background-color: {{ $color->code }};"></span>
-                                <a wire:click="colorBy('{{ $color->name }}')" class="pfont my-auto"
-                                    href="#">{{ $color->name }}</a>
+                            <div
+                                class="d-flex justify-content-between align-items-center {{ $selectColor === $color->name ? ' px-2 text-white ' : '' }}">
+                                <div>
+                                    <span class="dot me-2" style="background-color: {{ $color->code }};"></span>
+                                    <a wire:click="colorBy('{{ $color->name }}')" class="pfont my-auto"
+                                        href="#">{{ $color->name }}</a>
+                                </div>
+                                @if ($selectColor === $color->name)
+                                    <div>
+                                        <button wire:click="deselectColor('{{ $color->name }}')"
+                                            class="border-0 bg-transparent"
+                                            style="background-color: {{ $color->code }};">x</button>
+                                    </div>
+                                @endif
                             </div>
                         @endforeach
                     </div>
@@ -101,10 +110,19 @@
         <div class="d-flex flex-column">
             <h5 class="fw-lighter">Color</h5>
             @foreach ($colors as $color)
-                <div class="d-flex align-items-center">
-                    <span class="dot me-2" style="background-color: {{ $color->code }};"></span>
-                    <a wire:click="colorBy('{{ $color->name }}')" class="pfont my-auto"
-                        href="#">{{ $color->name }}</a>
+                <div
+                    class="d-flex justify-content-between align-items-center {{ $selectColor === $color->name ? ' px-2 text-white ' : '' }}">
+                    <div>
+                        <span class="dot me-2" style="background-color: {{ $color->code }};"></span>
+                        <a wire:click="colorBy('{{ $color->name }}')" class="pfont my-auto"
+                            href="#">{{ $color->name }}</a>
+                    </div>
+                    @if ($selectColor === $color->name)
+                        <div>
+                            <button wire:click="deselectColor('{{ $color->name }}')" class="border-0 bg-transparent"
+                                style="background-color: {{ $color->code }};">x</button>
+                        </div>
+                    @endif
                 </div>
             @endforeach
         </div>
@@ -129,12 +147,15 @@
                         <div class="ms-5 mb-2">
                             @foreach ($selectedHastags as $hastag)
                                 <span class="badge bg-dark">{{ $hastag }}</span>
+                                <button wire:click="removeHastag('{{ $hastag }}')"
+                                    class="text-dark border-0 bg-transparent position-relative"
+                                    aria-label="Fechar">x</button>
                             @endforeach
                         </div>
                         <div class="row">
-                            {{-- @dd($products) --}}
                             @foreach ($products as $product)
-                                <livewire:show-products :product="$product" wire:key="'product'.{{ $product->id }}">
+                                <livewire:show-products :product="$product" wire:key="'product'.{{ $product->id }}"
+                                    :selectCategory='$selectCategory'>
                                 </livewire:show-products>
                             @endforeach
                         </div>

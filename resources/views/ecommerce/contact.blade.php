@@ -31,9 +31,9 @@
                     </div>
                     <div class="col-8">
                         <div>
-                            <p>Telephone: +32 468123456<br>
-                                <a href="#">hello@example.com</a>
-                            </p>
+                            <p>Telephone: <a href="tel:+32 468123456""> +32 468123456<br></p>
+                            <a href="mailto: abc@example.com">hello@example.com</a>
+                            </a>
                             <p>Oostnieuwkerksesteenweg 111,<br> Roeselare 8800 Belgium<br>
                                 Monday to Friday: 10am to 7pm</p>
                         </div>
@@ -50,19 +50,19 @@
                             <div class="row">
                                 <div class="col form-floating">
                                     <input type="text" class="form-control" placeholder="Name" aria-label="name"
-                                        name="name" value="name">
+                                        name="name" value="">
                                     <label class="mx-3" for="name">Name</label>
                                 </div>
                                 <div class="col form-floating">
                                     <input type="email" class="form-control" placeholder="Email Address"
-                                        aria-label="email" name="email" value="email">
+                                        aria-label="email" name="email" value="">
                                     <label class="mx-3" for="email">Email</label>
                                 </div>
                             </div>
                             <div class="row my-3">
                                 <div class="form-floating">
                                     <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px"
-                                        name="message" value="message"></textarea>
+                                        name="message" value=""></textarea>
                                     <label class="mx-3" for="floatingTextarea2">Message</label>
                                 </div>
                             </div>

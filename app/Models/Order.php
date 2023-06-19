@@ -11,7 +11,7 @@ class Order extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['user_id', 'order_email', 'order_name', 'order_adress', 'order_bus', 'order_postcode', 'order_city', 'order_cupon', 'order_status', 'order_taxes', 'order_total', 'shipped',];
+    protected $fillable = ['user_id', 'order_email', 'order_name', 'order_adress', 'order_bus', 'order_postcode', 'order_city', 'shipment_id', 'order_status', 'order_taxes', 'order_total', 'order_total_with_ship'];
 
 
     public function user()
@@ -35,5 +35,9 @@ class Order extends Model
     public function isPaid()
     {
         return Payment::where('order_id', $this->id)->where('payment_status', 'paid')->count() > 0;
+    }
+    public function shipment()
+    {
+        return $this->belongsTo(Shipment::class);
     }
 }

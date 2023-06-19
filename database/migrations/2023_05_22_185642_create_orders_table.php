@@ -14,16 +14,17 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unsigned()->constrained()->cascadeOnDelete();
+            $table->foreignId('shipment_id')->unsigned()->constrained()->cascadeOnDelete();
             $table->string('order_email');
             $table->string('order_name');
             $table->string('order_adress');
             $table->string('order_bus')->nullable();
             $table->string('order_postcode');
             $table->string('order_city');
-            $table->string('order_cupon')->nullable();
             $table->string('order_status')->default('unpaid');
             $table->decimal('order_taxes', 10, 2);
             $table->decimal('order_total', 10, 2);
+            $table->decimal('order_total_with_ship', 10, 2);
             $table->timestamps();
             $table->softDeletes();
         });

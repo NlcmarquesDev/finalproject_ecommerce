@@ -12,9 +12,8 @@
                     <div class="row g-3 mb-9">
                         <div class=" col-md-12">
                             <div class="form-floating">
-                                <input class="form-control" name="name" id="floatingInputName" type="text"
-                                    placeholder="First name">
-                                <label for="floatingInputName">Question</label>
+                                <input class="form-control" name="question" id="floatingInputQuestion" type="text">
+                                <label for="floatingInputQuestion">Question</label>
                             </div>
                             @error('name')
                                 <p class="text-danger fs-6">{{ $message }}</p>
@@ -22,7 +21,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="form-floating">
-                                <textarea class="form-control" name="code" id="floatingInputCode" type="text" placeholder="code color"></textarea>
+                                <textarea class="form-control" name="answer" id="floatingInputCode" type="text"></textarea>
                                 <label for="floatingInputCode">Answer</label>
                             </div>
                             @error('code')
@@ -30,7 +29,7 @@
                             @enderror
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary ms-2">Create Close</button>
+                            <button type="submit" class="btn btn-primary ms-2">Create faq</button>
                         </div>
                     </div>
                 </div>

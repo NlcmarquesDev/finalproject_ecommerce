@@ -83,12 +83,4 @@ class ColorsController extends Controller
         Alert::warning('Color deleted Successfully');
         return back();
     }
-    public function colorRestore($id)
-    {
-        $color = Color::onlyTrashed()
-            ->where("id", $id)
-            ->restore();
-        Alert::info('Color Restored Successfully');
-        return back();
-    }
 }

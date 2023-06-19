@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
 use App\Traits\Slugify;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoriesController extends Controller
 {
@@ -16,7 +17,8 @@ class CategoriesController extends Controller
     {
         //
         $categories = Category::withTrashed()->paginate(10);
-        return view('admin.categories.index', compact('categories'));
+        $totalCategories = Category::count();
+        return view('admin.categories.index', compact('categories', 'totalCategories'));
     }
 
     /**
@@ -41,6 +43,7 @@ class CategoriesController extends Controller
         $categories->slug = Slugify::slugify($request->name);
         $categories->name = $request->name;
         $categories->save();
+        Alert::success('Category created successfully');
         return view("admin.categories.index");
     }
 
@@ -70,6 +73,7 @@ class CategoriesController extends Controller
     {
         //
         $category->update($request->all());
+        Alert::success('Category updated successfully');
         return redirect()
             ->route("categories.index")
             ->with("status", $category->name . " has been updated");
@@ -81,6 +85,7 @@ class CategoriesController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+        Alert::success('Category deleted successfully');
         return back()->with("status", $category->name . "Deleted");
     }
     public function categoryRestore($id)
@@ -88,6 +93,7 @@ class CategoriesController extends Controller
         $category = Category::onlyTrashed()
             ->where("id", $id)
             ->restore();
+        Alert::info('Category restored successfully');
         return back()->with("status", "has been restored");
     }
 }

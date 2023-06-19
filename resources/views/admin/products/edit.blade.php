@@ -64,7 +64,7 @@
                                 <label for="floatingInputCompany">Product Rating</label>
                             </div>
                         </div>
-                        <div class=" col-md-12">
+                        <div class=" col-md-4">
                             <div class="form-floating">
                                 <select name="colors[]" class="form-select" id="floatingSelectIndustry"
                                     style="height: 100px; " multiple required>
@@ -79,26 +79,61 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-12 d-flex justify-content-end mt-6">
-                            <button type="submit" class="btn btn-primary ms-2">Update Product</button>
+                        <div class=" col-md-4">
+                            <label>Hastags:</label>
+                            @foreach ($hastags as $hastag)
+                                {{-- @dd($hastag) --}}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $hastag->id }}"
+                                        id="hastag{{ $hastag->id }}" name="hastags[]"
+                                        @if ($hastag->id ? 'checked' : '')  @endif min='1'>
+                                    <label class="form-check-label"
+                                        for="hastag{{ $hastag->id }}">{{ $hastag->name }}</label>
+                                </div>
+                            @endforeach
+
                         </div>
+                        @error('hastags')
+                            <p class="alert alert-danger" role="alert">{{ $message }}</p>
+                        @enderror
+                        <div class=" col-md-4">
+                            <label>Categories:</label>
+                            @foreach ($categories as $category)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
+                                        id="category{{ $category->id }}" name="categories[]" min='1'>
+                                    <label class="form-check-label"
+                                        for="category{{ $category->id }}">{{ $category->name }}</label>
+                                </div>
+                            @endforeach
+
+                        </div>
+                        @error('categories')
+                            <p class="alert alert-danger" role="alert">{{ $message }}</p>
+                        @enderror
+                        < <div class="col-12 d-flex justify-content-end mt-6">
+                            <button type="submit" class="btn btn-primary ms-2">Update Product</button>
                     </div>
                 </div>
-                <div class="col-lg-6 d-flex justify-content-center align-items-center">
-                    <div class="d-flex align-items-end position-relative mb-7">
-                        <input class="d-none" id="upload-avatar" type="file">
-                        <div class=" rounded-circle cursor-pointer d-flex flex-center mb-5"
-                            style="max-width: 300px; max-height: 300px">
-                            <div class="form-group">
-                                <img src="{{ $product->photos->first() ? asset($product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62' }}"
-                                    alt="stone lamp" style="width: 300px; height: 300px" />
-                                <input type="file" name="photo_id[]" value="photo_id[]" id="ChooseFile" multiple>
-                                <label for="photo_id"></label>
-                            </div>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-center align-items-center">
+                <div class="d-flex align-items-end position-relative mb-7">
+                    <input class="d-none" id="upload-avatar" type="file">
+                    <div class=" rounded-circle cursor-pointer d-flex flex-center mb-5"
+                        style="max-width: 300px; max-height: 300px">
+                        <div class="form-group">
+                            <img src="{{ $product->photos->first() ? asset($product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62' }}"
+                                alt="stone lamp" style="width: 300px; height: 300px" />
+                            <input type="file" name="photo_id[]" value="photo_id[]" id="ChooseFile" multiple>
+                            <label class="mt-3" for="photo_id"> You need to upload 2 images</label>
+                            @error('photo_id')
+                                <p class="alert alert-danger" role="alert">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+    </div>
+    </form>
     </div>
 @endsection

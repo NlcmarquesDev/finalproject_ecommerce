@@ -53,7 +53,7 @@ class ProductController extends Controller
         request()->validate(
             [
                 'name' => ['required', 'between:3,255'],
-                //            'keywords' => ['required', Rule::exists('keywords', 'id')],
+                'photo_id' => ['required', 'array', 'min:2', 'max:2'],
                 'price' => 'required',
             ],
             [
@@ -115,8 +115,10 @@ class ProductController extends Controller
     {
         //
         $colors = Color::all();
+        $hastags = Hastag::all();
+        $categories = Category::all();
         $product = Product::find($id);
-        return view('admin.products.edit', compact('product', 'colors'));
+        return view('admin.products.edit', compact('product', 'colors', 'hastags', 'categories'));
     }
 
     /**
@@ -128,6 +130,10 @@ class ProductController extends Controller
         request()->validate(
             [
                 'name' => ['required', 'between:2,255'],
+                'photo_id' => ['required', 'array', 'min:2', 'max:2'],
+                'categories' => ['required', 'min:1'],
+                'hastags' => ['required', 'min:1'],
+
             ],
             [
                 'name.required' => 'Title is required',
@@ -137,22 +143,18 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $input = $request->all();
         if ($request->hasFile('photo_id')) {
-            $oldPhoto = $product->photo; // de huidige foto van de gebruiker
-            if ($files = $request->file("photo_id")) {
-                foreach ($files as $file) {
-                    $path = $file
-                        ->store("products");
-                    $photo = Photo::create(["file" => $path, "product_id" => $product->id]);
-                }
-            }
-            if ($oldPhoto) {
+            $oldPhotos = $product->photos; // Obter as fotos atuais do produto
+
+            // Remover as fotos antigas (caso existam)
+            foreach ($oldPhotos as $oldPhoto) {
                 unlink(public_path($oldPhoto->file));
-                // $oldPhoto->delete();
-                $oldPhoto->update(['file' => $path]);
-                $input['photo_id'] = $oldPhoto->id;
-            } else {
-                $photo = Photo::create(['file' => $path]);
-                $input['photo_id'] = $photo->id;
+                $oldPhoto->delete();
+            }
+
+            $files = $request->file("photo_id");
+            foreach ($files as $file) {
+                $path = $file->store("products");
+                $photo = Photo::create(["file" => $path, "product_id" => $product->id]);
             }
         }
         $product->update($input);
@@ -166,6 +168,11 @@ class ProductController extends Controller
             $ids[] = $obj->id;
         }
         $product->colors()->sync($ids);
+
+
+
+        $product->hastags()->sync($request->hastags, true);
+        $product->categories()->sync($request->categories, true);
 
         Alert::success('Product updated Successfully');
         return redirect()->route('products.index');

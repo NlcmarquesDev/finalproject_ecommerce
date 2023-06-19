@@ -401,9 +401,10 @@ a:hover {
 .el:nth-child(1) .el__bg {
     transform: translate3d(0%, 0, 0);
 }
+
 .el:nth-child(1) .el__bg:before {
     transition-delay: 0s;
-    background-image: url("../../public/Imagens/Acessories/clock.png");
+    // background-image: url("../../public/Imagens/Acessories/clock.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left;
@@ -732,3 +733,58 @@ a.pfont:hover {
     bottom: 0px;
     right: 13px;
 }
+
+////////****HERO SECTION*****/////
+.image-container {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.fade-animation-block {
+    width: 100%;
+    max-width: 1270px;
+}
+.fade-animation-block > ul {
+    display: grid;
+    grid-template-rows: 3;
+    column-gap: 14px;
+    row-gap: 14px;
+    grid-template-columns: 16.66% 16.66% 16.66% 16.66% 16.66% 16.66%;
+    grid-template-areas:
+        "large large . . . ."
+        "large large . . large-last large-last"
+        ". . . . large-last large-last";
+}
+.fade-animation-block > ul > li:first-child {
+    grid-area: large;
+}
+.fade-animation-block > ul > li:last-child {
+    grid-area: large-last;
+}
+.fade-animation-block > ul > li:first-child .img,
+.fade-animation-block > ul > li:last-child .img {
+    padding-bottom: 89.42%;
+}
+.img {
+    position: relative;
+    padding-bottom: 88.81%;
+}
+.img img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+////////////////////////////////////////////////////////////////

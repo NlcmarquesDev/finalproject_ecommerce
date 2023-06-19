@@ -2,11 +2,9 @@
 <div class="offcanvas-header lh-fixed fs-lg">
 
 </div>
-
 <!-- List group -->
 <ul class="list-group list-group-lg list-group-flush">
     @foreach ($cart->content() as $cartItem)
-        {{-- @dd($cartItem); --}}
         <li class="list-group-item mb-2">
             <div class="row align-items-center">
 
@@ -19,14 +17,12 @@
                     </a>
                 </div>
                 <div class="col-8 d-flex flex-column ">
-                    <div>
-                        <!-- Title -->
-                        <p class="fs-sm fw-bold mb-6">
-                            <a class="text-body"
-                                href="{{ route('single.product', $cartItem->product()->id) }}">{{ $cartItem->product()->name }}</a>
-                            <br>
-                            <span class="text-muted">{{ app('price')->format($cartItem->product()->price) }}</span>
-                        </p>
+                    <div class="fs-sm fw-bold mb-6">
+                        <a class="text-body"
+                            href="{{ route('single.product', $cartItem->product()->id) }}">{{ $cartItem->product()->name }}
+                            - <span class="text-muted">{{ $cartItem->color }}</span> </a>
+                        <br>
+                        <span class="text-muted">{{ app('price')->format($cartItem->product()->price) }}</span>
                     </div>
                     <div class="d-flex justify-content-between">
                         <form action="{{ route('cart.update') }}" method="POST">
@@ -46,10 +42,12 @@
                                 </button>
                         </form>
                         <!-- Remove -->
-                        <form action="{{ route('cart.remove', ['productId' => $cartItem->product()->id]) }}"
+                        <form
+                            action="{{ route('cart.remove', ['productId' => $cartItem->product()->id, 'color' => $cartItem->color]) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')
+                            <input type="hidden" name="color" value="{{ $cartItem->color }}">
                             <button type="submit" class="bg-transparent border-0 text-decoration-underline">
                                 Remove
                             </button>
@@ -61,11 +59,9 @@
         </li>
     @endforeach
 </ul>
-{{-- @dd($cart) --}}
-
 <!-- Footer -->
 <div class="offcanvas-footer justify-between lh-fixed fs-sm bg-light mt-5 py-3">
-    {{ Str::formatPrice($cart->subtotal(), '$') }}
+    {{-- {{ Str::formatPrice($cart->subtotal(), '$') }} --}}
     <strong>Subtotal</strong> <strong class="ms-auto">{{ app('price')->format($cart->subtotal()) }}</strong><br />
     <strong>Tax</strong> <strong class="ms-auto">{{ app('price')->format($cart->taxes()) }}</strong><br />
     <strong>Total</strong> <strong class="ms-auto">{{ app('price')->format($cart->total()) }}</strong>

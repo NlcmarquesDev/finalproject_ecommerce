@@ -43,7 +43,7 @@
                         </header>
                         <!---price and whishlist-->
                         <div class="d-flex justify-content-between align-items-center my-3">
-                            <p class="fs-5 my-auto">&euro; {{ $product->price }}- &euro; {{ $product->price + 10 }}</p>
+                            <p class="fs-5 my-auto">{{ app('price')->format($product->price) }}</p>
                             @if (Auth::user())
                                 <form action="{{ route('add.wishlist') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
@@ -62,7 +62,6 @@
                                     @endif
                                 </form>
                             @endif
-                            {{-- @dd($wishlistProductId) --}}
                         </div>
                         <hr />
                         <!---detail product-->
@@ -73,42 +72,43 @@
                             <div class="pe-2">
                                 @for ($i = 1; $i <= 5; $i++)
                                     @if ($i <= $product->rating)
-                                        <i class="fa-solid fa-star"></i> <!-- Ícone de estrela preenchida -->
+                                        <i class="fa-solid fa-star"></i>
                                     @else
-                                        <i class="fa-regular fa-star"></i> <!-- Ícone de estrela vazia -->
+                                        <i class="fa-regular fa-star"></i>
                                     @endif
                                 @endfor
                             </div>
                             <p class="fs-5 ps-2 my-auto">Reviews</p>
                         </div>
-                        <!---Color-->
-                        @if ($product->colors)
-                            <div class="d-flex justify-content-between my-3">
-                                <p class="fs-5 my-auto">Color</p>
-                                <select class="rounded border" name="color">
-                                    @foreach ($product->colors as $color)
-                                        <option value="">{{ $color->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endif
                         @if (Auth::user())
                             <form action="{{ route('addproduct') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                <!---Color-->
+                                @if ($product->colors)
+                                    <div class="d-flex justify-content-between my-3">
+                                        <p class="fs-5 my-auto">Color</p>
+                                        <select class="rounded border" name="color">
+                                            @foreach ($product->colors as $color)
+                                                <option value="{{ $color->name }}">{{ $color->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+
                                 <!---Quantity-->
                                 <div class="d-flex justify-content-between my-3">
                                     <p class="fs-5 my-auto">Quantity</p>
-                                    <input class="rounded px-2 border" name="quantity" type="number"
-                                        value="quantity_{{ $product->id }}" min="1"
+                                    <input class="rounded px-2 border" name="quantity" type="number" value="1"
+                                        min="1" placeholder="1"
                                         oninput="this.value =
                                         !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" />
                                 </div>
 
 
                                 <input type="hidden" name="id" value="{{ $product->id }}">
-                                <input type="hidden" name="name" value="{{ $product->name }}">
+                                {{-- <input type="hidden" name="name" value="{{ $product->name }}">
                                 <input type="hidden" name="image"
-                                    value="{{ $product->photos->first()->file ?? 'http://via.placeholder.com/62x62' }}">
+                                    value="{{ $product->photos->first()->file ?? 'http://via.placeholder.com/62x62' }}"> --}}
                                 <input type="hidden" name="price" value="{{ $product->price }}">
                                 <button type="submit" class="btn w-100"> Add to Cart</button>
                             @else
@@ -118,13 +118,24 @@
 
                         <!---categorie product-->
                         <div class="my-3">
-                            <p><b>Categories:</b> Diving, living</p>
+                            <p><b>Categories:</b>
+                                @foreach ($product->categories as $category)
+                                    {{ $category->name }},
+                                @endforeach
+                            </p>
+                        </div>
+                        <!---hastags product-->
+                        <div class="my-3">
+                            <p><b>Hastags:</b>
+                                @foreach ($product->hastags as $hastag)
+                                    {{ Str::ucfirst($hastag->name) }},
+                                @endforeach
+                            </p>
                         </div>
                         <!---Social media icon-->
                         <div class="iconfooter">
                             @foreach ($socials as $social)
-                                {{-- @dd($social->name) --}}
-                                <a href="{{ $social->url }}"><i
+                                <a href="{{ Str::lower($social->url) }}"><i
                                         class="bi bi-{{ $social->name }} navicon m-2"></i></a>
                             @endforeach
                         </div>

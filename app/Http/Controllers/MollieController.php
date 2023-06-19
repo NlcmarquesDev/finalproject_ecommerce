@@ -20,12 +20,12 @@ class MollieController extends Controller
         $transaction = Mollie::api()->payments()->create([
             'amount' => [
                 'currency' => 'EUR',
-                'value' => sprintf('%.2f', $order->order_total), // Certifique-se de fornecer o valor no formato correto
+                'value' => sprintf('%.2f', $order->order_total_with_ship), // Certifique-se de fornecer o valor no formato correto
             ],
             'description' => 'Payment for Order ID: ' . $order->id,
             'redirectUrl' => 'http://127.0.0.1:8000/payment-success/' . $order->id, // route('payment-success')
-            'cancelUrl' => 'https://22bf-84-199-250-178.ngrok-free.app/payment-cancel', // route('payment-cancel')
-            'webhookUrl' => 'https://22bf-84-199-250-178.ngrok-free.app/api/mollie/webhook', // route('api/mollie/web')
+            'cancelUrl' => 'https://9d6b-2a02-1811-ec12-ac00-b91d-acc3-3065-85cf.ngrok-free.app/payment-cancel', // route('payment-cancel')
+            'webhookUrl' => 'https://9d6b-2a02-1811-ec12-ac00-b91d-acc3-3065-85cf.ngrok-free.app/api/mollie/webhook', // route('api/mollie/web')
             'method' => 'bancontact',
             'metadata' => [
                 "order_id" => $order->id,

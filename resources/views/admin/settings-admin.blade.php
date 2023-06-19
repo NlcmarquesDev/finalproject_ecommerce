@@ -20,6 +20,9 @@
                     </div>
                 </form>
 
+
+
+
             </div>
             <div class="col-md-6">
                 <h1>Social Media</h1>
@@ -27,23 +30,23 @@
                     @csrf
                     <div class="my-2">
                         <label for="">Facebook:</label>
-                        <input type="url" name="facebook" value="facebook">
+                        <input type="url" name="facebook" value="">
                     </div>
                     <div class="my-2">
                         <label for="">Instagram:</label>
-                        <input type="url" name="instagram" value="instagram">
+                        <input type="url" name="instagram" value="">
                     </div>
                     <div class="my-2">
                         <label for="">Pinterest:</label>
-                        <input type="url" name="pinterest" value="pinterest">
+                        <input type="url" name="pinterest" value="">
                     </div>
                     <div class="my-2">
                         <label for="">Youtube:</label>
-                        <input type="url" name="youtube" value="youtube">
+                        <input type="url" name="youtube" value="">
                     </div>
                     <div class="my-2">
                         <label for="">TikTok:</label>
-                        <input type="url" name="tiktok" value="tiktok">
+                        <input type="url" name="tiktok" value="">
                     </div>
                     <button class="btn btn-dark w-50" type="submit"> Add Socials media</button>
 

@@ -1,6 +1,7 @@
 @extends('admin.index')
 @section('content')
-    <x-admin.heading_table title="Edit Color" button="All Color" rota="{{ route('colors.index') }}"></x-admin.heading_table>
+    <x-admin.heading_table title="Create Color" name=" New Color" button="All Color" rota="{{ route('colors.index') }}">
+    </x-admin.heading_table>
     <div class="row">
         <form action="{{ action('\App\Http\Controllers\Admin\ColorsController@store') }}" method="POST"
             enctype="multipart/form-data">
@@ -31,7 +32,7 @@
                             @enderror
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary ms-2">Create Close</button>
+                            <button type="submit" class="btn btn-primary ms-2">Create Color</button>
                         </div>
                     </div>
                 </div>

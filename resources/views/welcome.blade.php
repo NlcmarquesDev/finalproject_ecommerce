@@ -1,9 +1,11 @@
 @include('partials._header')
 
+{{-- @include('partials.sliders') --}}
+<livewire:slider />
+
 
 <!--HERO -->
-{{-- @dd(bcrypt(12345678)) --}}
-<div class="cont s--inactive">
+{{-- <div class="cont s--inactive">
     <!-- cont inner start -->
     <div class="cont__inner">
         <!-- el start -->
@@ -12,11 +14,19 @@
                 <div class="el__inner">
                     <div class="el__bg"></div>
                     <div class="el__preview-cont">
-                        <h2 class="el__heading">Accessories</h2>
+                        <img src="{{ asset('imagens/Acessories/clock.png') }}" alt="">
                     </div>
                     <div class="el__content">
+                        <img src="{{ asset('imagens/Acessories/clock.png') }}"
+                            style="transition-delay: 0s;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        background-position: left;"
+                            alt="">
                         <div class="el__text">
-                            <a href="#" class="text-decoration-none text-white">Marbel Wall Clock</a>
+                            <a href="#" class="text-decoration-none text-white">
+
+                                Marbel Wall Clock</a>
                         </div>
 
                         <div class="el__close-btn"></div>
@@ -31,7 +41,6 @@
                 <div class="el__inner">
                     <div class="el__bg"></div>
                     <div class="el__preview-cont">
-                        <h2 class="el__heading">Living</h2>
                     </div>
                     <div class="el__content">
                         <div class="el__text">
@@ -49,7 +58,6 @@
                 <div class="el__inner">
                     <div class="el__bg"></div>
                     <div class="el__preview-cont">
-                        <h2 class="el__heading">Furniture</h2>
                     </div>
                     <div class="el__content">
                         <div class="el__text">
@@ -68,7 +76,6 @@
                 <div class="el__inner">
                     <div class="el__bg"></div>
                     <div class="el__preview-cont">
-                        <h2 class="el__heading">Lighting</h2>
                     </div>
                     <div class="el__content">
                         <div class="el__text">
@@ -87,7 +94,6 @@
                 <div class="el__inner">
                     <div class="el__bg"></div>
                     <div class="el__preview-cont">
-                        <h2 id="diningColor" class="el__heading">Dining</h2>
                     </div>
                     <div class="el__content">
                         <div class="el__text">
@@ -102,7 +108,7 @@
         <!-- el end -->
     </div>
     <!-- cont inner end -->
-</div>
+</div> --}}
 <!--END HERO-->
 
 <!--CONTENT -->
@@ -110,6 +116,7 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-6">
             <img id="imgLamp" src="{{ asset('imagens/Lighting/Cast_Sconce_Wall_Lamp_left.png') }}" alt="cast lamp" />
+
         </div>
         <div id="articleslamp" class="col-12 col-lg-4 d-flex flex-column justify-content-center mb-5 mb-md-0">
             <div class="d-flex align-items-center">

@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('social_media', function (Blueprint $table) {
+        Schema::create('home_silders', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('url')->nullable();
+            $table->string('top_title');
+            $table->string('title');
+            $table->string('sub_title');
+            $table->string('offer');
+            $table->string('image');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('social_media');
+        Schema::dropIfExists('home_silders');
     }
 };

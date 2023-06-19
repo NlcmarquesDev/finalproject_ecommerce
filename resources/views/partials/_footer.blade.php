@@ -41,7 +41,7 @@
             </div>
             <div class="col-sm-4 iconfooter text-center">
                 @foreach ($socials as $social)
-                    <a href="{{ $social->url }}"><i class="bi bi-{{ $social->name }} navicon m-2"></i></a>
+                    <a href="{{ $social->url }}"><i class="bi bi-{{ Str::lower($social->name) }} navicon m-2"></i></a>
                 @endforeach
             </div>
 
@@ -59,11 +59,18 @@
 </div>
 </section>
 @livewireScripts
-{{-- <script src="../sweetalert.all.js"></script> --}}
 @include('sweetalert::alert')
+<script>
+    function openNav() {
+        document.getElementById("mySidepanel").style.width = "100%";
+        document.getElementById("mySidepanel").style.height = "100%";
+    }
 
-<!--END NEWSLETTER AND DISCOUNT-->
-
+    /* Set the width of the sidebar to 0 (hide it) */
+    function closeNav() {
+        document.getElementById("mySidepanel").style.width = "0";
+    }
+</script>
 
 <script src="https://kit.fontawesome.com/e644b18eb6.js" crossorigin="anonymous"></script>
 {{-- <script --}}
