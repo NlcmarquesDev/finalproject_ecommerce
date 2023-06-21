@@ -10,44 +10,39 @@
                 <div class="row g-3 mb-9">
                     <div class=" col-md-6">
                         <div class="form-floating">
-                            <input class="form-control" name="name" id="floatingInputFirstname" type="text"
-                                placeholder="First name" value="{{ $userDetail->name }}">
+                            <p class="form-control">{{ $userDetail->name }}</p>
+
                             <label for="floatingInputFirstname">Full Name</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input class="form-control" name="email" id="floatingInputEmail" type="text"
-                                placeholder="email" value="{{ $userDetail->email }}">
+                            <p class="form-control">{{ $userDetail->email }}</p>
                             <label for="floatingInputEmail">Your Email address</label>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input class="form-control" name="email" id="floatingInputEmail" type="text"
-                                placeholder="email" value="{{ $userDetail->is_active == 1 ? 'Active' : 'Inactive' }}">
+                            <p class="form-control">{{ $userDetail->is_active == 1 ? 'Active' : 'Inactive' }}</p>
                             <label for="floatingSelectRating">Status</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input class="form-control" name="login" id="floatingInputEmail" type="text"
-                                placeholder="email" value="{{ $userDetail->oauth_type }}">
+                            <p class="form-control">{{ $userDetail->oauth_type }}</p>
                             <label for="floatingSelectRating">Registration by:</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input class="form-control" name="created" id="floatingInputCreated" type="text"
-                                placeholder="created" value="{{ $userDetail->created_at }}">
+                            <p class="form-control">{{ $userDetail->created_at }}</p>
                             <label for="floatingSelectRating">Created at</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input class="form-control" name="updated" id="floatingInputupdated" type="text"
-                                placeholder="updated" value="{{ $userDetail->updated_at }}">
+                            <p class="form-control">{{ $userDetail->updated_at }}</p>
                             <label for="floatingSelectRating">Updated at</label>
                         </div>
                     </div>
@@ -56,30 +51,26 @@
                     <h4 class="mt-6">Address Information</h4>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input name="street" class="form-control" id="floatingInputStreet" type="text"
-                                placeholder="street" value="{{ $locationDetail->street }}">
+                            <p class="form-control">{{ $locationDetail->street }}</p>
                             <label for="floatingInputStreet">Street</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input name="city" class="form-control" id="floatingInputCompany" type="text"
-                                placeholder="City" value="{{ $locationDetail->city }}">
+                            <p class="form-control">{{ $locationDetail->city }}</p>
                             <label for="floatingInputCompany">City</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input name="number" class="form-control" id="floatingInputCompany" type="text"
-                                placeholder="phone" value="{{ $locationDetail->phone }}">
+                            <p class="form-control">{{ $locationDetail->phone }}</p>
                             <label for="floatingInputCompany">Phone number: +32 </label>
                         </div>
                     </div>
 
                     <div class="col-sm-6">
                         <div class="form-floating">
-                            <input name="zipcode" class="form-control" id="floatingInputZipcode" type="text"
-                                placeholder="postcode" value="{{ $locationDetail->zipcode }}">
+                            <p class="form-control">{{ $locationDetail->zipcode }}</p>
                             <label for="floatingInputZipcode">Post code</label>
                         </div>
                     </div>

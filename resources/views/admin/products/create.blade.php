@@ -51,6 +51,9 @@
                                 <input class="form-control" name="rating" id="floatingInputCompany" type="number"
                                     placeholder="Rating">
                                 <label for="floatingInputCompany">Rating</label>
+                                @error('rating')
+                                    <p class="text-danger fs-6">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class=" col-md-12">

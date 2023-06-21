@@ -39,7 +39,7 @@
                                     onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'">
 
                                 <label for="floatingInputprice">Product
-                                    Name</label>
+                                    Price</label>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -62,6 +62,9 @@
                                 <input class="form-control" name="rating" value="{{ $product->rating }}"
                                     id="floatingInputCompany" type="number" placeholder="Rating">
                                 <label for="floatingInputCompany">Product Rating</label>
+                                @error('rating')
+                                    <p class="text-danger fs-6">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class=" col-md-4">

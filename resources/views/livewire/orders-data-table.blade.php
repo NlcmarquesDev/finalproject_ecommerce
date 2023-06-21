@@ -45,9 +45,7 @@
                         </svg>
 
                     </button></th>
-                <th>Shipped</th>
                 <th>Created_at</th>
-                <th>Deleted_at</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -62,34 +60,11 @@
                     </td>
                     <td>{{ $order->order_email }} </td>
                     <td>{{ $order->order_name }}</td>
-                    <td><span
-                            class="badge rounded-pill {{ $order->order_status == 'shipped' ? 'bg-success' : 'bg-danger' }}">{{ $order->order_shipped }}</span>
-                    </td>
                     <td>{{ $order->created_at }}</td>
-                    <td>{{ $order->deleted_at ? $order->deleted_at->diffForHumans() : '' }}</td>
                     <td>
-                        <div class="d-flex justify-content-between gap-2">
-                            @if ($order->deleted_at != null)
-                                <form action="{{ route('products.restore', $order->id) }}" method="POST">
-                                    @csrf
-                                    @method('POST')
-                                    <button type="submit" class="btn btn-info">
-                                        Restore
-                                    </button>
-                                </form>
-                            @else
-                                <a class="btn btn-primary" href="{{ route('orders.items', $order->id) }}">
-                                    Details
-                                </a>
-                                <form action="{{ route('products.destroy', $order->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">
-                                        Delete
-                                    </button>
-                                </form>
-                            @endif
-                        </div>
+                        <a class="btn btn-primary" href="{{ route('orders.items', $order->id) }}">
+                            Details
+                        </a>
                     </td>
                 </tr>
             @endforeach

@@ -54,13 +54,14 @@ class ProductController extends Controller
             [
                 'name' => ['required', 'between:3,255'],
                 'photo_id' => ['required', 'array', 'min:2', 'max:2'],
-                'price' => 'required',
+                'price' => ['required', 'regex:/^\d+(\.\d{1,2})?$/'],
+                'rating' => ['required', 'min:1', 'max:5'],
             ],
             [
                 'name.required' => 'Product name is required',
-                //                'title.between' => 'Product name between 3 and 255 characters required',
                 'price.required' => 'Price is required',
-                //                'keywords.required'=>'Please check minimum one keyword'
+                'price.regex' => 'Invalid price format. Use up to 2 decimal places.',
+                'rating.required' => 'Please the minimum is ! and maximum is 5',
             ]
         );
 
@@ -130,14 +131,27 @@ class ProductController extends Controller
         request()->validate(
             [
                 'name' => ['required', 'between:2,255'],
-                'photo_id' => ['required', 'array', 'min:2', 'max:2'],
+                'photo_id' => ['nullable', 'array', 'min:0', 'max:2'],
+                'photo_id.*' => ['nullable', 'image'],
                 'categories' => ['required', 'min:1'],
                 'hastags' => ['required', 'min:1'],
+                'price' => ['required', 'regex:/^\d+(\.\d{1,2})?$/'],
+                'rating' => ['required', 'numeric', 'min:1', 'max:5'],
 
             ],
             [
                 'name.required' => 'Title is required',
                 'name.between' => 'Title between 2 and 255 characters required',
+                'photo_id.array' => 'Photos must be an array',
+                'photo_id.min' => 'At least 0 photos are required',
+                'photo_id.max' => 'No more than 2 photos are allowed',
+                'photo_id.*.image' => 'Invalid photo format',
+                'price.required' => 'Price is required',
+                'price.regex' => 'Invalid price format. Use up to 2 decimal places.',
+                'rating.required' => 'Rating is required',
+                'rating.numeric' => 'Rating must be a number',
+                'rating.min' => 'Rating must be at least 1',
+                'rating.max' => 'Rating cannot exceed 5',
             ]
         );
         $product = Product::findOrFail($id);
