@@ -13,7 +13,7 @@
     <!--      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"-->
     <!--      crossorigin="anonymous"-->
     <!--    />-->
-
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png" />
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @livewireStyles
 

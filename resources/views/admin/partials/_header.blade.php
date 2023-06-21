@@ -9,7 +9,7 @@
     <meta name="author" content="" />
     <title>NM - luxury items for you thought of you </title>
     {{-- <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}"> --}}
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/icon" />
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png" />
     @vite(['resources/sass/admin.scss', 'resources/js/app.js'])
     @livewireStyles
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
