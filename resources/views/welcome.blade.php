@@ -1,159 +1,53 @@
 @include('partials._header')
 
-{{-- @include('partials.sliders') --}}
 <livewire:slider />
 
-
-<!--HERO -->
-{{-- <div class="cont s--inactive">
-    <!-- cont inner start -->
-    <div class="cont__inner">
-        <!-- el start -->
-        <div class="el">
-            <div class="el__overflow">
-                <div class="el__inner">
-                    <div class="el__bg"></div>
-                    <div class="el__preview-cont">
-                        <img src="{{ asset('imagens/Acessories/clock.png') }}" alt="">
-                    </div>
-                    <div class="el__content">
-                        <img src="{{ asset('imagens/Acessories/clock.png') }}"
-                            style="transition-delay: 0s;
-                        background-size: cover;
-                        background-repeat: no-repeat;
-                        background-position: left;"
-                            alt="">
-                        <div class="el__text">
-                            <a href="#" class="text-decoration-none text-white">
-
-                                Marbel Wall Clock</a>
-                        </div>
-
-                        <div class="el__close-btn"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- el end -->
-        <!-- el start -->
-        <div class="el">
-            <div class="el__overflow">
-                <div class="el__inner">
-                    <div class="el__bg"></div>
-                    <div class="el__preview-cont">
-                    </div>
-                    <div class="el__content">
-                        <div class="el__text">
-                            <a href="#" class="text-decoration-none text-white">Kredenets Sneackers</a>
-                        </div>
-                        <div class="el__close-btn"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- el end -->
-        <!-- el start -->
-        <div class="el">
-            <div class="el__overflow">
-                <div class="el__inner">
-                    <div class="el__bg"></div>
-                    <div class="el__preview-cont">
-                    </div>
-                    <div class="el__content">
-                        <div class="el__text">
-                            <a href="#" class="text-decoration-none text-white">Andrea light
-                            </a>
-                        </div>
-                        <div class="el__close-btn"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- el end -->
-        <!-- el start -->
-        <div class="el">
-            <div class="el__overflow">
-                <div class="el__inner">
-                    <div class="el__bg"></div>
-                    <div class="el__preview-cont">
-                    </div>
-                    <div class="el__content">
-                        <div class="el__text">
-                            <a href="#" class="text-decoration-none text-white">Andreea light
-                            </a>
-                        </div>
-                        <div class="el__close-btn"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- el end -->
-        <!-- el start -->
-        <div class="el">
-            <div class="el__overflow">
-                <div class="el__inner">
-                    <div class="el__bg"></div>
-                    <div class="el__preview-cont">
-                    </div>
-                    <div class="el__content">
-                        <div class="el__text">
-                            <a href="#" class="text-decoration-none text-white">Thin Haus Tabel
-                            </a>
-                        </div>
-                        <div class="el__close-btn"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- el end -->
-    </div>
-    <!-- cont inner end -->
-</div> --}}
-<!--END HERO-->
-
 <!--CONTENT -->
-<section id="products" class="container d-flex justify-content-center align-items-center">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-6">
-            <img id="imgLamp" src="{{ asset('imagens/Lighting/Cast_Sconce_Wall_Lamp_left.png') }}" alt="cast lamp" />
+<div>
+    <section id="products" class="container d-flex justify-content-center align-items-center">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <img id="imgLamp" src="{{ asset('imagens/Lighting/Cast_Sconce_Wall_Lamp_left.png') }}" alt="cast lamp" />
 
+            </div>
+            <div id="articleslamp" class="col-12 col-lg-4 d-flex flex-column justify-content-center mb-5 mb-md-0">
+                <div class="d-flex align-items-center">
+                    <div class="bolicon"><i class="bi bi-lightbulb icon"></i></div>
+                    <div>
+                        <h4>Industrial Design</h4>
+                        <p class="pfont">
+                            Geometric forms rendered in <br />
+                            industrial, cast aluminum.
+                        </p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center my-md-5">
+                    <div class="bolicon">
+                        <i class="bi bi-box-arrow-in-up icon"></i>
+                    </div>
+                    <div class="mt-3">
+                        <h4>Sophisticated Built</h4>
+                        <p class="pfont">
+                            Pleasant, glare-free illumination <br />
+                            delivered via sculptural fixtures.
+                        </p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="bolicon"><i class="bi bi-eyedropper icon"></i></div>
+                    <div>
+                        <h4>Superb Finish</h4>
+                        <p class="pfont">
+                            Cast aluminum with a smooth, warm <br />
+                            and tactile finish.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="articleslamp" class="col-12 col-lg-4 d-flex flex-column justify-content-center mb-5 mb-md-0">
-            <div class="d-flex align-items-center">
-                <div class="bolicon"><i class="bi bi-lightbulb icon"></i></div>
-                <div>
-                    <h4>Industrial Design</h4>
-                    <p class="pfont">
-                        Geometric forms rendered in <br />
-                        industrial, cast aluminum.
-                    </p>
-                </div>
-            </div>
-            <div class="d-flex align-items-center my-md-5">
-                <div class="bolicon">
-                    <i class="bi bi-box-arrow-in-up icon"></i>
-                </div>
-                <div class="mt-3">
-                    <h4>Sophisticated Built</h4>
-                    <p class="pfont">
-                        Pleasant, glare-free illumination <br />
-                        delivered via sculptural fixtures.
-                    </p>
-                </div>
-            </div>
-            <div class="d-flex align-items-center">
-                <div class="bolicon"><i class="bi bi-eyedropper icon"></i></div>
-                <div>
-                    <h4>Superb Finish</h4>
-                    <p class="pfont">
-                        Cast aluminum with a smooth, warm <br />
-                        and tactile finish.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
+</div>
+
 <!--END CONTENT -->
 
 <!--CONTENT PUBLICITY -->
