@@ -9,6 +9,7 @@
                 <th>Id</th>
                 <th>Order_id</th>
                 <th>Product Name</th>
+                <th>Product Color</th>
                 <th>Product Price</th>
                 <th>Product Taxes</th>
                 <th>Quantity</th>
@@ -22,6 +23,7 @@
                     <td>{{ $orderItem->id }}</td>
                     <td> {{ $orderItem->order_id }}</td>
                     <td>{{ $orderItem->product_name }}</td>
+                    <td>{{ $orderItem->product_color }}</td>
                     <td>{{ app('price')->format($orderItem->product_price) }}</td>
                     <td>{{ app('price')->format($orderItem->product_taxes) }}</td>
                     <td>{{ $orderItem->quantity }}</td>

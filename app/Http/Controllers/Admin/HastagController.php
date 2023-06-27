@@ -16,9 +16,9 @@ class HastagController extends Controller
     {
         //
         $hastags = Hastag::withTrashed()->paginate(10);
-        // $totalHatags = Hastag::count();
-        // return view('admin.hastags.index', compact('hastags', 'totalHatags'));
-        return view('admin.hastags.index', compact('hastags'));
+        $totalHastags  = Hastag::count();
+        return view('admin.hastags.index', compact('hastags', 'totalHastags'));
+        // return view('admin.hastags.index', compact('hastags'));
     }
 
     /**
