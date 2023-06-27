@@ -84,12 +84,7 @@ Route::middleware(['role:administrator,customer'])->group(function () {
     Route::get('/myorders/{id}', [OrderController::class, 'show'])->name('my.orders');
     //MY SETTINGS USER PAGE
     Route::resource('/mysettings', SettingUserController::class);
-    // Route::get('/mysettings/{id}', [SettingUserController::class, 'index'])->name('settings.index');
-    // Route::get('/mysettings/{id}', [SettingUserController::class, 'update'])->name('settings.update');
 });
-
-//
-// Route::get('/category/{category:slug}', [CategoriesController::class, 'category'])->name('category.category');
 
 Auth::routes();
 
@@ -144,8 +139,4 @@ Route::prefix('admin')->middleware(['role:administrator'])->group(function () {
     Route::get('settings', [SettingsController::class, 'favicon'])->name("settings.admin");
     Route::post('settings/favicon', [SettingsController::class, 'addFavicon'])->name("add.favicon");
     Route::post('settings/socialmedia', [SocialMediaController::class, 'socialMedia'])->name('social.media');
-    //SLIDER HOMEPAGE
-    // Route::get('/slider', AdminHomeSliderComponent::class)->name('admin.slider');
-    // Route::get('/slider/add', AdminAddHomeSlider::class)->name('admin.slider.add');
-    // Route::get('/slider/edit/{slide_id}', AdminEditHomeSlider::class)->name('admin.slider.edit');
 });

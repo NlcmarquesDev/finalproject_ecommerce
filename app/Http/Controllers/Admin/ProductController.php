@@ -13,6 +13,7 @@ use App\Models\SocialMedia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
@@ -56,12 +57,16 @@ class ProductController extends Controller
                 'photo_id' => ['required', 'array', 'min:2', 'max:2'],
                 'price' => ['required', 'regex:/^\d+(\.\d{1,2})?$/'],
                 'rating' => ['required', 'min:1', 'max:5'],
+                'colors' => ['required', 'array', 'min:1'],
+                'quantities' => ['nullable', 'array'],
+                'quantities.*' => ['nullable', 'integer', 'min:1'],
             ],
             [
                 'name.required' => 'Product name is required',
                 'price.required' => 'Price is required',
                 'price.regex' => 'Invalid price format. Use up to 2 decimal places.',
                 'rating.required' => 'Please the minimum is ! and maximum is 5',
+                'quantities.*.required_with' => 'The quantity must be provided for the selected color(s).',
             ]
         );
 
@@ -70,17 +75,18 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->rating = $request->rating;
-        $product->quantity = $request->quantity;
 
 
         $product->save();
-        $colorIds = collect($request->input('colors', []))->pluck($product->color)->all();
-        $ids = [];
-        foreach ($colorIds as $item) {
-            $obj = json_decode($item);
-            $ids[] = $obj->id;
+
+        $colorQuantities = $request->input('quantities', []);
+        $syncData = [];
+        foreach ($colorQuantities as $colorId => $quantity) {
+            if ($quantity > 0) {
+                $syncData[$colorId] = ['quantity' => $quantity];
+            }
         }
-        $product->colors()->sync($ids);
+        $product->colors()->sync($syncData);
 
         $product->categories()->sync($request->categories, true);
 
@@ -137,6 +143,9 @@ class ProductController extends Controller
                 'hastags' => ['required', 'min:1'],
                 'price' => ['required', 'regex:/^\d+(\.\d{1,2})?$/'],
                 'rating' => ['required', 'numeric', 'min:1', 'max:5'],
+                'colors' => ['required', 'array', 'min:1'],
+                'quantities' => ['nullable', 'array'],
+                'quantities.*' => ['nullable', 'integer', 'min:1'],
 
             ],
             [
@@ -152,14 +161,16 @@ class ProductController extends Controller
                 'rating.numeric' => 'Rating must be a number',
                 'rating.min' => 'Rating must be at least 1',
                 'rating.max' => 'Rating cannot exceed 5',
+                'quantities.*.required_with' => 'The quantity must be provided for the selected color(s).',
             ]
         );
         $product = Product::findOrFail($id);
         $input = $request->all();
-        if ($request->hasFile('photo_id')) {
-            $oldPhotos = $product->photos; // Obter as fotos atuais do produto
 
-            // Remover as fotos antigas (caso existam)
+
+        if ($request->hasFile('photo_id')) {
+            $oldPhotos = $product->photos;
+
             foreach ($oldPhotos as $oldPhoto) {
                 unlink(public_path($oldPhoto->file));
                 $oldPhoto->delete();
@@ -173,18 +184,26 @@ class ProductController extends Controller
         }
         $product->update($input);
 
+        $selectedColors = $request->input('colors', []);
+        $colorQuantities = $request->input('quantities', []);
 
-        $colorIds = collect($request->input('colors', []))->pluck($product->color)->all();
-        $ids = [];
-
-        foreach ($colorIds as $item) {
-            $obj = json_decode($item);
-            $ids[] = $obj->id;
+        $syncData = [];
+        foreach ($selectedColors as $colorId) {
+            if (isset($colorQuantities[$colorId])) {
+                $quantity = $colorQuantities[$colorId];
+                if ($quantity !== '' && is_numeric($quantity) && $quantity >= 1) {
+                    $syncData[$colorId] = ['quantity' => $quantity];
+                } else {
+                    $errorMessage = 'Quantity must be a positive number greater than or equal to 1.';
+                    return redirect()->back()->withErrors(['quantities.' . $colorId => $errorMessage]);
+                }
+            } else {
+                $errorMessage = 'Quantity is required for the selected color.';
+                return redirect()->back()->withErrors(['quantities.' . $colorId => $errorMessage]);
+            }
         }
-        $product->colors()->sync($ids);
 
-
-
+        $product->colors()->sync($syncData);
         $product->hastags()->sync($request->hastags, true);
         $product->categories()->sync($request->categories, true);
 
@@ -197,8 +216,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-
-
         $product = Product::findOrFail($product->id);
         foreach ($product->photos as $photo) {
             $photo->delete();
@@ -210,7 +227,6 @@ class ProductController extends Controller
     public function productRestore($id)
     {
         Product::onlyTrashed()->where('id', $id)->restore();
-        // herstel ook alle posts van de gebruiker
         $product = Product::withTrashed()->where('id', $id)->first();
         $product->save();
         Alert::info('Product restore Successfully');

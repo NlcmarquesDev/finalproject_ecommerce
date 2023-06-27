@@ -11,7 +11,7 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'description', 'price', 'quantity', 'rating'];
+    protected $fillable = ['name', 'description', 'price', 'rating'];
 
     public static function Slugify($value)
     {
@@ -24,7 +24,7 @@ class Product extends Model
     }
     public function colors()
     {
-        return $this->belongsToMany(Color::class, 'product_color', 'product_id', 'color_id');
+        return $this->belongsToMany(Color::class, 'color_product')->withPivot('quantity');
     }
     public function hastags()
     {

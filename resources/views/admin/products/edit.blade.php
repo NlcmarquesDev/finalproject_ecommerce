@@ -49,15 +49,7 @@
                                     Price</label>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input class="form-control" name="quantity" value="{{ $product->quantity }}"
-                                    id="floatingInputPhone" type="number" placeholder="quantity">
-                                <label for="floatingInputPhone">Product Quantity</label>
-                            </div>
-                        </div>
-
-                        <div class=" col-md-6">
+                        <div class=" col-md-12">
                             <div class="form-floating">
                                 <input class="form-control" name="rating" value="{{ $product->rating }}"
                                     id="floatingInputCompany" type="number" placeholder="Rating">
@@ -67,25 +59,28 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class=" col-md-4">
-                            <div class="form-floating">
-                                <select name="colors[]" class="form-select" id="floatingSelectIndustry"
-                                    style="height: 100px; " multiple required>
-                                    @foreach ($colors as $color)
-                                        <option value="{{ $color }}">{{ $color->name }}</option>
-                                    @endforeach
-                                </select>
-                                <label for="floatingSelectIndustry">Color "hou de ctrl toets ingedrukt om meerdere te
-                                    selecteren"</label>
-                                @error('colors')
-                                    <p class="text-danger fs-6">{{ $message }}</p>
-                                @enderror
-                            </div>
+                        <div class="col-md-4">
+                            <label>Colors:</label>
+                            @foreach ($colors as $index => $color)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $color->id }}"
+                                        id="color{{ $index }}" name="colors[]">
+                                    <label class="form-check-label"
+                                        for="color{{ $index }}">{{ $color->name }}</label>
+                                    <input class="form-control" name="quantities[{{ $color->id }}]" type="number"
+                                        placeholder="quantity">
+                                    @error('quantities.' . $color->id)
+                                        <p class="alert alert-danger" role="alert">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            @endforeach
                         </div>
+                        @error('colors')
+                            <p class="alert alert-danger" role="alert">{{ $message }}</p>
+                        @enderror
                         <div class=" col-md-4">
                             <label>Hastags:</label>
                             @foreach ($hastags as $hastag)
-                                {{-- @dd($hastag) --}}
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="{{ $hastag->id }}"
                                         id="hastag{{ $hastag->id }}" name="hastags[]"
@@ -114,29 +109,31 @@
                         @error('categories')
                             <p class="alert alert-danger" role="alert">{{ $message }}</p>
                         @enderror
-                        < <div class="col-12 d-flex justify-content-end mt-6">
+
+                        <div class="col-12 d-flex justify-content-end mt-6">
                             <button type="submit" class="btn btn-primary ms-2">Update Product</button>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 d-flex justify-content-center align-items-center">
-                <div class="d-flex align-items-end position-relative mb-7">
-                    <input class="d-none" id="upload-avatar" type="file">
-                    <div class=" rounded-circle cursor-pointer d-flex flex-center mb-5"
-                        style="max-width: 300px; max-height: 300px">
-                        <div class="form-group">
-                            <img src="{{ $product->photos->first() ? asset($product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62' }}"
-                                alt="stone lamp" style="width: 300px; height: 300px" />
-                            <input type="file" name="photo_id[]" value="photo_id[]" id="ChooseFile" multiple>
-                            <label class="mt-3" for="photo_id"> You need to upload 2 images</label>
-                            @error('photo_id')
-                                <p class="alert alert-danger" role="alert">{{ $message }}</p>
-                            @enderror
+                <div class="col-lg-6 d-flex justify-content-center align-items-center">
+                    <div class="d-flex align-items-end position-relative mb-7">
+                        <input class="d-none" id="upload-avatar" type="file">
+                        <div class=" rounded-circle cursor-pointer d-flex flex-center mb-5"
+                            style="max-width: 300px; max-height: 300px">
+                            <div class="form-group">
+                                <img src="{{ $product->photos->first() ? asset($product->photos->skip(1)->first()->file) : 'http://via.placeholder.com/62x62' }}"
+                                    alt="stone lamp" style="width: 300px; height: 300px" />
+                                <input type="file" name="photo_id[]" value="photo_id[]" id="ChooseFile" multiple>
+                                <label class="mt-3" for="photo_id"> You need to upload 2 images</label>
+                                @error('photo_id')
+                                    <p class="alert alert-danger" role="alert">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-    </div>
-    </form>
+        </form>
     </div>
 @endsection

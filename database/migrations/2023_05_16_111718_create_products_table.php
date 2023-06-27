@@ -17,11 +17,10 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price', 10, 2)->nullable();
             $table->integer('rating')->nullable();
-            $table->integer('quantity')->default(10);
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::create("product_color", function (Blueprint $table) {
+        Schema::create("color_product", function (Blueprint $table) {
             $table->id();
             $table
                 ->foreignId("product_id")
@@ -33,6 +32,7 @@ return new class extends Migration
                 ->unsigned()
                 ->constrained()
                 ->cascadeOnDelete();
+            $table->integer('quantity')->default(10);
             $table->timestamps();
             $table->unique(["product_id", "color_id"]);
         });

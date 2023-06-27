@@ -416,7 +416,8 @@ a.pfont:hover {
 .gallery-wrap {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    justify-content: center;
+    width: 82%;
     height: 80vh;
 }
 

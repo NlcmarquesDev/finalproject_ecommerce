@@ -41,6 +41,7 @@
                             <div class="col-md-6 col-lg-4">
                                 @foreach ($order->orderItems as $orderItem)
                                     <p><b>Product Name: </b> {{ $orderItem->product_name }}</p>
+                                    <p><b>Product Color: </b> {{ $orderItem->product_color }}</p>
                                     <p><b>Quantity: </b> {{ $orderItem->quantity }}</p>
                                 @endforeach
                             </div>

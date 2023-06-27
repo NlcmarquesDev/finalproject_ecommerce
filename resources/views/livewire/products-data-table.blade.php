@@ -37,16 +37,6 @@
                         </svg>
 
                     </button></th>
-                <th> <button wire:click="sortBy('quantity')"
-                        class="d-flex align-items-center border-0 bg-transparent p-0" style=" font-weight:bold; ">
-                        <p class="m-0 pe-2">Quantity</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-arrow-down-up" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
-                        </svg>
-
-                    </button></th>
                 <th>Deleted_at</th>
                 <th>Actions</th>
             </tr>
@@ -65,7 +55,6 @@
                     <td><strong>{{ $product->name }}</strong></td>
                     <td>{{ $product->description }}</td>
                     <td>{{ app('price')->format($product->price) }}</td>
-                    <td><span class="badge bg-success">{{ $product->quantity }}</span></td>
                     <td>{{ $product->deleted_at ? $product->deleted_at->diffForHumans() : '' }}</td>
                     <td>
                         <div class="d-flex justify-content-between gap-2">

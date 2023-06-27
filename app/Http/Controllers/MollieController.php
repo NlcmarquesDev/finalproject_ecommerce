@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use App\Models\Order;
 use App\Models\Payment;
+
+use App\Models\Cart;
+use App\Models\ColorProduct;
 use Illuminate\Http\Request;
 use Mollie\Laravel\Facades\Mollie;
 
@@ -15,7 +19,7 @@ class MollieController extends Controller
         Mollie::api()->setApiKey('test_GnVpmSRdtV2wBqzgmdsAeMWEHHEbv8'); // your mollie test api key
     }
 
-    public function preparePayment(Order $order)
+    public function preparePayment(Order $order, Cart $cart)
     {
         $transaction = Mollie::api()->payments()->create([
             'amount' => [
@@ -24,8 +28,8 @@ class MollieController extends Controller
             ],
             'description' => 'Payment for Order ID: ' . $order->id,
             'redirectUrl' => 'http://127.0.0.1:8000/payment-success/' . $order->id, // route('payment-success')
-            'cancelUrl' => 'https://9d6b-2a02-1811-ec12-ac00-b91d-acc3-3065-85cf.ngrok-free.app/payment-cancel', // route('payment-cancel')
-            'webhookUrl' => 'https://9d6b-2a02-1811-ec12-ac00-b91d-acc3-3065-85cf.ngrok-free.app/api/mollie/webhook', // route('api/mollie/web')
+            'cancelUrl' => 'https://b729-2a02-1811-ec12-ac00-1922-14e9-f0c-a276.ngrok-free.app/payment-cancel', // route('payment-cancel')
+            'webhookUrl' => 'https://b729-2a02-1811-ec12-ac00-1922-14e9-f0c-a276.ngrok-free.app/api/mollie/webhook', // route('api/mollie/web')
             'method' => 'bancontact',
             'metadata' => [
                 "order_id" => $order->id,
@@ -38,6 +42,23 @@ class MollieController extends Controller
         $payment->payment_status = 'unpaid';
         $payment->payment_gateway = 'mollie';
         $payment->save();
+
+        foreach ($cart->content() as $cartItem) {
+            $product = $cartItem->product();
+            $colorName = $cartItem->color();
+            $color = Color::where('name', $colorName)->first();
+
+            if ($color) {
+                $colorProduct = ColorProduct::where('product_id', $product->id)
+                    ->where('color_id', $color->id)
+                    ->first();
+
+                if ($colorProduct) {
+                    $colorProduct->quantity -= $cartItem->quantity();
+                    $colorProduct->save();
+                }
+            }
+        }
 
 
 
@@ -54,6 +75,7 @@ class MollieController extends Controller
      */
     public function paymentSuccess(Order $order)
     {
+
         if ($order->isPaid()) {
 
             $order = Order::findOrFail($order->id);

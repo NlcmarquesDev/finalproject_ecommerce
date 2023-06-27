@@ -56,19 +56,19 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
-                                                <input type="address" name="adress" value="" class="form-control"
-                                                    id="floatingInput" placeholder="Straat , Nr." required>
+                                                <input type="text" name="adress" value="" class="form-control"
+                                                    id="floatingInput" placeholder="Straat , Nr.">
                                                 <label for="floatingInput">Address and number</label>
                                             </div>
                                         </div>
                                     </div>
-                                    @error('address')
+                                    @error('adress')
                                         <p class="text-danger fs-6">{{ $message }}</p>
                                     @enderror
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
-                                                <input type="bus" name="bus" class="form-control"
+                                                <input type="number" name="bus" class="form-control"
                                                     id="floatingInput" placeholder="Bus (optionel)">
                                                 <label for="floatingInput">Bus</label>
                                             </div>
@@ -76,9 +76,8 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
-                                            <input type="postcode" name="postcode" class="form-control"
-                                                id="floatingInput" value="" placeholder="Vorbield: 8930 "
-                                                required>
+                                            <input type="number" name="postcode" class="form-control"
+                                                id="floatingInput" value="" placeholder="Vorbield: 8930 ">
                                             <label for="floatingInput">Postcode</label>
                                         </div>
                                     </div>
@@ -91,8 +90,8 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
-                                                <input type="city" name="city" class="form-control"
-                                                    id="floatingInput" value="" placeholder="Stad" required>
+                                                <input type="text" name="city" class="form-control"
+                                                    id="floatingInput" value="" placeholder="Stad">
                                                 <label for="floatingInput">Stad</label>
                                             </div>
                                         </div>

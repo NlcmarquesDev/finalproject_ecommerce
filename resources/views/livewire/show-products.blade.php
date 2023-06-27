@@ -16,13 +16,13 @@
             </div>
         </div>
         <div class="frontpage-product">
-            @if ($selectCategory)
-                @foreach ($product->categories as $category)
-                    <p class="badge text-bg-secondary">
-                        {{ $category->name }}
-                    </p>
-                @endforeach
-            @endif
+            {{-- @if ($selectCategory) --}}
+            @foreach ($product->categories as $category)
+                <p class="badge text-bg-secondary" wire:key="productcategory{{ $category }}">
+                    {{ $category->name }}
+                </p>
+            @endforeach
+            {{-- @endif --}}
         </div>
         <div class="frontpage-product d-flex justify-content-between algin-items-center">
 

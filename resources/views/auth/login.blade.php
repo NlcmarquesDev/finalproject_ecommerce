@@ -52,14 +52,7 @@
                                 @enderror
                             </div>
 
-                            <!-- Checkbox -->
-                            <div class="form-check d-flex justify-content-center mb-4">
-                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33"
-                                    checked />
-                                <label class="form-check-label" for="form2Example33">
-                                    Subscribe to our newsletter
-                                </label>
-                            </div>
+
                             <div class="form-check d-flex justify-content-center mb-4">
                                 @if (Route::has('password.request'))
                                     <a class="" href="{{ route('password.request') }}">
@@ -74,25 +67,14 @@
                             </button>
 
                             <!-- Register buttons -->
-                            <div class="text-center ">
+                            <div class="text-center  ">
                                 <p>or sign up with:</p>
-                                <div class="d-flex">
-                                    <button type="button" class="btn  btn-floating mx-1 border border-0">
-                                        <i class="fab fa-facebook-f fs-3"></i>
-                                    </button>
+                                <div class="d-flex justify-content-center">
 
-                                    <a href="{{ route('google.login') }}"
-                                        class="btn  btn-floating mx-1 border border-0">
+                                    <a href="{{ route('google.login') }}" class="btn  btn-block mx-1">
                                         <i class="fab fa-google fs-3"></i>
+                                        oogle
                                     </a>
-
-                                    <button type="button" class="btn btn-floating mx-1 border border-0">
-                                        <i class="fab fa-twitter fs-3"></i>
-                                    </button>
-
-                                    <button type="button" class="btn  btn-floating mx-1 border border-0">
-                                        <i class="fab fa-github fs-3"></i>
-                                    </button>
                                 </div>
 
                             </div>

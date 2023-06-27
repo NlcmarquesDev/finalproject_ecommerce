@@ -33,20 +33,18 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input class="form-control" name="price" id="floatingInputPhone" type="number"
-                                    placeholder="Price">
-                                <label for="floatingInputPhone">Price</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input class="form-control" name="quantity" id="floatingInputPhone" type="number"
-                                    placeholder="Quantity">
-                                <label for="floatingInputPhone">Quantity</label>
+                                <input class="form-control" type="number" id="floatingInputprice" placeholder="0.00"
+                                    required name="price" min="0" step="0.01" title="Currency"
+                                    pattern="^\d+(?:\.\d{1,2})?$"
+                                    onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'">
+
+                                <label for="floatingInputprice">Product
+                                    Price</label>
                             </div>
                         </div>
 
-                        <div class=" col-md-12">
+
+                        <div class=" col-md-6">
                             <div class="form-floating">
                                 <input class="form-control" name="rating" id="floatingInputCompany" type="number"
                                     placeholder="Rating">
@@ -56,47 +54,51 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class=" col-md-12">
-                            <div class="form-floating">
-                                <select name="colors[]" class="form-select" id="floatingSelectIndustry"
-                                    style="height: 100px; " multiple>
-                                    @foreach ($colors as $color)
-                                        <option value="{{ $color }}">{{ $color->name }}</option>
-                                    @endforeach
-                                </select>
-                                <label for="floatingSelectIndustry">Color "hou de ctrl toets ingedrukt om meerdere te
-                                    selecteren"</label>
-                                @error('colors')
-                                    <p class="text-danger fs-6">{{ $message }}</p>
-                                @enderror
-                            </div>
+                        <div class="col-md-4">
+                            <label>Colors:</label>
+                            @foreach ($colors as $index => $color)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $color->id }}"
+                                        id="color{{ $index }}" name="colors[]">
+                                    <label class="form-check-label"
+                                        for="color{{ $index }}">{{ $color->name }}</label>
+                                    <input class="form-control" name="quantities[{{ $color->id }}]" type="number"
+                                        placeholder="quantity">
+                                    @error('quantities.' . $color->id)
+                                        <p class="alert alert-danger" role="alert">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="d-flex">
-                            <div class=" col-md-6">
-                                <label>Hastags:</label>
-                                @foreach ($hastags as $hastag)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{ $hastag->id }}"
-                                            id="hastag{{ $hastag->id }}" name="hastags[]">
-                                        <label class="form-check-label"
-                                            for="hastag{{ $hastag->id }}">{{ $hastag->name }}</label>
-                                    </div>
-                                @endforeach
+                        @error('colors')
+                            <p class="alert alert-danger" role="alert">{{ $message }}</p>
+                        @enderror
 
-                            </div>
-                            <div class=" col-md-12">
-                                <label>Categories:</label>
-                                @foreach ($categories as $category)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
-                                            id="category{{ $category->id }}" name="categories[]">
-                                        <label class="form-check-label"
-                                            for="category{{ $category->id }}">{{ $category->name }}</label>
-                                    </div>
-                                @endforeach
+                        <div class=" col-md-4">
+                            <label>Hastags:</label>
+                            @foreach ($hastags as $hastag)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $hastag->id }}"
+                                        id="hastag{{ $hastag->id }}" name="hastags[]">
+                                    <label class="form-check-label"
+                                        for="hastag{{ $hastag->id }}">{{ $hastag->name }}</label>
+                                </div>
+                            @endforeach
 
-                            </div>
                         </div>
+                        <div class=" col-md-4">
+                            <label>Categories:</label>
+                            @foreach ($categories as $category)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
+                                        id="category{{ $category->id }}" name="categories[]">
+                                    <label class="form-check-label"
+                                        for="category{{ $category->id }}">{{ $category->name }}</label>
+                                </div>
+                            @endforeach
+
+                        </div>
+
 
                         <div class="col-12 d-flex justify-content-end mt-6">
                             <button type="submit" class="btn btn-primary ms-2">Create Product</button>

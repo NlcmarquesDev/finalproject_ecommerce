@@ -29,6 +29,7 @@ class FilterShop extends Component
 
     public function sortBy($category)
     {
+
         if (is_array($this->selectCategory)) {
             if (in_array($category, $this->selectCategory)) {
                 $this->selectCategory = array_diff($this->selectCategory, [$category]);
@@ -91,11 +92,14 @@ class FilterShop extends Component
         //         $query->where('name', 'like', '%' . $this->selectCategory . '%');
         //     });
         // }
+
         if ($this->selectCategory) {
+
             $categories = is_array($this->selectCategory) ? $this->selectCategory : [$this->selectCategory];
             $query->whereHas('categories', function ($query) use ($categories) {
                 $query->whereIn('name', $categories);
             });
+            // dd($categories);
         }
 
 

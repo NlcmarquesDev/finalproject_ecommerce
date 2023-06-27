@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('order_id')->unsigned()->constrained()->cascadeOnDelete();
             $table->integer('quantity');
             $table->string('product_name');
+            $table->string('product_color');
             $table->decimal('product_price', 10, 2)->default(0);
             $table->decimal('product_taxes', 10, 2)->default(0);
             $table->timestamps();

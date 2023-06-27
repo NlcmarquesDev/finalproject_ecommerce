@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 
+use App\Models\Color;
 use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\Locations;
+use App\Models\OrderItem;
+use App\Models\ColorProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\MollieController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MollieController;
 
 class CheckoutController extends Controller
 {
@@ -21,21 +23,19 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
 
-        request()->validate(
-            [
-                'name' => ['required', 'between:2,255'],
-                'address' => ['required', 'between:2,255'],
-                'postcode' => ['required', 'beetween:2,6'],
-                'city' => ['required', 'between:2,255'],
-                'email' => ['required', 'between:2,255'],
-            ],
-            [
-                'name.required' => 'name is required',
-                //                'title.between' => 'Product name between 3 and 255 characters required',
-
-                //                'keywords.required'=>'Please check minimum one keyword'
-            ]
-        );
+        request()->validate([
+            'name' => ['required', 'between:2,255'],
+            'adress' => ['required', 'string', 'max:255'],
+            'postcode' => ['required', 'string', 'between:2,6'],
+            'city' => ['required', 'between:2,255'],
+            'email' => ['required', 'between:2,255'],
+        ], [
+            'name.required' => 'Name is required',
+            'adress.required' => 'Adress is required',
+            'postcode.required' => 'Postcode is required',
+            'city.required' => 'City is required',
+            'email.required' => 'Email is required',
+        ]);
 
         $userId = Auth::id();
 
@@ -65,14 +65,16 @@ class CheckoutController extends Controller
                 $orderItem->order_id = $order->id;
                 $orderItem->quantity = $cartItem->quantity();
                 $orderItem->product_name = $cartItem->product()->name;
+                $orderItem->product_color = $cartItem->color();
                 $orderItem->product_price = $cartItem->product()->price;
                 $orderItem->product_taxes = $cartItem->product()->taxes();
                 $orderItem->save();
             }
         }
 
+
         // Criação dos dados de pagamento (Payment)
         $molliController = new MollieController();
-        $molliController->preparePayment($order);
+        $molliController->preparePayment($order, $cart);
     }
 }

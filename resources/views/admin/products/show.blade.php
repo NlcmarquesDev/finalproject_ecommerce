@@ -23,48 +23,46 @@
                                 <label for="floatingInputdescription">Product description</label>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-floating">
                                 <p class="form-control">{{ app('price')->format($product->price) }}</p>
                                 <label for="floatingInputPhone">Product
                                     Price</label>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-floating">
-                                <p class="form-control">{{ $product->quantity }}</p>
-                                <label for="floatingInputPhone">Quantity</label>
-                            </div>
-                        </div>
-
-                        <div class=" col-md-4">
+                        <div class=" col-md-6">
                             <div class="form-floating">
                                 <p class="form-control">{{ $product->rating }}</p>
                                 <label for="floatingInputCompany">Rating</label>
                             </div>
                         </div>
-                        <div class=" col-md-4">
+                        <div class=" col-md-6">
                             <div class="form-floating">
                                 <p class="form-control">{{ $product->created_at }}</p>
                                 <label for="floatingInputCompany">Created at</label>
                             </div>
                         </div>
-                        <div class=" col-md-4">
+                        <div class=" col-md-6">
                             <div class="form-floating">
                                 <p class="form-control">{{ $product->updated_at }}</p>
                                 <label for="floatingInputCompany">Updated at</label>
                             </div>
                         </div>
                         <div class=" col-md-12">
-                            <div class="form-floating">
-                                <p class="form-control">
-                                    @foreach ($product->colors as $color)
-                                        <span class="dot me-2"
-                                            style="background-color: {{ $color->code }};"></span>{{ $color->name }}
-                                    @endforeach
-                                </p>
-                                <label for="floatingInputCompany">Color From the Product</label>
-                            </div>
+                            @foreach ($product->colors as $color)
+                                <div class="form-floating mb-2">
+                                    <div class="form-control d-flex justify-content-between">
+                                        <div>
+                                            <span class="dot me-2"
+                                                style="background-color: {{ $color->code }};"></span>{{ $color->name }}
+                                        </div>
+                                        <div>
+                                            <p> <b>Quantity: </b> {{ $color->pivot->quantity }}</p>
+                                        </div>
+                                    </div>
+                                    <label for="floatingInputCompany">Color From the Product</label>
+                                </div>
+                            @endforeach
                         </div>
                         <div class=" col-md-12">
                             <div class="form-floating">
