@@ -23,9 +23,7 @@ class UsersController extends Controller
 
     public function index()
     {
-        //
-        // $fillableFields = ['name', 'is_active', 'email', 'role_id'];
-        // $users = User::withTrashed()->paginate(10);
+
         $totalUsers = User::count();
 
         return view("admin.users.index", compact('totalUsers'));
@@ -59,7 +57,6 @@ class UsersController extends Controller
                 ->file("photo_id")
                 ->store("users");
             $photo = Photo::create(["file" => $path]);
-            //update photo_id (FK in users table)
             $input["photo_id"] = $user->photo_id = $photo->id;
         }
 
@@ -70,14 +67,12 @@ class UsersController extends Controller
         $location->phone = $request->phone;
         $location->city = $request->city;
         $location->zipcode = $request->zipcode;
-        // dd($request->all());
         $location->save();
 
         $user->role_id = $request->role_id;
         Alert::success('User Created Successfully');
 
         return redirect()->route('users.index');
-        //return back()->withInput();
     }
 
     /**
@@ -126,13 +121,11 @@ class UsersController extends Controller
         }
         // oude foto verwijderen
         //we kijken eerst of er een foto bestaat
-        //        @dd($request->hasFile('photo_id'));
         if ($request->hasFile('photo_id')) {
             $oldPhoto = $user->photo; // de huidige foto van de gebruiker
             $path = request()->file('photo_id')->store('users');
             if ($oldPhoto) {
                 unlink(public_path($oldPhoto->file));
-                // $oldPhoto->delete();
                 $oldPhoto->update(['file' => $path]);
                 $input['photo_id'] = $oldPhoto->id;
             } else {
@@ -140,7 +133,6 @@ class UsersController extends Controller
                 $input['photo_id'] = $photo->id;
             }
         }
-        // dd($input);
         $user->update($input);
         $location->update($input);
         Alert::success('User updated Successfully', 'Please continue our work!');
@@ -164,9 +156,7 @@ class UsersController extends Controller
     public function usersRestore($id)
     {
         User::onlyTrashed()->where('id', $id)->restore();
-        // herstel ook alle posts van de gebruiker
         $user = User::withTrashed()->where('id', $id)->first();
-        //        $user->posts()->onlyTrashed()->restore();
         $user->is_active = 1;
         $user->save();
         Alert::info('User restore Successfully');

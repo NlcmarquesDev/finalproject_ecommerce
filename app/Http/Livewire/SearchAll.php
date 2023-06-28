@@ -19,7 +19,6 @@ class SearchAll extends Component
             $productSearch = Product::with('photos')->where('name', 'like', '%' . $this->search . '%')->get();
         }
 
-
         return view('livewire.search-all', [
             'productSearch' => collect($productSearch)->take(5),
         ]);

@@ -31,8 +31,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('customer', function (User $user) {
             return $user->isCustomer();
         });
-        Gate::define('editor', function (User $user) {
-            return $user->isEditor();
-        });
+        // Gate::define('editor', function (User $user) {
+        //     return $user->isEditor();
+        // });
     }
 }

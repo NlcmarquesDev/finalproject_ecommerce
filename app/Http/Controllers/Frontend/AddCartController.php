@@ -23,29 +23,28 @@ class AddCartController extends Controller
     public function addProduct(Request $request)
     {
 
-        // Obtenha os detalhes do produto do request...
         $productId = $request->input('id');
         $product = Product::findOrFail($productId);
         $productColor = $request->input('color');
         $productQuantity = $request->input('quantity');
 
 
-        // Recupere o carrinho da sessão ou crie um novo objeto Cart se ainda não existir
+        // recup the cart session or create e new cart
         $cart = session()->get('cart') ?? new Cart();
 
-        // Verifique se o $cart é um objeto Cart
+        // check if cart is object
         if (!$cart instanceof Cart) {
             $cart = new Cart();
         }
 
-        // Adicione o produto ao carrinho usando o método addProduct()
+        //add product to the cart
         $cart->addProduct($product, $productQuantity, $productColor);
 
-        // Armazene o objeto Cart atualizado na sessão
+
         session()->put('cart', $cart);
 
 
-        //Acesse a sessão "wishlist" e remova o produto correspondente
+        //session wishlist
         $wishlist = session('wishlist');
 
         if ($wishlist && is_array($wishlist->products)) {
@@ -54,7 +53,7 @@ class AddCartController extends Controller
             foreach ($products as $key => $product) {
                 if ($product && isset($product['id']) && $product['id'] == $productId) {
                     unset($products[$key]);
-                    break; // Saia do loop após remover o item
+                    break;
                 }
             }
 
@@ -67,27 +66,27 @@ class AddCartController extends Controller
 
     public function removeProduct(Request $request, $productId)
     {
-        // Recupere o objeto Cart da sessão
+
         $cart = session('cart');
 
         $color = $request->color;
 
 
         if ($cart instanceof Cart) {
-            // Crie um novo array para armazenar os produtos atualizados
+
             $updatedProducts = [];
 
-            // Percorra os produtos do carrinho e adicione apenas os produtos que não correspondem ao ID fornecido
+            // check the cart product and add whitch dont match with id given
             foreach ($cart->products as $product) {
                 if ($product['id'] != $productId || $product['color'] != $color) {
                     $updatedProducts[] = $product;
                 }
             }
 
-            // Atribua o novo array de produtos atualizados à propriedade "products" do objeto "Cart"
+            // new array with updated products
             $cart->products = $updatedProducts;
 
-            // Armazene o objeto Cart atualizado na sessão
+
             session(['cart' => $cart]);
         }
         Alert::success('Removed from the cart Successfully');

@@ -26,10 +26,8 @@ class GoogleController extends Controller
         try {
 
             $user = Socialite::driver('google')->user();
-            // $userExists = User::where('oauth_id', $user->id)->where('oauth_type', 'google')->first();
             $userExists = User::where('email', $user->email)->first();
 
-            // dd($userExists);
             if ($userExists) {
                 Auth::login($userExists);
 
@@ -39,8 +37,6 @@ class GoogleController extends Controller
                 $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
-                    // 'email_verified_at' => now(),
-                    // 'role_id' => 2,
                     'oauth_id' => $user->id,
                     'password' => Hash::make($user->password),
                     'oauth_type' => 'google',

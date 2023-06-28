@@ -1,13 +1,11 @@
 <?php
 
-use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\MollieController;
-use App\Http\Controllers\SliderController;
 use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Auth\GoogleController;
@@ -17,7 +15,6 @@ use App\Http\Controllers\Admin\HastagController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingsController;
-use App\Http\Controllers\Admin\OrderItemController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Frontend\AddCartController;
 use App\Http\Controllers\FrontEnd\CheckoutController;

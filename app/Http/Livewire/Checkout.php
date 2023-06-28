@@ -19,7 +19,6 @@ class Checkout extends Component
 
     public function selectedShipment($shipmentId)
     {
-
         $ship = Shipment::findOrFail($shipmentId);
         $this->selectedShipmentId = $shipmentId;
         $this->shipPrice = $ship->price;
@@ -28,8 +27,6 @@ class Checkout extends Component
 
     public function render()
     {
-
-
         $userId = Auth::id();
         $location = Locations::FindOrfail($userId);
         $user = User::findOrFail($userId);

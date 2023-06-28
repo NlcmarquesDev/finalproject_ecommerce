@@ -35,7 +35,7 @@ class Wishlist extends Model
         }
 
         if ($existingProductIndex == null) {
-            // Adicionar um novo produto ao carrinho
+
             $newProduct = [
                 'id' => $productId,
                 'name' => $productName,

@@ -67,7 +67,6 @@ class FaqController extends Controller
     {
         //
         $faq->update($request->all());
-        // dd($request->all());
         Alert::success('Faq updated Successfully');
         return redirect()->route("faq.index");
     }

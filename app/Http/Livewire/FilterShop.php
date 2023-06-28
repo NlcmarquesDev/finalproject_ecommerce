@@ -25,8 +25,6 @@ class FilterShop extends Component
     protected $queryString = ['selectCategory', 'selectColor', 'selectedHastags', 'search', 'high', 'low'];
 
 
-
-
     public function sortBy($category)
     {
 
@@ -60,10 +58,6 @@ class FilterShop extends Component
             $this->selectedHastags = array_values($this->selectedHastags);
         }
     }
-    // public function getSelectCategoryProperty()
-    // {
-    //     return !empty($this->selectedCategory);
-    // }
 
     public function deselectColor($color)
     {
@@ -87,19 +81,12 @@ class FilterShop extends Component
     {
         $query = Product::with('photos', 'colors')->where('name', 'like', '%' . $this->search . '%');
 
-        // if ($this->selectCategory) {
-        //     $query->whereHas('categories', function ($query) {
-        //         $query->where('name', 'like', '%' . $this->selectCategory . '%');
-        //     });
-        // }
-
         if ($this->selectCategory) {
 
             $categories = is_array($this->selectCategory) ? $this->selectCategory : [$this->selectCategory];
             $query->whereHas('categories', function ($query) use ($categories) {
                 $query->whereIn('name', $categories);
             });
-            // dd($categories);
         }
 
 

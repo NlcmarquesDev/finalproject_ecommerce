@@ -16,15 +16,5 @@ class DatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $this->call([RoleSeeder::class, PhotoSeeder::class, UserSeeder::class, CategorySeeder::class, ShipmentSeeder::class, ColorsSeeder::class, FaqSeeder::class, LocationsSeeder::class, ProductSeeder::class, ProductColorSeeder::class, ProductCategorySeeder::class, HastagSeeder::class, HastagProductSeeder::class,]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-        //        $this->call([
-        //            UserSeeder::class,
-        //            RoleSeeder::class,
-        //            PhotoSeeder::class,
-        //            UsersRolesSeeder::class,
-        //            FaqSeeder::class,
-        //            CategorySeeder::class,
-        //            ProductSeeder::class,
-        //        ]);
     }
 }

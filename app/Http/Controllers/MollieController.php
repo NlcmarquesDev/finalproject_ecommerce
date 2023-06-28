@@ -60,10 +60,6 @@ class MollieController extends Controller
             }
         }
 
-
-
-
-        // Atualize o registro de pagamento com o ID do pagamento retornado pelo Mollie
         header("Location: " . $transaction->getCheckoutUrl(), true, 303);
         exit();
     }

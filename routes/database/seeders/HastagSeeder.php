@@ -14,7 +14,7 @@ class HastagSeeder extends Seeder
     public function run(): void
     {
         //
-        $hastags = ['minimalist', 'lightning', 'classic', 'bathroom', 'interior', 'essentials', 'dinning', 'decor', 'comtemporany'];
+        $hastags = ['minimalist', 'lightning', 'classic', 'bathroom', 'interior', 'essentials', 'dining', 'decor', 'comtemporany'];
 
         foreach ($hastags as $hastag) {
             Hastag::create([
