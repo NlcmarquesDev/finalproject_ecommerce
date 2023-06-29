@@ -28,8 +28,8 @@ class MollieController extends Controller
             ],
             'description' => 'Payment for Order ID: ' . $order->id,
             'redirectUrl' => 'http://127.0.0.1:8000/payment-success/' . $order->id, // route('payment-success')
-            'cancelUrl' => 'https://b729-2a02-1811-ec12-ac00-1922-14e9-f0c-a276.ngrok-free.app/payment-cancel', // route('payment-cancel')
-            'webhookUrl' => 'https://b729-2a02-1811-ec12-ac00-1922-14e9-f0c-a276.ngrok-free.app/api/mollie/webhook', // route('api/mollie/web')
+            'cancelUrl' => 'https://968b-2a02-1811-ec12-ac00-6990-c00f-cd22-452.ngrok-free.app/payment-cancel', // route('payment-cancel')
+            'webhookUrl' => 'https://968b-2a02-1811-ec12-ac00-6990-c00f-cd22-452.ngrok-free.app/api/mollie/webhook', // route('api/mollie/web')
             'method' => 'bancontact',
             'metadata' => [
                 "order_id" => $order->id,

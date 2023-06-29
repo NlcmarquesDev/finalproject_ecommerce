@@ -45,7 +45,7 @@
                                 <input type="text" class="form-control" placeholder="{{ $location->phone }}"
                                     name="phone" value="{{ $location->phone }}">
                             </div>
-                            <div class="col-md-12"><label class="labels">Email ID</label><input type="text"
+                            <div class="col-md-12"><label class="labels">Email</label><input type="text"
                                     class="form-control" placeholder="{{ $user->email }}" value="{{ $user->email }}"
                                     name="email"></div>
                         @endforeach

@@ -82,7 +82,7 @@ class UsersController extends Controller
     {
         //
         $userDetail = User::findOrFail($id);
-        $locationDetail = Locations::findOrFail($id);
+        $locationDetail = Locations::where('user_id', $id)->first();
 
 
         return view('admin.users.show', compact('userDetail', 'locationDetail'));
@@ -112,7 +112,7 @@ class UsersController extends Controller
             'is_active' => 'required',
         ]);
         $user = User::findOrFail($id);
-        $location = Locations::findOrFail($id);
+        $location = Locations::where('user_id', $id)->first();
         if (trim($request->password) == '') {
             $input = $request->except('password');
         } else {

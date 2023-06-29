@@ -77,28 +77,28 @@
                                 <div class="form-floating">
                                     <input name="street" class="form-control" value="{{ $location->street }}"
                                         id="floatingInputStreet" type="text" placeholder="street">
-                                    <label for="floatingInputStreet">{{ $location->street }}</label>
+                                    <label for="floatingInputStreet">Street</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <input name="city" class="form-control" value="{{ $location->city }}"
                                         id="floatingInputCompany" type="text" placeholder="City">
-                                    <label for="floatingInputCompany">{{ $location->city }}</label>
+                                    <label for="floatingInputCompany">City</label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-floating">
                                     <input name="phone" class="form-control" value="{{ $location->phone }}"
                                         id="floatingInputPhone" type="number" placeholder="Phone number">
-                                    <label for="floatingInputPhone">{{ $location->phone }}</label>
+                                    <label for="floatingInputPhone">Phone number: +32</label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-floating">
                                     <input name="zipcode" class="form-control" value="{{ $location->zipcode }}"
-                                        id="floatingInputZipcode" type="text" placeholder="postcode">
-                                    <label for="floatingInputZipcode">{{ $location->zipcode }}</label>
+                                        id="floatingInputZipcode" type="text" placeholder="Postcode">
+                                    <label for="floatingInputZipcode">Postcode</label>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">

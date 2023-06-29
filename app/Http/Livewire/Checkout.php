@@ -28,7 +28,7 @@ class Checkout extends Component
     public function render()
     {
         $userId = Auth::id();
-        $location = Locations::FindOrfail($userId);
+        $location = Locations::where('user_id', $userId)->first();
         $user = User::findOrFail($userId);
         $shipments = Shipment::all();
         $currentDate = Carbon::now();

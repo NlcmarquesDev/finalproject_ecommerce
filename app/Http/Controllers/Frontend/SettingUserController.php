@@ -65,7 +65,7 @@ class SettingUserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $location = Locations::findOrFail($id);
+        $location = Locations::where('user_id', $id)->first();
 
         // dd($location);
         $input = $request->all();

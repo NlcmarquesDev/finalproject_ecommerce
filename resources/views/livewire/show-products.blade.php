@@ -55,7 +55,10 @@
                     <a href="{{ route('single.product', $product->id) }}" class="text-decoration-none"><i
                             class="bi bi-plus-lg fs-4 navicon"></i></a>
                 @else
-                    <a href="{{ route('register') }}">Register</a>
+                    <div class="d-flex flex-column">
+                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('login') }}">Login</a>
+                    </div>
                 @endif
                 </form>
             </div>

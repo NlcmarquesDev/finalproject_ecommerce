@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Locations;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
@@ -65,12 +66,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'role_id' => 2,
             'password' => Hash::make($data['password']),
         ]);
+
+
+        Locations::create([
+            'user_id' => $user->id,
+            'street' => '',
+            'postcode' => '',
+            'number' => '',
+            'city' => '',
+        ]);
+
+        return $user;
+
         Alert::success('Registed Successfully', 'Welcome to your Store');
     }
 }
