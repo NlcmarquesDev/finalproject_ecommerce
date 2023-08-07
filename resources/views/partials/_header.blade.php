@@ -105,7 +105,8 @@
                             </ul>
                         </li>
 
-                        <a class="nav-link d-none d-lg-inline-block mx-2" href="{{ route('contact') }}">Contact us</a>
+                        <a class="nav-link d-none d-lg-inline-block mx-2" href="{{ route('contact') }}">Contact
+                            us</a>
 
                         @if (Route::has('login'))
                             @auth
@@ -146,7 +147,9 @@
                 <!-----button for Login-->
                 <div class="d-flex align-items-center">
                     @if (Route::has('login'))
+
                         <div class="d-flex">
+                            <p class="borderrounded m-2">Try here <i class="fa-solid fa-arrow-right "></i></p>
                             @auth
                                 @if (Auth::user()->isAdmin() == '1')
                                     <a href="{{ url('/admin') }}"><i
@@ -164,7 +167,9 @@
                         </div>
                     @endif
 
+
                 </div>
+
 
                 <!-----button for Checklist-->
                 @if ($wishlist && count($wishlist->products) > 0)

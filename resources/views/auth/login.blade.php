@@ -52,6 +52,13 @@
                                 @enderror
                             </div>
 
+                            <div class="border border-success rounded p-2 mb-3" style="--bs-border-opacity: .5;">
+                                <p>Email address: <b>admin@test.com</b></p>
+                                <p>Password: <b>admin123</b></p>
+                            </div>
+
+
+
 
                             <div class="form-check d-flex justify-content-center mb-4">
                                 @if (Route::has('password.request'))

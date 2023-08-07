@@ -1,6 +1,6 @@
 @extends('admin.index')
 @section('content')
-    <x-admin.heading_table title="All Faqs" name="{{ $totalHastags }}" button="All Faqs"> </x-admin.heading_table>
+    <x-admin.heading_table title="All Hastags" name="{{ $totalHastags }}" button="All Hastags"> </x-admin.heading_table>
 
     <table class="table align-middle mb-0 bg-white">
         <thead class="bg-light">
