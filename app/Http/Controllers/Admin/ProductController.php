@@ -94,6 +94,7 @@ class ProductController extends Controller
             foreach ($files as $file) {
                 $path = $file
                     ->store("products");
+
                 $photo = Photo::create(["file" => $path, "product_id" => $product->id]);
             }
         }
