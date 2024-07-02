@@ -1,59 +1,63 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Full Store eCommerce
+This project is a comprehensive eCommerce platform built using the Laravel framework and MySQL. It provides a full-featured online store experience, including user authentication, product management, category management, and filtering capabilities.
 
-## About My Project Ecommerce
+## Screenshots
 
-This is a repository that contains the source code of my e-commerce project developed in Laravel. The objective of this project is to create a functional and intuitive e-commerce platform to facilitate the sale and purchase of products online,within what was our teaching and using some of the technologies listed below.
 
--   [Laravel](https://laravel.com/).
--   [Livewire](https://laravel-livewire.com/).
--   [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/).
--   [MySql](https://www.mysql.com/).
 
-## Main Functionalities
+## Features
+- User Authentication: Secure login and registration system for users.
+- Product Management: Admins can add, edit, and delete products from the store.
+- Category Management: Admins can manage product categories to organize the store.
+- User Management: Admins can manage users and their roles within the platform.
+- Product Filters: Users can filter products based on categories, price, and other attributes.
+- Order history for users.
+- Admin panel to manage products, orders and users.
+- Database Storage: All data is stored securely in a MySQL database.
+- MVC Architecture: The project follows the Model-View-Controller (MVC) design pattern for organized and maintainable code.
 
--   User registration and authentication.
--   Display of products in different categories.
--   Adding products to the shopping cart.
--   Secure and intuitive checkout process.
--   Order history for users.
--   Admin panel to manage products, orders and users.
 
-## Installation Requirements
-
--   Clone this repository to your local machine.
--   Run the composer install command to install the project's dependencies.
-
-```
-   npm install && composer install
+## Installation
+Clone the repository:
+```bash
+Copy code
+git clone https://github.com/yourusername/full-store-ecommerce.git
 ```
 
--   Create MySQL database and update the connection settings in the .env file.
-
+Navigate into the project directory:
+```bash
+Copy code
+cd full-store-ecommerce
 ```
-APP_NAME=LaravelEcommerce
+Install dependencies:
+```bash
+Copy code
+composer install
+npm install
 ```
+### Create a MySQL database and import the ecommerce.sql file.
+Configure the .env file with your database credentials:
+dotenv
 
-For Mac Users only
-
-```
+```Copy code
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
-DB_PORT=8889
-DB_DATABASE=dbfinalproject_ecommerce
-DB_USERNAME=root
-DB_PASSWORD=root
-
-FILESYSTEM_DISK=public
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_database_user
+DB_PASSWORD=your_database_password
 ```
-
-For Windows
-
+Run database migrations:
+```bash
+Copy code
+php artisan migrate
+php artisan db:seed
 ```
-DB_DATABASE=dbfinalproject_ecommerce
-
-FILESYSTEM_DISK=public
+Serve the application:
+```bash
+Copy code
+php artisan serve
 ```
-
 For MailTrap
 
 ```
@@ -85,25 +89,40 @@ Mollie CLient Developer
 MOLLIE_KEY=
 ```
 
--   Create the app_key for the project
+Create the app_key for the project
 
 ```
 php artisan key:generate
 ```
 
--   Perform database migrations with the php artisan migrate command.
--   Start the development server with the php artisan serve command, and run dev
 
-```
-npm run dev
-```
+### Usage
+To browse products, navigate to the homepage and explore various categories.
+To add a product to your cart, click the "Add to Cart" button on the product page.
+To view your cart, click on the "Cart" link in the navigation menu.
+To manage the store, access the admin dashboard where you can add, edit, or delete products and categories.
+To filter products, use the filter options available on the product listing pages.
 
-```
-php artisan serve
-```
+## Notes
+This project is a comprehensive eCommerce platform but may require additional security measures before production use.
+You can extend the project with additional features such as payment integration, order tracking, and more.
 
--   Access the application in your browser through the address http://localhost:8000.
 
--   Feel free to explore the source code and adapt the project to your needs. If you have any questions or suggestions, please don't hesitate to contact us.
+## Tech Stack
+- Client: HTML, CSS, JavaScript, Blade (Laravel's templating engine)
+- Server: PHP (Laravel framework)
+- Database: MySQL
 
-Enjoy developing your e-commerce in Laravel and good luck!
+
+### Authors
+José Nuno Marques - @NlcmarquesDev
+
+ #### About Me
+Hello there! 👋 I'm José Nuno Marques, a passionate and enthusiastic Junior Full Stack Developer with a strong desire to create web applications. I love combining my problem-solving skills with cutting-edge technologies to build robust and user-friendly software solutions. This README file serves as a brief introduction to my background, skills, and projects.
+
+### Badges
+Add badges from somewhere like: shields.io
+
+### License
+This project is licensed under the MIT License.
+
